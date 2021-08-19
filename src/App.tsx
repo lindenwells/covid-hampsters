@@ -1,25 +1,48 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import { StyledFirebaseAuth } from "react-firebaseui";
+import firebase, { authUiConfig } from "./firebase";
+import { useEffect, useState } from "react";
+import { Button } from "@material-ui/core";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  const [loggedIn, setLoggedIn] = useState(false);
+
+  useEffect(() => {
+    const unregisterAuthObserver = firebase
+      .auth()
+      .onAuthStateChanged((user) => {
+        setLoggedIn(!!user);
+      });
+
+    return () => unregisterAuthObserver();
+  }, []);
+
+  if (loggedIn) {
+    return (
+      <div className="App">
+        <header className="App-header">
+          <p>
+            {" "}
+            Welcome {firebase.auth()?.currentUser?.displayName}! You are now
+            signed-in!
+          </p>
+          <Button onClick={() => firebase?.auth()?.signOut()}>Sign-out</Button>
+        </header>
+      </div>
+    );
+  } else {
+    return (
+      <div className="App">
+        <header className="App-header">
+          <p>Youre logged out</p>
+          <StyledFirebaseAuth
+            uiConfig={authUiConfig}
+            firebaseAuth={firebase.auth()}
+          ></StyledFirebaseAuth>
+        </header>
+      </div>
+    );
+  }
 }
 
 export default App;
