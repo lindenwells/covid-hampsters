@@ -33,6 +33,7 @@ function App() {
   } else {
     return (
       <div className="App">
+        {/* banner starts here */}
         <header className="App-header">
           <p>Youre logged out</p>
           <StyledFirebaseAuth
@@ -40,6 +41,9 @@ function App() {
             firebaseAuth={firebase.auth()}
           ></StyledFirebaseAuth>
         </header>
+        {/* banner ends here */}
+        {/* Stuff to add goes here */}
+        hello world
       </div>
     );
   }
