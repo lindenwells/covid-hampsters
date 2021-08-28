@@ -3,6 +3,7 @@ import { StyledFirebaseAuth } from "react-firebaseui";
 import firebase, { authUiConfig } from "./firebase";
 import { useEffect, useState } from "react";
 import { Button } from "@material-ui/core";
+import TablePage from "./TablePageGrid";
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -43,7 +44,7 @@ function App() {
         </header>
         {/* banner ends here */}
         {/* Stuff to add goes here */}
-        hello world
+        <TablePage/>
       </div>
     );
   }
