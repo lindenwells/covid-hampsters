@@ -4,6 +4,12 @@ import firebase, { authUiConfig } from "./firebase";
 import { useEffect, useState } from "react";
 import { Button } from "@material-ui/core";
 import TablePage from "./TablePageGrid";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -18,36 +24,101 @@ function App() {
     return () => unregisterAuthObserver();
   }, []);
 
-  if (loggedIn) {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <p>
-            {" "}
-            Welcome {firebase.auth()?.currentUser?.displayName}! You are now
-            signed-in!
-          </p>
-          <Button onClick={() => firebase?.auth()?.signOut()}>Sign-out</Button>
-        </header>
-      </div>
-    );
-  } else {
-    return (
-      <div className="App">
-        {/* banner starts here */}
-        <header className="App-header">
-          <p>Youre logged out</p>
-          <StyledFirebaseAuth
-            uiConfig={authUiConfig}
-            firebaseAuth={firebase.auth()}
-          ></StyledFirebaseAuth>
-        </header>
-        {/* banner ends here */}
-        {/* Stuff to add goes here */}
-        <TablePage/>
-      </div>
-    );
+  function isLoggedIn() {
+    if (loggedIn) {
+      return (
+        <div className="App">
+          <header className="App-header">
+            <p>
+              {" "}
+              Welcome {firebase.auth()?.currentUser?.displayName}! You are now
+              signed-in!
+            </p>
+            <Button onClick={() => firebase?.auth()?.signOut()}>Sign-out</Button>
+          </header>
+        </div>
+      );
+    } else {
+      return (
+        <div className="App">
+          <header className="App-header">
+            <p>You're logged out</p>
+            <StyledFirebaseAuth
+              uiConfig={authUiConfig}
+              firebaseAuth={firebase.auth()}
+            ></StyledFirebaseAuth>
+          </header>
+          {/* <TablePage/> */}
+        </div>
+      );
+    }
   }
+
+  function displayThis() {
+    return (
+      <>
+        <h4>Routing example</h4>
+        <div>
+          <Router>
+            <div>
+              <nav>
+                <ul>
+                  <li>
+                    <Link to="/">Home</Link>
+                  </li>
+                  <li>
+                    <Link to="/about">About</Link>
+                  </li>
+                </ul>
+              </nav>
+  
+              <Switch>
+                <Route path="/about">
+                  <About />
+                </Route>
+                <Route exact path="/">
+                  <Home />
+                </Route>
+              </Switch>
+            </div>
+          </Router>
+  
+          <button onClick={test}>
+            test
+          </button>
+        </div>
+      </>
+    )
+  }
+
+  const Home = () => (
+    <h2>I'm home baby</h2>
+  )
+  const About = () => (
+    <h2>About</h2>
+  )
+  const test = () => (
+    alert('yeet')
+  )
+  {/* can also write this:
+    function Home() {
+      return <h2>I'm home baby</h2>;
+    }
+    It does the same thing, but apparently 
+    using const etc. is best practice :shrug:
+  */}
+
+  const logdIn = isLoggedIn();
+  return (
+    <>
+      {/* For determining if logged in or not in banner */}
+      {logdIn}
+      {/* Displays the rest of the page */}
+      <div className="App">
+        {displayThis()}
+      </div>
+    </>
+  );
 }
 
 export default App;
