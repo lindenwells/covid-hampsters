@@ -48,7 +48,6 @@ function App() {
               firebaseAuth={firebase.auth()}
             ></StyledFirebaseAuth>
           </header>
-          {/* <TablePage/> */}
         </div>
       );
     }
@@ -116,6 +115,7 @@ function App() {
       {/* Displays the rest of the page */}
       <div className="App">
         {displayThis()}
+        {/* <TablePage/> */}
       </div>
     </>
   );
