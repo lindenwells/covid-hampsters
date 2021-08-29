@@ -10,7 +10,7 @@
 
 import React from 'react';
 import clsx from 'clsx';
-import { createStyles, lighten, makeStyles, Theme } from '@material-ui/core/styles';
+import { createStyles, makeStyles, Theme, withStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
@@ -27,6 +27,7 @@ import IconButton from '@material-ui/core/IconButton';
 import Tooltip from '@material-ui/core/Tooltip';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch';
+import { orange } from '@material-ui/core/colors';
 /*
 import DeleteIcon from '@material-ui/icons/Delete';
 import FilterListIcon from '@material-ui/icons/FilterList';
@@ -123,7 +124,7 @@ function EnhancedTableHead(props: EnhancedTableProps) {
     <TableHead>
       <TableRow>
         <TableCell padding="checkbox">
-          <Checkbox
+          <OrangeCheckbox
             indeterminate={numSelected > 0 && numSelected < rowCount}
             checked={rowCount > 0 && numSelected === rowCount}
             onChange={onSelectAllClick}
@@ -165,8 +166,8 @@ const useToolbarStyles = makeStyles((theme: Theme) =>
     highlight:
       theme.palette.type === 'light'
         ? {
-            color: theme.palette.secondary.main,
-            backgroundColor: lighten(theme.palette.secondary.light, 0.85),
+//            color: theme.palette.secondary.main,
+            backgroundColor: orange[100],
           }
         : {
             color: theme.palette.text.primary,
@@ -198,7 +199,7 @@ const EnhancedTableToolbar = (props: EnhancedTableToolbarProps) => {
         </Typography>
       ) : (
         <Typography className={classes.title} variant="h6" id="tableTitle" component="div">
-          Brisbane
+          -
         </Typography>
       )}
       {numSelected > 0 ? (
@@ -242,10 +243,54 @@ const useStyles = makeStyles((theme: Theme) =>
       top: 20,
       width: 1,
     },
+    tableRow: {
+      "&.Mui-selected, &.Mui-selected:hover": {
+        // !important is bad practice, search better way later
+        backgroundColor: orange[100] + "!important",
+      }
+    }
   }),
 );
 
-export default function EnhancedTable() {
+const ColoredTableRow = withStyles({
+  root: {
+    '&:nth-of-type(odd)': {
+      backgroundColor: orange[50],
+    },
+  },
+})(TableRow);
+
+const OrangeSwitch = withStyles({
+  switchBase: {
+    color: orange[100],
+    '&$checked': {
+      color: orange[200],
+    },
+    '&$checked + $track': {
+      backgroundColor: orange[200],
+    },
+  },
+  checked: {},
+  track: {},
+})(Switch);
+
+const OrangeCheckbox = withStyles({
+  root: {
+    color: orange[200],
+    '&$checked': {
+      color: orange[300],
+    },
+  },
+  checked: {},
+})(Checkbox);
+
+interface detailProps {
+  clickHandle: (hospitalName: string) => void; 
+}
+
+export default function EnhancedTable(props: detailProps) {
+  const { clickHandle } = props;
+
   const classes = useStyles();
   const [order, setOrder] = React.useState<Order>('desc');
   const [orderBy, setOrderBy] = React.useState<keyof Data>('totalBeds');
@@ -270,6 +315,8 @@ export default function EnhancedTable() {
   };
 
   const handleClick = (event: React.MouseEvent<unknown>, name: string) => {
+    clickHandle(name)
+
     const selectedIndex = selected.indexOf(name);
     let newSelected: string[] = [];
 
@@ -334,7 +381,7 @@ export default function EnhancedTable() {
                   const labelId = `enhanced-table-checkbox-${index}`;
 
                   return (
-                    <TableRow
+                    <ColoredTableRow
                       hover
                       onClick={(event) => handleClick(event, row.hospitalName)}
                       role="checkbox"
@@ -342,9 +389,10 @@ export default function EnhancedTable() {
                       tabIndex={-1}
                       key={row.hospitalName}
                       selected={isItemSelected}
+                      className={classes.tableRow}
                     >
                       <TableCell padding="checkbox">
-                        <Checkbox
+                        <OrangeCheckbox
                           checked={isItemSelected}
                           inputProps={{ 'aria-labelledby': labelId }}
                         />
@@ -355,7 +403,7 @@ export default function EnhancedTable() {
                       <TableCell align="right">{row.bedsSevere}</TableCell>
                       <TableCell align="right">{row.bedsMild}</TableCell>
                       <TableCell align="right">{row.totalBeds}</TableCell>
-                    </TableRow>
+                    </ColoredTableRow>
                   );
                 })}
               {emptyRows > 0 && (
@@ -376,10 +424,12 @@ export default function EnhancedTable() {
           onRowsPerPageChange={handleChangeRowsPerPage}
         />
       </Paper>
-      <FormControlLabel
-        control={<Switch checked={dense} onChange={handleChangeDense} />}
-        label="Dense padding"
-      />
+      <Paper>
+        <FormControlLabel
+          control={<OrangeSwitch checked={dense} onChange={handleChangeDense} />}
+          label="Dense padding"
+        />
+      </Paper>
     </div>
   );
 }

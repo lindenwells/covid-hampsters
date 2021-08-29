@@ -3,13 +3,13 @@ import { StyledFirebaseAuth } from "react-firebaseui";
 import firebase, { authUiConfig } from "./firebase";
 import { useEffect, useState } from "react";
 import { Button } from "@material-ui/core";
-import TablePage from "./TablePageGrid";
 import {
   BrowserRouter as Router,
   Switch,
   Route,
   Link
 } from "react-router-dom";
+import DataGrid from "./DataGrid";
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -68,8 +68,17 @@ function App() {
                   <li>
                     <Link to="/about">About</Link>
                   </li>
+                  <li>
+                    <Button component={Link} to="/detail" variant="contained">
+                      Area Link (From Map)
+                    </Button>
+                  </li>
                 </ul>
               </nav>
+
+              <button onClick={test}>
+                test
+              </button>
   
               <Switch>
                 <Route path="/about">
@@ -78,13 +87,13 @@ function App() {
                 <Route exact path="/">
                   <Home />
                 </Route>
+                <Route path="/detail">
+                  <DataGrid area="Brisbane"/>
+                </Route>
               </Switch>
             </div>
           </Router>
-  
-          <button onClick={test}>
-            test
-          </button>
+
         </div>
       </>
     )
@@ -99,13 +108,13 @@ function App() {
   const test = () => (
     alert('yeet')
   )
-  {/* can also write this:
+  /* can also write this:
     function Home() {
       return <h2>I'm home baby</h2>;
     }
     It does the same thing, but apparently 
     using const etc. is best practice :shrug:
-  */}
+  */
 
   const logdIn = isLoggedIn();
   return (
@@ -115,7 +124,6 @@ function App() {
       {/* Displays the rest of the page */}
       <div className="App">
         {displayThis()}
-        {/* <TablePage/> */}
       </div>
     </>
   );
