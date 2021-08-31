@@ -1,15 +1,12 @@
 import "./App.css";
-import { StyledFirebaseAuth } from "react-firebaseui";
 import firebase, { authUiConfig } from "./firebase";
 import { useEffect, useState } from "react";
 import { Button } from "@material-ui/core";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link
-} from "react-router-dom";
-import DataGrid from "./DataGrid";
+import Login from "./components/login";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import DataGrid from "./components/table/DataGrid";
+import Home from "./components/home";
+import About from "./components/about";
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -23,35 +20,6 @@ function App() {
 
     return () => unregisterAuthObserver();
   }, []);
-
-  function isLoggedIn() {
-    if (loggedIn) {
-      return (
-        <div className="App">
-          <header className="App-header">
-            <p>
-              {" "}
-              Welcome {firebase.auth()?.currentUser?.displayName}! You are now
-              signed-in!
-            </p>
-            <Button onClick={() => firebase?.auth()?.signOut()}>Sign-out</Button>
-          </header>
-        </div>
-      );
-    } else {
-      return (
-        <div className="App">
-          <header className="App-header">
-            <p>You're logged out</p>
-            <StyledFirebaseAuth
-              uiConfig={authUiConfig}
-              firebaseAuth={firebase.auth()}
-            ></StyledFirebaseAuth>
-          </header>
-        </div>
-      );
-    }
-  }
 
   function displayThis() {
     return (
@@ -76,10 +44,8 @@ function App() {
                 </ul>
               </nav>
 
-              <button onClick={test}>
-                test
-              </button>
-  
+              <button onClick={() => alert("test")}>test</button>
+
               <Switch>
                 <Route path="/about">
                   <About />
@@ -88,26 +54,16 @@ function App() {
                   <Home />
                 </Route>
                 <Route path="/detail">
-                  <DataGrid area="Brisbane"/>
+                  <DataGrid area="Brisbane" />
                 </Route>
               </Switch>
             </div>
           </Router>
-
         </div>
       </>
-    )
+    );
   }
 
-  const Home = () => (
-    <h2>I'm home baby</h2>
-  )
-  const About = () => (
-    <h2>About</h2>
-  )
-  const test = () => (
-    alert('yeet')
-  )
   /* can also write this:
     function Home() {
       return <h2>I'm home baby</h2>;
@@ -116,15 +72,12 @@ function App() {
     using const etc. is best practice :shrug:
   */
 
-  const logdIn = isLoggedIn();
   return (
     <>
       {/* For determining if logged in or not in banner */}
-      {logdIn}
+      <Login loggedIn={loggedIn} />
       {/* Displays the rest of the page */}
-      <div className="App">
-        {displayThis()}
-      </div>
+      <div className="App">{displayThis()}</div>
     </>
   );
 }
