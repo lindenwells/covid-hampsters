@@ -19,3 +19,9 @@
 .App-link {
   color: #626869;
 }
+
+.headerMenu li{
+  list-style-type: none;
+  display: inline-block;
+  margin: 6%;
+}

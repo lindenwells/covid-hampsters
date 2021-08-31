@@ -26,20 +26,38 @@ function App() {
       <>
         <div>
           <Router>
+            <nav className="headerMenu">
+              <li>
+                <Button component={Link} to="/" variant="contained">
+                  Home
+                </Button>
+              </li>
+              <li>
+                <Button component={Link} to="/about" variant="contained">
+                  About
+                </Button>
+              </li>
+              <li>
+                <Button component={Link} to="/login" variant="contained">
+                  Login
+                </Button>
+              </li> 
+            </nav>
+
             <div>
               <Switch>
-                <Route path="/about">
-                  <About />
-                </Route>
                 <Route exact path="/">
                   <Home />
+                </Route>
+                <Route path="/about">
+                  <About />
                 </Route>
                 <Route path="/detail">
                   <DataGrid area="Brisbane" />
                 </Route>
               </Switch>
             </div>
-          </Router>
+        </Router>
         </div>
       </>
     );
