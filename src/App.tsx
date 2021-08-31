@@ -24,28 +24,9 @@ function App() {
   function displayThis() {
     return (
       <>
-        <h4>Routing example</h4>
         <div>
           <Router>
             <div>
-              <nav>
-                <ul>
-                  <li>
-                    <Link to="/">Home</Link>
-                  </li>
-                  <li>
-                    <Link to="/about">About</Link>
-                  </li>
-                  <li>
-                    <Button component={Link} to="/detail" variant="contained">
-                      Area Link (From Map)
-                    </Button>
-                  </li>
-                </ul>
-              </nav>
-
-              <button onClick={() => alert("test")}>test</button>
-
               <Switch>
                 <Route path="/about">
                   <About />
