@@ -16,12 +16,13 @@ import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import Table from "./Table";
 import { Link } from "react-router-dom";
-import chart from "./chart.png";
 
 import MapIcon from '@material-ui/icons/Map';
 import BarChartIcon from '@material-ui/icons/BarChart';
 import TrendingUpIcon from '@material-ui/icons/TrendingUp';
 import { orange } from '@material-ui/core/colors';
+import chartPicture from "./chart.png";
+import Chart from "./Chart";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -31,6 +32,9 @@ const useStyles = makeStyles((theme: Theme) =>
     center: {
       margin: "auto",
       maxWidth: 1000,
+    },
+    titleContainer: {
+      alignItems: "center",
     },
     buttonContainer: {
       display: "flex",
@@ -62,6 +66,10 @@ const useStyles = makeStyles((theme: Theme) =>
         fontSize: 25,
       }
     },
+    chartContainer: {
+      minWidth: 1000,
+      minHeight: 600,
+    }
   })
 );
 
@@ -89,11 +97,7 @@ function Show(props: ShowInterface) {
       return (
         <Paper className={classes.center}>
           <Box display="flex">
-            <img
-              src={chart}
-              className={`${classes.img} ${classes.center}`}
-              alt="scuffed chart1"
-            />
+            <Chart />
           </Box>
         </Paper>
       );
@@ -103,7 +107,7 @@ function Show(props: ShowInterface) {
         <Paper className={classes.center}>
           <Box display="flex">
             <img
-              src={chart}
+              src={chartPicture}
               className={`${classes.img} ${classes.center}`}
               alt="scuffed chart2"
             />
@@ -150,7 +154,6 @@ export default function DataGrid(props: DataGridProps) {
                 xs={2}
                 sm={3}
                 className={classes.buttonContainer}
-                justifyContent="flex-start"
               >
                 {show !== ThingToShow.specific && (
                   <Button classes={{root: classes.button}} variant="contained" component={Link} to="/">
@@ -168,12 +171,12 @@ export default function DataGrid(props: DataGridProps) {
                   </Button>
                 )}
               </Grid>
-              <Grid item xs={6} sm={6} direction="column">
+              <Grid item className={classes.titleContainer} xs={6} sm={6}>
                 <Paper>
                   <Typography variant="h4">{area}</Typography>
                   <Typography variant="subtitle1">
                     {show === ThingToShow.data && "Hospital Stats"}
-                    {show === ThingToShow.trend && "Available Beds"}
+                    {show === ThingToShow.trend && "Patients in Need of Beds"}
                     {show === ThingToShow.specific && hospitalName}
                   </Typography>
                 </Paper>
@@ -183,7 +186,6 @@ export default function DataGrid(props: DataGridProps) {
                 xs={4}
                 sm={3}
                 className={classes.buttonContainer}
-                justifyContent="flex-end"
               >
                 {show !== ThingToShow.specific && (
                   <>
