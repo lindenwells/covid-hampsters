@@ -179,46 +179,6 @@ const useToolbarStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-interface EnhancedTableToolbarProps {
-  numSelected: number;
-}
-
-const EnhancedTableToolbar = (props: EnhancedTableToolbarProps) => {
-  const classes = useToolbarStyles();
-  const { numSelected } = props;
-
-  return (
-    <Toolbar
-      className={clsx(classes.root, {
-        [classes.highlight]: numSelected > 0,
-      })}
-    >
-      {numSelected > 0 ? (
-        <Typography className={classes.title} color="inherit" variant="subtitle1" component="div">
-          {numSelected} selected
-        </Typography>
-      ) : (
-        <Typography className={classes.title} variant="h6" id="tableTitle" component="div">
-          -
-        </Typography>
-      )}
-      {numSelected > 0 ? (
-        <Tooltip title="Delete">
-          <IconButton aria-label="delete">
-{/*            <DeleteIcon />*/}
-          </IconButton>
-        </Tooltip>
-      ) : (
-        <Tooltip title="Filter list">
-          <IconButton aria-label="filter list">
-{/*            <FilterListIcon />*/}
-          </IconButton>
-        </Tooltip>
-      )}
-    </Toolbar>
-  );
-};
-
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
@@ -255,7 +215,7 @@ const useStyles = makeStyles((theme: Theme) =>
 const ColoredTableRow = withStyles({
   root: {
     '&:nth-of-type(odd)': {
-      backgroundColor: orange[50],
+      // backgroundColor: "#EFEFEF",
     },
   },
 })(TableRow);
@@ -356,7 +316,6 @@ export default function EnhancedTable(props: detailProps) {
   return (
     <div className={classes.root}>
       <Paper className={classes.paper}>
-        <EnhancedTableToolbar numSelected={selected.length} />
         <TableContainer>
           <Table
             className={classes.table}

@@ -18,24 +18,33 @@ import Table from "./Table";
 import { Link } from "react-router-dom";
 import chart from "./chart.png";
 
+import MapIcon from '@material-ui/icons/Map';
+import BarChartIcon from '@material-ui/icons/BarChart';
+import TrendingUpIcon from '@material-ui/icons/TrendingUp';
+import { orange } from '@material-ui/core/colors';
+
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      background: "#C4C4C4",
-      // display: 'flex',
-      // marginLeft: '55px',
-      // marginRight: '55px',
-      // background: 'linear-gradient(45deg, rgba(115,115,115,1) 0%, rgba(143,143,143,1) 35%, rgba(212,212,212,1) 100%)',
+      background: "#F2F2F2",
     },
     center: {
       margin: "auto",
       maxWidth: 1000,
     },
-    buttons: {
+    buttonContainer: {
       display: "flex",
       alignItems: "flex-end",
+      justifyContent: "center",
       "& > *": {
         margin: theme.spacing(0.25),
+      },
+    },
+    button: {
+      backgroundColor: orange[200],
+      [theme.breakpoints.down('xs')]: {
+        maxWidth: "40px",
+        minWidth: "40px",
       },
     },
     img: {
@@ -46,6 +55,12 @@ const useStyles = makeStyles((theme: Theme) =>
     padding: {
       marginTop: "16px",
       marginBottom: "16px",
+    },
+    icon: {
+      fontSize: 30,
+      [theme.breakpoints.down('xs')]: {
+        fontSize: 25,
+      }
     },
   })
 );
@@ -132,58 +147,61 @@ export default function DataGrid(props: DataGridProps) {
             <Grid container>
               <Grid
                 item
-                xs={3}
-                className={classes.buttons}
+                xs={2}
+                sm={3}
+                className={classes.buttonContainer}
                 justifyContent="flex-start"
               >
                 {show !== ThingToShow.specific && (
-                  <Button variant="contained" component={Link} to="/">
-                    Go Back to Map
+                  <Button classes={{root: classes.button}} variant="contained" component={Link} to="/">
+                    <MapIcon classes={{root: classes.icon}} />
                   </Button>
                 )}
 
                 {show === ThingToShow.specific && (
                   <Button
+                    classes={{root: classes.button}}
                     variant="contained"
                     onClick={(event) => handleClick(event, ThingToShow.data)}
                   >
-                    Go Back to Data
+                    <BarChartIcon classes={{root: classes.icon}} />
                   </Button>
                 )}
               </Grid>
-              <Grid item xs={6} direction="column">
+              <Grid item xs={6} sm={6} direction="column">
                 <Paper>
                   <Typography variant="h4">{area}</Typography>
                   <Typography variant="subtitle1">
                     {show === ThingToShow.data && "Hospital Stats"}
                     {show === ThingToShow.trend && "Available Beds"}
-                    {show === ThingToShow.specific && (
-                      <Typography variant="h6">{hospitalName}</Typography>
-                    )}
+                    {show === ThingToShow.specific && hospitalName}
                   </Typography>
                 </Paper>
               </Grid>
               <Grid
                 item
-                xs={3}
-                className={classes.buttons}
+                xs={4}
+                sm={3}
+                className={classes.buttonContainer}
                 justifyContent="flex-end"
               >
                 {show !== ThingToShow.specific && (
                   <>
                     <Button
+                      classes={{root: classes.button}}
                       variant="contained"
                       onClick={(event) => handleClick(event, ThingToShow.data)}
                       disabled={show === ThingToShow.data && true}
                     >
-                      Data
+                      <BarChartIcon classes={{root: classes.icon}} />
                     </Button>
                     <Button
+                      classes={{root: classes.button}}
                       variant="contained"
                       onClick={(event) => handleClick(event, ThingToShow.trend)}
                       disabled={show === ThingToShow.trend && true}
                     >
-                      Trend
+                      <TrendingUpIcon classes={{root: classes.icon}} />
                     </Button>
                   </>
                 )}
