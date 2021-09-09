@@ -7,7 +7,7 @@
  *
  */
 
-import { ReferenceLine, Brush, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import { AreaChart, Area, ReferenceLine, Brush, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
 export default function BedsRequiredChart() {
   return(
@@ -22,14 +22,21 @@ export default function BedsRequiredChart() {
         }}
       >
         <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="name" />
+        <XAxis dataKey="date" />
         <YAxis />
         <Tooltip />
         <Legend />
-        <Line type="monotone" dataKey="Patients" stroke="#ff9800" activeDot={{ r: 8 }} />
-        <Line type="monotone" dataKey="Patients (Predicted)" stroke="#42a5f5" />
+        <Line type="monotone" name="Patients" dataKey="patients" stroke="#ff9800" activeDot={{ r: 6 }} />
+        <Line type="monotone" name="Patients (Predicted)" dataKey="patientsPredicted" stroke="#42a5f5" activeDot={{ r: 6 }} />
         <ReferenceLine x="8/09/2021" stroke="#42a5f5" label="Today" />
-        <Brush dataKey="name" height={40} stroke="#8884d8"/>
+        <Brush dataKey="date" height={50} stroke="#8884d8">
+          <AreaChart>
+            <CartesianGrid />
+            <YAxis hide domain={['auto', 'auto']} />
+            <Area type="monotone" dataKey="patients" stroke="#ff9800" fill="#ff9800" dot={false} />
+            <Area type="monotone" dataKey="patientsPredicted" stroke="#42a5f5" fill="#42a5f5" dot={false} />
+          </AreaChart>
+        </Brush>
       </LineChart>
     </ResponsiveContainer>
   );
@@ -38,52 +45,52 @@ export default function BedsRequiredChart() {
 // example data
 const data = [
   {
-    name: '1/09/2021',
-    Patients: 4100,
+    date: '1/09/2021',
+    patients: 4100,
   },
   {
-    name: '2/09/2021',
-    Patients: 3200,
+    date: '2/09/2021',
+    patients: 3200,
   },
   {
-    name: '3/09/2021',
-    Patients: 1900,
+    date: '3/09/2021',
+    patients: 1900,
   },
   {
-    name: '4/09/2021',
-    Patients: 2800,
+    date: '4/09/2021',
+    patients: 2800,
   },
   {
-    name: '5/09/2021',
-    Patients: 1903,
+    date: '5/09/2021',
+    patients: 1903,
   },
   {
-    name: '6/09/2021',
-    Patients: 2306,
+    date: '6/09/2021',
+    patients: 2306,
   },
   {
-    name: '7/09/2021',
-    Patients: 3500,
+    date: '7/09/2021',
+    patients: 3500,
   },
   {
-    name: '8/09/2021',
-    Patients: 4000,
-    "Patients (Predicted)": 4000,
+    date: '8/09/2021',
+    patients: 4000,
+    patientsPredicted: 4000,
   },
   {
-    name: '9/09/2021',
-    "Patients (Predicted)": 5444,
+    date: '9/09/2021',
+    patientsPredicted: 5444,
   },
   {
-    name: '10/09/2021',
-    "Patients (Predicted)": 6000,
+    date: '10/09/2021',
+    patientsPredicted: 6000,
   },
   {
-    name: '11/09/2021',
-    "Patients (Predicted)": 7444,
+    date: '11/09/2021',
+    patientsPredicted: 7444,
   },
   {
-    name: '12/09/2021',
-    "Patients (Predicted)": 7000,
+    date: '12/09/2021',
+    patientsPredicted: 7000,
   },
 ];
