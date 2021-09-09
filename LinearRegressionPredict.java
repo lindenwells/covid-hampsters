@@ -1,7 +1,7 @@
 package LinearRegression;
 
 import java.util.ArrayList;
-
+/***comments */
 public class LinearRegression {
     private int number;
     private double b, w, lRate;
