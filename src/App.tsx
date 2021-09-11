@@ -1,5 +1,5 @@
 import "./App.css";
-import firebase, { authUiConfig } from "./firebase";
+import firebase from "./firebase";
 import { useEffect, useState } from "react";
 import { Button } from "@material-ui/core";
 import Login from "./components/login";
@@ -7,22 +7,10 @@ import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import DataGrid from "./components/table/DataGrid";
 import Home from "./components/home";
 import About from "./components/about";
-import { QuerySnapshot } from "@firebase/firestore";
+// import { Populator } from "./assets/database_populater_script";
+// import { db } from "./firebase";
 
-firebase
-  .firestore()
-  .collection("hospital")
-  .get()
-  .then((querySnapshot) => {
-    querySnapshot.forEach((docRef) => {
-      console.log(docRef.data());
-    });
-  })
-  .catch((error) => {
-    console.log("Error getting documents: ", error);
-  });
-
-function App() {
+const App = () => {
   const [loggedIn, setLoggedIn] = useState(false);
 
   useEffect(() => {
@@ -35,55 +23,45 @@ function App() {
     return () => unregisterAuthObserver();
   }, []);
 
-  function displayThis() {
+  const displayThis = () => {
     return (
-      <>
-        <div>
-          <Router>
-            <nav className="headerMenu">
-              <li>
-                <Button component={Link} to="/" variant="contained">
-                  Home
-                </Button>
-              </li>
-              <li>
-                <Button component={Link} to="/about" variant="contained">
-                  About
-                </Button>
-              </li>
-              <li>
-                <Button component={Link} to="/login" variant="contained">
-                  Login
-                </Button>
-              </li>
-            </nav>
+      <div>
+        <Router>
+          <nav className="headerMenu">
+            <li>
+              <Button component={Link} to="/" variant="contained">
+                Home
+              </Button>
+            </li>
+            <li>
+              <Button component={Link} to="/about" variant="contained">
+                About
+              </Button>
+            </li>
+            <li>
+              <Button component={Link} to="/login" variant="contained">
+                Login
+              </Button>
+            </li>
+          </nav>
 
-            <div>
-              <Switch>
-                <Route exact path="/">
-                  <Home />
-                </Route>
-                <Route path="/about">
-                  <About />
-                </Route>
-                <Route path="/detail">
-                  <DataGrid area="Brisbane" />
-                </Route>
-              </Switch>
-            </div>
-          </Router>
-        </div>
-      </>
+          <div>
+            <Switch>
+              <Route exact path="/">
+                <Home />
+              </Route>
+              <Route path="/about">
+                <About />
+              </Route>
+              <Route path="/detail">
+                <DataGrid area="Brisbane" />
+              </Route>
+            </Switch>
+          </div>
+        </Router>
+      </div>
     );
-  }
-
-  /* can also write this:
-    function Home() {
-      return <h2>I'm home baby</h2>;
-    }
-    It does the same thing, but apparently 
-    using const etc. is best practice :shrug:
-  */
+  };
 
   return (
     <>
@@ -93,6 +71,6 @@ function App() {
       <div className="App">{displayThis()}</div>
     </>
   );
-}
+};
 
 export default App;
