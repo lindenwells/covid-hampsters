@@ -1,12 +1,14 @@
 import "./App.css";
 import firebase, { authUiConfig } from "./firebase";
 import { useEffect, useState } from "react";
-import { Button } from "@material-ui/core";
+import { AppBar, Button, Toolbar, IconButton, Menu, Grid, Typography } from "@material-ui/core";
 import Login from "./components/login";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { RouteComponentProps } from 'react-router-dom';
 import DataGrid from "./components/table/DataGrid";
 import Home from "./components/home";
 import About from "./components/about";
+// import Toolbar from '@material-ui/core/Toolbar';
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -20,6 +22,23 @@ function App() {
 
     return () => unregisterAuthObserver();
   }, []);
+
+  const MenuBar = () => {
+    return (
+      <AppBar position="static">
+        <Toolbar>
+          <Grid container justifyContent="flex-end">
+            <Grid item>
+              {/* <Typography align="left">
+                Title
+              </Typography> */}
+              <Button color="inherit">Login</Button>
+            </Grid>
+          </Grid>
+        </Toolbar>
+      </AppBar>
+    );
+  }
 
   function displayThis() {
     return (
@@ -76,6 +95,7 @@ function App() {
 
   return (
     <>
+      <MenuBar/>
       {/* Displays the rest of the page */}
       <div className="App">{displayThis()}</div>
     </>
