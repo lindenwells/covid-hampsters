@@ -7,6 +7,20 @@ import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import DataGrid from "./components/table/DataGrid";
 import Home from "./components/home";
 import About from "./components/about";
+import { QuerySnapshot } from "@firebase/firestore";
+
+firebase
+  .firestore()
+  .collection("hospital")
+  .get()
+  .then((querySnapshot) => {
+    querySnapshot.forEach((docRef) => {
+      console.log(docRef.data());
+    });
+  })
+  .catch((error) => {
+    console.log("Error getting documents: ", error);
+  });
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -41,7 +55,7 @@ function App() {
                 <Button component={Link} to="/login" variant="contained">
                   Login
                 </Button>
-              </li> 
+              </li>
             </nav>
 
             <div>
@@ -57,7 +71,7 @@ function App() {
                 </Route>
               </Switch>
             </div>
-        </Router>
+          </Router>
         </div>
       </>
     );
