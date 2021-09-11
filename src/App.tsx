@@ -52,6 +52,9 @@ function App() {
                 <Route path="/about">
                   <About />
                 </Route>
+                <Route path="/login">
+                  <Login loggedIn={loggedIn} />
+                </Route>
                 <Route path="/detail">
                   <DataGrid area="Brisbane" />
                 </Route>
@@ -73,8 +76,6 @@ function App() {
 
   return (
     <>
-      {/* For determining if logged in or not in banner */}
-      <Login loggedIn={loggedIn} />
       {/* Displays the rest of the page */}
       <div className="App">{displayThis()}</div>
     </>
