@@ -1,14 +1,14 @@
 import "./App.css";
 import firebase, { authUiConfig } from "./firebase";
-import { useEffect, useState } from "react";
-import { AppBar, Button, Toolbar, IconButton, Menu, Grid, Typography } from "@material-ui/core";
+import React, { SetStateAction, useEffect, useState } from "react";
+import { AppBar, Button, Toolbar, IconButton, Menu, Grid, Typography, Popover } from "@material-ui/core";
 import Login from "./components/login";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { RouteComponentProps } from 'react-router-dom';
 import DataGrid from "./components/table/DataGrid";
 import Home from "./components/home";
 import About from "./components/about";
-// import Toolbar from '@material-ui/core/Toolbar';
+import { makeStyles } from '@material-ui/core/styles';
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -22,6 +22,54 @@ function App() {
 
     return () => unregisterAuthObserver();
   }, []);
+
+  const useStyles = makeStyles((theme) => ({
+    typography: {
+      padding: theme.spacing(2),
+    },
+  }));
+
+  const LoginPopover = () => {
+    const classes = useStyles();
+    const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(
+      null
+    );
+
+    const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+      setAnchorEl(event.currentTarget);
+    };
+
+    const handleClose = () => {
+      setAnchorEl(null);
+    };
+
+    const open = Boolean(anchorEl);
+    const id = open ? 'simple-popover' : undefined;
+
+    return (
+      <div>
+        <Button aria-describedby={id} variant="contained" color="primary" onClick={handleClick}>
+          BIG ppover
+        </Button>
+        <Popover
+          id={id}
+          open={open}
+          anchorEl={anchorEl}
+          onClose={handleClose}
+          anchorOrigin={{
+            vertical: 'bottom',
+            horizontal: 'center',
+          }}
+          transformOrigin={{
+            vertical: 'top',
+            horizontal: 'center',
+          }}
+          >
+            <Typography className={classes.typography}>Many popover muc h wow !11!!!</Typography>
+        </Popover>
+      </div>
+    )
+  }
 
   const MenuBar = () => {
     return (
@@ -40,7 +88,7 @@ function App() {
     );
   }
 
-  function displayThis() {
+  const displayThis = () => {
     return (
       <>
         <div>
@@ -96,6 +144,7 @@ function App() {
   return (
     <>
       <MenuBar/>
+      {LoginPopover()}
       {/* Displays the rest of the page */}
       <div className="App">{displayThis()}</div>
     </>
