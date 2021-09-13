@@ -1,10 +1,8 @@
 /*
- * feel free to change everything
- * pretty rough currently
- *
  * DataGrid shows:
- *   - Details of Certain Area Data/Trend
- *   - Data of available beds for certain hospital (click on hospital row)
+ *   - Details of Certain Area Data/Trend.
+ *   - Data of available beds for certain hospital (click on hospital row).
+ *   - Uses material-ui, recharts.
  */
 
 import React from "react";
@@ -14,7 +12,6 @@ import Box from "@material-ui/core/Box";
 import Paper from "@material-ui/core/Paper";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
-import Table from "./Table";
 import { Link } from "react-router-dom";
 
 import MapIcon from '@material-ui/icons/Map';
@@ -23,11 +20,12 @@ import TrendingUpIcon from '@material-ui/icons/TrendingUp';
 import { orange } from '@material-ui/core/colors';
 import chartPicture from "./chart.png";
 import Chart from "./Chart";
+import Table from "./Table";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      background: "#F2F2F2",
+      background: "#f2f2f2",
     },
     center: {
       margin: "auto",
