@@ -7,6 +7,8 @@
  */
 
 import { AreaChart, Area, ReferenceLine, Brush, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import regression from 'regression';
+//import { AreaChart, Area, ReferenceLine, Brush, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
 export default function BedsRequiredChart() {
   return(
@@ -26,14 +28,14 @@ export default function BedsRequiredChart() {
         <Tooltip />
         <Legend />
         <Line type="monotone" name="Patients" dataKey="patients" stroke="#ff9800" activeDot={{ r: 6 }} />
-        <Line type="monotone" name="Patients (Predicted)" dataKey="patientsPredicted" stroke="#42a5f5" activeDot={{ r: 6 }} />
-        <ReferenceLine x="8/09/2021" stroke="#42a5f5" label="Today" />
+        <Line type="monotone" name="Patients (Predicted)" dataKey="predicted" stroke="#42a5f5" activeDot={{ r: 6 }} />
+        <ReferenceLine x="11" stroke="#42a5f5" label="Today" />
         <Brush dataKey="date" height={50} stroke="#8884d8">
           <AreaChart>
             <CartesianGrid />
             <YAxis hide domain={['auto', 'auto']} />
             <Area type="monotone" dataKey="patients" stroke="#ff9800" fill="#ff9800" dot={false} />
-            <Area type="monotone" dataKey="patientsPredicted" stroke="#42a5f5" fill="#42a5f5" dot={false} />
+            <Area type="monotone" dataKey="predicted" stroke="#42a5f5" fill="#42a5f5" dot={false} />
           </AreaChart>
         </Brush>
       </LineChart>
@@ -41,55 +43,105 @@ export default function BedsRequiredChart() {
   );
 }
 
+type DataPoint = {
+  x : number,
+  name : string,
+  patients ?: number
+  predicted ?: number
+}
 // example data
-const data = [
+
+var data : DataPoint[] = [
   {
-    date: '1/09/2021',
+    x: 1,
+    name: '1/09/2021',
     patients: 4100,
   },
   {
-    date: '2/09/2021',
+    x: 2,
+    name: '2/09/2021',
     patients: 3200,
   },
   {
-    date: '3/09/2021',
+    x: 3,
+    name: '3/09/2021',
     patients: 1900,
   },
   {
-    date: '4/09/2021',
+    x: 4,
+    name: '4/09/2021',
     patients: 2800,
   },
   {
-    date: '5/09/2021',
+    x: 5,
+    name: '5/09/2021',
     patients: 1903,
   },
   {
-    date: '6/09/2021',
+    x: 6,
+    name: '6/09/2021',
     patients: 2306,
   },
   {
-    date: '7/09/2021',
+    x: 7,
+    name: '7/09/2021',
     patients: 3500,
   },
   {
-    date: '8/09/2021',
+    x: 8,
+    name: '8/09/2021',
     patients: 4000,
-    patientsPredicted: 4000,
   },
   {
-    date: '9/09/2021',
-    patientsPredicted: 5444,
+    x: 9,
+    name: '9/09/2021',
+    patients: 5444,
   },
   {
-    date: '10/09/2021',
-    patientsPredicted: 6000,
+    x: 10,
+    name: '10/09/2021',
+    patients: 6000,
   },
   {
-    date: '11/09/2021',
-    patientsPredicted: 7444,
+    x: 11,
+    name: '11/09/2021',
+    patients: 7444,
   },
   {
-    date: '12/09/2021',
-    patientsPredicted: 7000,
+    x: 12,
+    name: '12/09/2021',
+    patients: 8000,
+    predicted: 8000,
   },
 ];
+
+let twoDim = 
+  data.map(
+    (date) => [date.x, date.patients]
+  );
+
+  console.log(twoDim);
+
+const linearRegression = regression.polynomial(twoDim, {order : 3});
+
+const [,dataPrediction1] = linearRegression.predict(12);
+const [,dataPrediction2] = linearRegression.predict(13);
+const [,dataPrediction3] = linearRegression.predict(14);
+
+data = data.concat(
+  {
+    x: 13,
+    name:  '13/09/2021', 
+    predicted: dataPrediction1
+  },
+  {
+    x: 14,
+    name:  '14/09/2021', 
+    predicted: dataPrediction2
+  },
+  {
+    x: 15,
+    name:  '15/09/2021', 
+    predicted: dataPrediction3
+  }
+  );
