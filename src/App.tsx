@@ -49,7 +49,7 @@ function App() {
     return (
       <div>
         <Button aria-describedby={id} variant="contained" color="primary" onClick={handleClick}>
-          BIG ppover
+          Popover
         </Button>
         <Popover
           id={id}
