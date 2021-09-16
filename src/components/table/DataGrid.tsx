@@ -6,13 +6,13 @@
  */
 
 import React from "react";
+import { Link, useParams } from "react-router-dom";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
 import Paper from "@material-ui/core/Paper";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
-import { Link } from "react-router-dom";
 
 import MapIcon from '@material-ui/icons/Map';
 import BarChartIcon from '@material-ui/icons/BarChart';
@@ -119,14 +119,9 @@ function Show(props: ShowInterface) {
   }
 }
 
-// Pass in various data needed.
-interface DataGridProps {
-  area: string;
-}
-
-export default function DataGrid(props: DataGridProps) {
+export default function DataGrid() {
   const classes = useStyles();
-  const { area } = props;
+  const { area } = useParams(); // PATH: /detail/:area
   const [show, setShow] = React.useState<ThingToShow>(ThingToShow.data);
   // get this from Table.tsx
   const [hospitalName, setHospitalName] = React.useState<string>("");

@@ -14,12 +14,13 @@
  * https://www.openstreetmap.org/ (accessed Sep. 12, 2021).
  */
 
-import React from "react";
+import { useCallback } from "react";
+import { useHistory } from "react-router-dom";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
-import { MapContainer, TileLayer, Marker, Popup, Circle } from 'react-leaflet';
-import { LatLngExpression } from 'leaflet';
+import { MapContainer, TileLayer, Tooltip, Circle } from 'react-leaflet';
+import { LatLngExpression, LeafletMouseEventHandlerFn } from 'leaflet';
 // import "./Map.css"
 import "leaflet/dist/leaflet.css";
 
@@ -55,6 +56,12 @@ export default function Map() {
   let position: LatLngExpression = [-27.4705, 153.0260]
   const color = { color: 'red' }
 
+  // Invoke "Link" (OnClick).
+  const history = useHistory();
+  function OnClick(area: string): LeafletMouseEventHandlerFn {
+    return useCallback(() => history.push('/detail/' + area), [history]);
+  };
+
   return (
     //<React.Fragment></React.Fragment>
       <div className={classes.root}>
@@ -66,11 +73,15 @@ export default function Map() {
                   attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                   url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 />
-                <Circle center={[-27.4705, 153.0260]} pathOptions={color} radius={10000}>
-                  <Popup>Brisbane Hospitals</Popup>
+                <Circle center={[-27.4705, 153.0260]} pathOptions={color} radius={10000} 
+                  eventHandlers={{ click: OnClick("Brisbane") }}
+                >
+                  <Tooltip>Brisbane Hospitals</Tooltip>
                 </Circle>
-                <Circle center={[-27.6146, 152.7608]} pathOptions={color} radius={6000}>
-                  <Popup>Ipswitch Hospitals</Popup>
+                <Circle center={[-27.6146, 152.7608]} pathOptions={color} radius={6000}
+                  eventHandlers={{ click: OnClick("Ipswitch") }}
+                >
+                  <Tooltip>Ipswitch Hospitals</Tooltip>
                 </Circle>
               </MapContainer>
             </Box>

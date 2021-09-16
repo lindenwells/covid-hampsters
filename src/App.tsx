@@ -66,8 +66,8 @@ const App = () => {
               <Route path="/about">
                 <About />
               </Route>
-              <Route path="/detail">
-                <DataGrid area="Brisbane" />
+              <Route path="/detail/:area">
+                <DataGrid />
               </Route>
             </Switch>
           </div>
