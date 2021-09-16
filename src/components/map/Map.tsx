@@ -28,7 +28,7 @@ import "leaflet/dist/leaflet.css";
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     map: {
-      height: "500px",
+      height: "600px",
     },
     padding: {
       padding: "16px",

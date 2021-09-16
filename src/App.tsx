@@ -1,7 +1,7 @@
 import "./App.css";
 import firebase, { authUiConfig } from "./firebase";
 import React, { SetStateAction, useEffect, useState } from "react";
-import { AppBar, Button, Tab, Tabs, Toolbar, IconButton, Grid, Typography, Popover } from "@material-ui/core";
+import { AppBar, Button, Tab, Tabs, Toolbar, IconButton, Grid, Typography, Popover, Box } from "@material-ui/core";
 import Login from "./components/login";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { RouteComponentProps } from 'react-router-dom';
@@ -13,6 +13,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 // import { Populator } from "./assets/database_populater_script";
 // import { db } from "./firebase";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
+import icon from "./COVID-19_Hampsters_2.png";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -34,9 +35,25 @@ const useStyles = makeStyles((theme: Theme) =>
     tabsIndicatorColor: {
       backgroundColor: "#0177FB",
     },
+    tabsFlexContainer: {
+      alignContent: "center",
+    },
+    tabButtonsAlign: {
+      marginTop: "auto",
+      marginBottom: "auto",
+      marginLeft: "auto",
+      marginRight: "20px",
+    },
     login: {
       padding: theme.spacing(2),
     },
+    icon: {
+      maxHeight: "50px",
+      minWidth: "50px",
+      marginLeft: "30px",
+      marginRight: "30px",
+    },
+
   })
 );
 
@@ -76,7 +93,7 @@ const App = () => {
     const id = open ? 'simple-popover' : undefined;
 
     return (
-      <div>
+      <React.Fragment>
         <Button aria-describedby={id} variant="contained" color="primary" onClick={handleClick}>
           Login
         </Button>
@@ -109,7 +126,7 @@ const App = () => {
               </Router>
             </Typography>
         </Popover>
-      </div>
+      </React.Fragment>
     )
   }
 
@@ -118,6 +135,7 @@ const App = () => {
       <div className="box">
         <Router>
           <div className="header">
+            {/*
             <AppBar position="sticky">
               <Toolbar>
                 <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
@@ -129,9 +147,24 @@ const App = () => {
                 <LoginPopover />
               </Toolbar>
             </AppBar>
-            <Tabs classes={{root: classes.tabs, indicator: classes.tabsIndicatorColor}} value={selectedTab} onChange={handleChange} aria-label="simple tabs example">
-              <Tab label="Home" component={Link} to="/" variant="contained" />
-              <Tab label="About" component={Link} to="/about" variant="contained" />
+            */}
+            <Tabs classes={{root: classes.tabs, 
+              indicator: classes.tabsIndicatorColor, 
+              flexContainer: classes.tabsFlexContainer}} 
+              value={selectedTab}
+              onChange={handleChange} 
+              aria-label="tabs"
+            >
+              <img
+                src={icon}
+                className={classes.icon}
+                alt="bedlam"
+              />
+              <Tab value={0} label="Home" component={Link} to="/" variant="contained" />
+              <Tab value={1} label="About" component={Link} to="/about" variant="contained" />
+              <div className={classes.tabButtonsAlign}>
+              <LoginPopover />
+              </div>
               {/* <Tab label="Login" component={Link} to="/login" variant="contained" /> */}
             </Tabs>
           </div>
