@@ -13,7 +13,7 @@ import regression from 'regression';
 export default function BedsRequiredChart() {
   return(
     <ResponsiveContainer width="100%" height="100%" minHeight="400px">
-      <LineChart
+      <AreaChart
         data={data}
         margin={{
           top: 5,
@@ -22,23 +22,43 @@ export default function BedsRequiredChart() {
           bottom: 5,
         }}
       >
+        <defs>
+          <linearGradient id="OrangeGradient" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="5%" stopColor="rgba(255, 152, 0, 0.8)" />
+            <stop offset="95%" stopColor="rgba(255, 152, 0, 0)" />
+          </linearGradient>
+          <linearGradient id="BlueGradient" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="5%" stopColor="rgba(66, 165, 245, 0.8)" />
+            <stop offset="95%" stopColor="rgba(66, 165, 245, 0)" />
+          </linearGradient>
+        </defs>
         <CartesianGrid strokeDasharray="3 3" />
         <XAxis dataKey="date" />
         <YAxis />
         <Tooltip />
         <Legend />
-        <Line type="monotone" name="Patients" dataKey="patients" stroke="#ff9800" activeDot={{ r: 6 }} />
-        <Line type="monotone" name="Patients (Predicted)" dataKey="predicted" stroke="#42a5f5" activeDot={{ r: 6 }} />
-        <ReferenceLine x="11" stroke="#42a5f5" label="Today" />
-        <Brush dataKey="date" height={50} stroke="#8884d8">
+        <Area type="monotone" name="Patients" dataKey="patients" stroke="#ff9800" activeDot={{ r: 6 }}
+          strokeWidth="2"
+          fillOpacity="1"
+          fill="url(#OrangeGradient)"
+          dot={{ r: 4 }}
+        />
+        <Area type="monotone" name="Patients (Predicted)" dataKey="predicted" stroke="#42a5f5" activeDot={{ r: 6 }}
+          strokeWidth="2"
+          fillOpacity="1"
+          fill="url(#BlueGradient)"
+          dot={{ r: 4 }}
+        />
+        <ReferenceLine x="11" stroke="#42a5f5" label={{ value: "Today", fill: "#ffffff" }} />
+        <Brush dataKey="date" height={50} stroke="#8884d8" >
           <AreaChart>
-            <CartesianGrid />
+            <CartesianGrid fill="#1E1D2B" />
             <YAxis hide domain={['auto', 'auto']} />
             <Area type="monotone" dataKey="patients" stroke="#ff9800" fill="#ff9800" dot={false} />
             <Area type="monotone" dataKey="predicted" stroke="#42a5f5" fill="#42a5f5" dot={false} />
           </AreaChart>
         </Brush>
-      </LineChart>
+      </AreaChart>
     </ResponsiveContainer>
   );
 }

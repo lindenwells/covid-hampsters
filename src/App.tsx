@@ -22,10 +22,6 @@ import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-    footer: {
-      background: "#bdbdbd",
-      minHeight: "40px",
-    },
     root: {
       flexGrow: 1,
     },
@@ -35,6 +31,15 @@ const useStyles = makeStyles((theme: Theme) =>
     title: {
       flexGrow: 1,
     },
+    tabs: {
+      background: "#1E1D2B",
+      color: "#ffffff",
+      indicatorColor: "#0177FB",
+      boxShadow: "inset 0 -2px 0 0 #252736",
+    },
+    tabsIndicatorColor: {
+      backgroundColor: "#0177FB",
+    }
   })
 );
 
@@ -58,30 +63,29 @@ const App = () => {
 
   const displayThis = () => {
     return (
-      <div>
-        <div className={classes.root}>
-          <AppBar position="sticky">
-            <Toolbar>
-              <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
-                <MenuIcon />
-              </IconButton>
-              <Typography variant="h6" className={classes.title}>
-                COVID Hampsters
-              </Typography>
-              <Button color="inherit">Login</Button>
-            </Toolbar>
-          </AppBar>
-        </div>
+      <div className="box">
         <Router>
-          <Tabs value={selectedTab} onChange={handleChange} aria-label="simple tabs example">
-            <Tab label="Home" component={Link} to="/" variant="contained" />
-            <Tab label="About" component={Link} to="/about" variant="contained" />
-            <Tab label="Login" component={Link} to="/login" variant="contained" />
-          </Tabs>
-          <div>
+          <div className="header">
+            <AppBar position="sticky">
+              <Toolbar>
+                <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
+                  <MenuIcon />
+                </IconButton>
+                <Typography variant="h6" className={classes.title}>
+                  COVID Hampsters
+                </Typography>
+                <Button color="inherit">Login</Button>
+              </Toolbar>
+            </AppBar>
+            <Tabs classes={{root: classes.tabs, indicator: classes.tabsIndicatorColor}} value={selectedTab} onChange={handleChange} aria-label="simple tabs example">
+              <Tab label="Home" component={Link} to="/" variant="contained" />
+              <Tab label="About" component={Link} to="/about" variant="contained" />
+              <Tab label="Login" component={Link} to="/login" variant="contained" />
+            </Tabs>
+          </div>
+          <div className="content">
             <Switch>
               <Route exact path="/">
-                <Home />
                 <Map />
               </Route>
               <Route path="/about">
@@ -92,7 +96,8 @@ const App = () => {
               </Route>
             </Switch>
           </div>
-          <div className={classes.footer}>
+          <div className="footer">
+            Team '); DROP_TABLE
           </div>
         </Router>
       </div>

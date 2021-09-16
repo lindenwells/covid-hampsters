@@ -17,19 +17,16 @@ import Typography from "@material-ui/core/Typography";
 import MapIcon from '@material-ui/icons/Map';
 import BarChartIcon from '@material-ui/icons/BarChart';
 import TrendingUpIcon from '@material-ui/icons/TrendingUp';
-import { orange } from '@material-ui/core/colors';
 import chartPicture from "./chart.png";
 import Chart from "./Chart";
 import Table from "./Table";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-    root: {
-      background: "#f2f2f2",
-    },
     center: {
       margin: "auto",
       maxWidth: 1000,
+      background: "#1E1D2B",
     },
     titleContainer: {
       alignItems: "center",
@@ -43,7 +40,7 @@ const useStyles = makeStyles((theme: Theme) =>
       },
     },
     button: {
-      backgroundColor: orange[200],
+      backgroundColor: "#2B2C3E",
       [theme.breakpoints.down('xs')]: {
         maxWidth: "40px",
         minWidth: "40px",
@@ -62,11 +59,16 @@ const useStyles = makeStyles((theme: Theme) =>
       fontSize: 30,
       [theme.breakpoints.down('xs')]: {
         fontSize: 25,
-      }
+      },
+      color: "#FFFFFF",
     },
     chartContainer: {
       minWidth: 1000,
       minHeight: 600,
+    },
+    paper: {
+      background: "#2B2C3E",
+      color: "#FFFFFF",
     }
   })
 );
@@ -93,24 +95,20 @@ function Show(props: ShowInterface) {
     }
     case ThingToShow.trend: {
       return (
-        <Paper className={classes.center}>
-          <Box display="flex">
-            <Chart />
-          </Box>
-        </Paper>
+        <Box className={classes.center} display="flex">
+          <Chart />
+        </Box>
       );
     }
     case ThingToShow.specific: {
       return (
-        <Paper className={classes.center}>
-          <Box display="flex">
-            <img
-              src={chartPicture}
-              className={`${classes.img} ${classes.center}`}
-              alt="scuffed chart2"
-            />
-          </Box>
-        </Paper>
+        <Box className={classes.center} display="flex">
+          <img
+            src={chartPicture}
+            className={`${classes.img} ${classes.center}`}
+            alt="scuffed chart2"
+          />
+        </Box>
       );
     }
     default: {
@@ -137,7 +135,7 @@ export default function DataGrid() {
   };
 
   return (
-    <div className={classes.root}>
+    <div>
       <Grid container>
         <Grid item className={classes.padding} xs={12}>
           <Box className={classes.center}>
@@ -165,7 +163,7 @@ export default function DataGrid() {
                 )}
               </Grid>
               <Grid item className={classes.titleContainer} xs={6} sm={6}>
-                <Paper>
+                <Paper className={classes.paper}>
                   <Typography variant="h4">{area}</Typography>
                   <Typography variant="subtitle1">
                     {show === ThingToShow.data && "Hospital Stats"}
