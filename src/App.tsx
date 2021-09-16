@@ -9,7 +9,6 @@ import DataGrid from "./components/table/DataGrid";
 import Map from "./components/map/Map";
 import Home from "./components/home";
 import About from "./components/about";
-import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
@@ -26,6 +25,15 @@ const useStyles = makeStyles((theme: Theme) =>
     footer: {
       background: "#bdbdbd",
       minHeight: "40px",
+    },
+    root: {
+      flexGrow: 1,
+    },
+    menuButton: {
+      marginRight: theme.spacing(2),
+    },
+    title: {
+      flexGrow: 1,
     },
   })
 );
@@ -47,20 +55,6 @@ const App = () => {
 
     return () => unregisterAuthObserver();
   }, []);
-
-  const useStyles = makeStyles((theme) => ({
-    root: {
-      flexGrow: 1,
-    },
-    menuButton: {
-      marginRight: theme.spacing(2),
-    },
-    title: {
-      flexGrow: 1,
-    },
-  }));
-
-  const classes = useStyles();
 
   const displayThis = () => {
     return (
