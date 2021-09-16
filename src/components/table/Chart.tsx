@@ -111,6 +111,11 @@ var data : DataPoint[] = [
     name: '11/09/2021',
     patients: 7444,
   },
+  {
+    x: 12,
+    name: '12/09/2021',
+    patients: 7444,
+  },
 ];
 
 let twoDim = 
