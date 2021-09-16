@@ -1,17 +1,47 @@
 import "./App.css";
 import firebase, { authUiConfig } from "./firebase";
 import React, { SetStateAction, useEffect, useState } from "react";
-import { AppBar, Button, Toolbar, IconButton, Menu, Grid, Typography, Popover } from "@material-ui/core";
+import { AppBar, Button, Tab, Tabs, Toolbar, IconButton, Grid, Typography, Popover } from "@material-ui/core";
 import Login from "./components/login";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import { RouteComponentProps } from 'react-router-dom';
 import DataGrid from "./components/table/DataGrid";
+import Map from "./components/map/Map";
 import Home from "./components/home";
 import About from "./components/about";
-import { makeStyles } from '@material-ui/core/styles';
+import MenuIcon from '@material-ui/icons/Menu';
+// import { Populator } from "./assets/database_populater_script";
+// import { db } from "./firebase";
+import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 
-function App() {
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    footer: {
+      background: "#bdbdbd",
+      minHeight: "40px",
+    },
+    root: {
+      flexGrow: 1,
+    },
+    menuButton: {
+      marginRight: theme.spacing(2),
+    },
+    title: {
+      flexGrow: 1,
+    },
+    login: {
+      padding: theme.spacing(2),
+    },
+  })
+);
+
+const App = () => {
+  const classes = useStyles();
   const [loggedIn, setLoggedIn] = useState(false);
+  const [selectedTab, setSelectedTab] = React.useState(0);
+  const handleChange = (event: any, newValue: React.SetStateAction<number>) => {
+    setSelectedTab(newValue);
+  };
 
   useEffect(() => {
     const unregisterAuthObserver = firebase
@@ -22,12 +52,6 @@ function App() {
 
     return () => unregisterAuthObserver();
   }, []);
-
-  const useStyles = makeStyles((theme) => ({
-    typography: {
-      padding: theme.spacing(2),
-    },
-  }));
 
   const LoginPopover = () => {
     const classes = useStyles();
@@ -49,7 +73,7 @@ function App() {
     return (
       <div>
         <Button aria-describedby={id} variant="contained" color="primary" onClick={handleClick}>
-          Popover
+          Login
         </Button>
         <Popover
           id={id}
@@ -65,90 +89,77 @@ function App() {
             horizontal: 'center',
           }}
           >
-            <Typography className={classes.typography}>Many popover muc h wow !11!!!</Typography>
+            <Typography className={classes.login}>
+              {/* TODO: need to figure out a better way then copy pasting
+                  this Router pattern every time we want a link */}
+              <Router>
+                <Link to="/login" variant="contained">
+                  Login
+                </Link>
+                <Switch>
+                  <Route path="/login">
+                    <Login loggedIn={loggedIn} />
+                  </Route>
+                </Switch>
+              </Router>
+            </Typography>
         </Popover>
       </div>
     )
   }
 
-  const MenuBar = () => {
-    return (
-      <AppBar position="static">
-        <Toolbar>
-          <Grid container justifyContent="flex-end">
-            <Grid item>
-              {/* <Typography align="left">
-                Title
-              </Typography> */}
-              <Button color="inherit">Login</Button>
-            </Grid>
-          </Grid>
-        </Toolbar>
-      </AppBar>
-    );
-  }
-
   const displayThis = () => {
     return (
-      <>
-        <div>
-          <Router>
-            <nav className="headerMenu">
-              <li>
-                <Button component={Link} to="/" variant="contained">
-                  Home
-                </Button>
-              </li>
-              <li>
-                <Button component={Link} to="/about" variant="contained">
-                  About
-                </Button>
-              </li>
-              <li>
-                <Button component={Link} to="/login" variant="contained">
-                  Login
-                </Button>
-              </li> 
-            </nav>
-
-            <div>
-              <Switch>
-                <Route exact path="/">
-                  <Home />
-                </Route>
-                <Route path="/about">
-                  <About />
-                </Route>
-                <Route path="/login">
-                  <Login loggedIn={loggedIn} />
-                </Route>
-                <Route path="/detail">
-                  <DataGrid area="Brisbane" />
-                </Route>
-              </Switch>
-            </div>
-        </Router>
+      <div>
+        <div className={classes.root}>
+          <AppBar position="sticky">
+            <Toolbar>
+              <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
+                <MenuIcon />
+              </IconButton>
+              <Typography variant="h6" className={classes.title}>
+                COVID Hampsters
+              </Typography>
+              <LoginPopover />
+            </Toolbar>
+          </AppBar>
         </div>
-      </>
+        <Router>
+          <Tabs value={selectedTab} onChange={handleChange} aria-label="simple tabs example">
+            <Tab label="Home" component={Link} to="/" variant="contained" />
+            <Tab label="About" component={Link} to="/about" variant="contained" />
+            {/* <Tab label="Login" component={Link} to="/login" variant="contained" /> */}
+          </Tabs>
+          <div>
+            <Switch>
+              <Route exact path="/">
+                <Home />
+                <Map />
+              </Route>
+              <Route path="/about">
+                <About />
+              </Route>
+              {/* <Route path="/login">
+                <Login loggedIn={loggedIn} />
+              </Route> */}
+              <Route path="/detail">
+                <DataGrid area="Brisbane" />
+              </Route>
+            </Switch>
+          </div>
+          <div className={classes.footer}>
+          </div>
+        </Router>
+      </div>
     );
-  }
-
-  /* can also write this:
-    function Home() {
-      return <h2>I'm home baby</h2>;
-    }
-    It does the same thing, but apparently 
-    using const etc. is best practice :shrug:
-  */
+  };
 
   return (
     <>
-      <MenuBar/>
-      {LoginPopover()}
       {/* Displays the rest of the page */}
       <div className="App">{displayThis()}</div>
     </>
   );
-}
+};
 
 export default App;
