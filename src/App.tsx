@@ -1,21 +1,15 @@
-import React from 'react';
 import "./App.css";
-import firebase from "./firebase";
-import { useEffect, useState } from "react";
-import { Button } from "@material-ui/core";
+import firebase, { authUiConfig } from "./firebase";
+import React, { SetStateAction, useEffect, useState } from "react";
+import { AppBar, Button, Tab, Tabs, Toolbar, IconButton, Grid, Typography, Popover } from "@material-ui/core";
 import Login from "./components/login";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { RouteComponentProps } from 'react-router-dom';
 import DataGrid from "./components/table/DataGrid";
 import Map from "./components/map/Map";
 import Home from "./components/home";
 import About from "./components/about";
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
 // import { Populator } from "./assets/database_populater_script";
 // import { db } from "./firebase";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
@@ -39,7 +33,10 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     tabsIndicatorColor: {
       backgroundColor: "#0177FB",
-    }
+    },
+    login: {
+      padding: theme.spacing(2),
+    },
   })
 );
 
@@ -61,6 +58,61 @@ const App = () => {
     return () => unregisterAuthObserver();
   }, []);
 
+  const LoginPopover = () => {
+    const classes = useStyles();
+    const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(
+      null
+    );
+
+    const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+      setAnchorEl(event.currentTarget);
+    };
+
+    const handleClose = () => {
+      setAnchorEl(null);
+    };
+
+    const open = Boolean(anchorEl);
+    const id = open ? 'simple-popover' : undefined;
+
+    return (
+      <div>
+        <Button aria-describedby={id} variant="contained" color="primary" onClick={handleClick}>
+          Login
+        </Button>
+        <Popover
+          id={id}
+          open={open}
+          anchorEl={anchorEl}
+          onClose={handleClose}
+          anchorOrigin={{
+            vertical: 'bottom',
+            horizontal: 'center',
+          }}
+          transformOrigin={{
+            vertical: 'top',
+            horizontal: 'center',
+          }}
+          >
+            <Typography className={classes.login}>
+              {/* TODO: need to figure out a better way then copy pasting
+                  this Router pattern every time we want a link */}
+              <Router>
+                <Link to="/login" variant="contained">
+                  Login
+                </Link>
+                <Switch>
+                  <Route path="/login">
+                    <Login loggedIn={loggedIn} />
+                  </Route>
+                </Switch>
+              </Router>
+            </Typography>
+        </Popover>
+      </div>
+    )
+  }
+
   const displayThis = () => {
     return (
       <div className="box">
@@ -74,13 +126,13 @@ const App = () => {
                 <Typography variant="h6" className={classes.title}>
                   COVID Hampsters
                 </Typography>
-                <Button color="inherit">Login</Button>
+                <LoginPopover />
               </Toolbar>
             </AppBar>
             <Tabs classes={{root: classes.tabs, indicator: classes.tabsIndicatorColor}} value={selectedTab} onChange={handleChange} aria-label="simple tabs example">
               <Tab label="Home" component={Link} to="/" variant="contained" />
               <Tab label="About" component={Link} to="/about" variant="contained" />
-              <Tab label="Login" component={Link} to="/login" variant="contained" />
+              {/* <Tab label="Login" component={Link} to="/login" variant="contained" /> */}
             </Tabs>
           </div>
           <div className="content">
@@ -91,6 +143,9 @@ const App = () => {
               <Route path="/about">
                 <About />
               </Route>
+              {/* <Route path="/login">
+                <Login loggedIn={loggedIn} />
+              </Route> */}
               <Route path="/detail/:area">
                 <DataGrid />
               </Route>
@@ -106,8 +161,6 @@ const App = () => {
 
   return (
     <>
-      {/* For determining if logged in or not in banner */}
-      <Login loggedIn={loggedIn} />
       {/* Displays the rest of the page */}
       <div className="App">{displayThis()}</div>
     </>
