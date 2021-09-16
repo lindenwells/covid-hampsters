@@ -1,3 +1,4 @@
+import React from 'react';
 import "./App.css";
 import firebase from "./firebase";
 import { useEffect, useState } from "react";
@@ -8,6 +9,14 @@ import DataGrid from "./components/table/DataGrid";
 import Map from "./components/map/Map";
 import Home from "./components/home";
 import About from "./components/about";
+import { makeStyles } from '@material-ui/core/styles';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
+import IconButton from '@material-ui/core/IconButton';
+import MenuIcon from '@material-ui/icons/Menu';
+import Tabs from '@material-ui/core/Tabs';
+import Tab from '@material-ui/core/Tab';
 // import { Populator } from "./assets/database_populater_script";
 // import { db } from "./firebase";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
@@ -24,6 +33,10 @@ const useStyles = makeStyles((theme: Theme) =>
 const App = () => {
   const classes = useStyles();
   const [loggedIn, setLoggedIn] = useState(false);
+  const [selectedTab, setSelectedTab] = React.useState(0);
+  const handleChange = (event: any, newValue: React.SetStateAction<number>) => {
+    setSelectedTab(newValue);
+  };
 
   useEffect(() => {
     const unregisterAuthObserver = firebase
@@ -35,28 +48,42 @@ const App = () => {
     return () => unregisterAuthObserver();
   }, []);
 
+  const useStyles = makeStyles((theme) => ({
+    root: {
+      flexGrow: 1,
+    },
+    menuButton: {
+      marginRight: theme.spacing(2),
+    },
+    title: {
+      flexGrow: 1,
+    },
+  }));
+
+  const classes = useStyles();
+
   const displayThis = () => {
     return (
       <div>
+        <div className={classes.root}>
+          <AppBar position="sticky">
+            <Toolbar>
+              <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
+                <MenuIcon />
+              </IconButton>
+              <Typography variant="h6" className={classes.title}>
+                COVID Hampsters
+              </Typography>
+              <Button color="inherit">Login</Button>
+            </Toolbar>
+          </AppBar>
+        </div>
         <Router>
-          <nav className="headerMenu">
-            <li>
-              <Button component={Link} to="/" variant="contained">
-                Home
-              </Button>
-            </li>
-            <li>
-              <Button component={Link} to="/about" variant="contained">
-                About
-              </Button>
-            </li>
-            <li>
-              <Button component={Link} to="/login" variant="contained">
-                Login
-              </Button>
-            </li>
-          </nav>
-
+          <Tabs value={selectedTab} onChange={handleChange} aria-label="simple tabs example">
+            <Tab label="Home" component={Link} to="/" variant="contained" />
+            <Tab label="About" component={Link} to="/about" variant="contained" />
+            <Tab label="Login" component={Link} to="/login" variant="contained" />
+          </Tabs>
           <div>
             <Switch>
               <Route exact path="/">
