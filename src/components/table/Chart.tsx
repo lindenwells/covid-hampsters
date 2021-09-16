@@ -7,8 +7,9 @@
  *
  */
 
-import { ReferenceLine, Brush, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import { AreaChart, Area, ReferenceLine, Brush, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import regression from 'regression';
+//import { AreaChart, Area, ReferenceLine, Brush, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
 export default function BedsRequiredChart() {
   return(
@@ -23,7 +24,7 @@ export default function BedsRequiredChart() {
         }}
       >
         <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="name" />
+        <XAxis dataKey="date" />
         <YAxis />
         <Tooltip />
         <Legend />
@@ -31,6 +32,17 @@ export default function BedsRequiredChart() {
         <Line type="monotone" dataKey="predicted" stroke="#42a5f5" />
         <ReferenceLine x="12/09/2021" stroke="#42a5f5" label="Today" />
         <Brush dataKey="name" height={40} stroke="#8884d8"/>
+        <Line type="monotone" name="Patients" dataKey="patients" stroke="#ff9800" activeDot={{ r: 6 }} />
+        <Line type="monotone" name="Patients (Predicted)" dataKey="patientsPredicted" stroke="#42a5f5" activeDot={{ r: 6 }} />
+        <ReferenceLine x="8/09/2021" stroke="#42a5f5" label="Today" />
+        <Brush dataKey="date" height={50} stroke="#8884d8">
+          <AreaChart>
+            <CartesianGrid />
+            <YAxis hide domain={['auto', 'auto']} />
+            <Area type="monotone" dataKey="patients" stroke="#ff9800" fill="#ff9800" dot={false} />
+            <Area type="monotone" dataKey="patientsPredicted" stroke="#42a5f5" fill="#42a5f5" dot={false} />
+          </AreaChart>
+        </Brush>
       </LineChart>
     </ResponsiveContainer>
   );
@@ -99,11 +111,6 @@ var data : DataPoint[] = [
     x: 11,
     name: '11/09/2021',
     patients: 7444,
-  },
-  {
-    x: 12,
-    name: '12/09/2021',
-    patients: 7000,
   },
 ];
 
