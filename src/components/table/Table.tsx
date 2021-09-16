@@ -5,7 +5,6 @@
  * REFERENCE:
  * Material-UI. "Table." Material-UI. 
  * https://material-ui.com/components/tables/ (accessed Aug. 28, 2021).
- *
  */
 
 import React from 'react';
@@ -215,7 +214,7 @@ const useStyles = makeStyles((theme: Theme) =>
 const ColoredTableRow = withStyles({
   root: {
     '&:nth-of-type(odd)': {
-      // backgroundColor: "#EFEFEF",
+      // backgroundColor: "#efefef",
     },
   },
 })(TableRow);

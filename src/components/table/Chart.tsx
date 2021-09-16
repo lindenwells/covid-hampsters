@@ -4,7 +4,6 @@
  * REFERENCE:
  * Recharts Group. "API." Recharts. 
  * https://recharts.org/en-US/api (accessed Wed. 8, 2021).
- *
  */
 
 import { AreaChart, Area, ReferenceLine, Brush, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
