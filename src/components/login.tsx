@@ -5,6 +5,8 @@ import { StyledFirebaseAuth } from "react-firebaseui";
 type loginProps = {
   loggedIn: boolean;
 };
+
+// TODO: Feel free to play around with the style and make it look nice :)
 const Login = (props: loginProps) => {
   if (props.loggedIn) {
     return (

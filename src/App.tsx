@@ -131,19 +131,6 @@ const App = () => {
       <div className="box">
         <Router>
           <div className="header">
-            {/*
-            <AppBar position="sticky">
-              <Toolbar>
-                <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu">
-                  <MenuIcon />
-                </IconButton>
-                <Typography variant="h6" className={classes.title}>
-                  COVID Hampsters
-                </Typography>
-                <LoginPopover />
-              </Toolbar>
-            </AppBar>
-            */}
             <Tabs classes={{root: classes.tabs, 
               indicator: classes.tabsIndicatorColor, 
               flexContainer: classes.tabsFlexContainer}} 
@@ -161,7 +148,6 @@ const App = () => {
               <div className={classes.tabButtonsAlign}>
               <LoginPopover />
               </div>
-              {/* <Tab label="Login" component={Link} to="/login" variant="contained" /> */}
             </Tabs>
           </div>
           <div className="content">
@@ -172,9 +158,6 @@ const App = () => {
               <Route path="/about">
                 <About />
               </Route>
-              {/* <Route path="/login">
-                <Login loggedIn={loggedIn} />
-              </Route> */}
               <Route path="/detail/:area">
                 <DataGrid />
               </Route>
