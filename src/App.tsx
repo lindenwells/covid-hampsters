@@ -13,6 +13,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 // import { Populator } from "./assets/database_populater_script";
 // import { db } from "./firebase";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
+import { StyledFirebaseAuth } from "react-firebaseui";
 import icon from "./COVID-19_Hampsters_2.png";
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -45,7 +46,9 @@ const useStyles = makeStyles((theme: Theme) =>
       marginRight: "20px",
     },
     login: {
+      // TODO: Feel free to play around with the login button styling
       padding: theme.spacing(2),
+      minWidth: "200px",
     },
     icon: {
       maxHeight: "50px",
@@ -74,6 +77,10 @@ const App = () => {
 
     return () => unregisterAuthObserver();
   }, []);
+  
+  type loginProps = {
+    loggedIn: boolean;
+  };
 
   const LoginPopover = () => {
     const classes = useStyles();
@@ -112,18 +119,7 @@ const App = () => {
           }}
           >
             <Typography className={classes.login}>
-              {/* TODO: need to figure out a better way then copy pasting
-                  this Router pattern every time we want a link */}
-              <Router>
-                <Link to="/login" variant="contained">
-                  Login
-                </Link>
-                <Switch>
-                  <Route path="/login">
-                    <Login loggedIn={loggedIn} />
-                  </Route>
-                </Switch>
-              </Router>
+                <Login loggedIn={loggedIn} />
             </Typography>
         </Popover>
       </React.Fragment>
