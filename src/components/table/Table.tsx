@@ -26,7 +26,7 @@ import IconButton from '@material-ui/core/IconButton';
 import Tooltip from '@material-ui/core/Tooltip';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch';
-import { orange } from '@material-ui/core/colors';
+import { blue } from '@material-ui/core/colors';
 /*
 import DeleteIcon from '@material-ui/icons/Delete';
 import FilterListIcon from '@material-ui/icons/FilterList';
@@ -122,22 +122,18 @@ function EnhancedTableHead(props: EnhancedTableProps) {
   return (
     <TableHead>
       <TableRow>
-        <TableCell padding="checkbox">
-          <OrangeCheckbox
-            indeterminate={numSelected > 0 && numSelected < rowCount}
-            checked={rowCount > 0 && numSelected === rowCount}
-            onChange={onSelectAllClick}
-            inputProps={{ 'aria-label': 'select all desserts' }}
-          />
+        <TableCell className={classes.cell} padding="checkbox">
         </TableCell>
         {headCells.map((headCell) => (
           <TableCell
+            className={classes.cell}
             key={headCell.id}
             align={headCell.numeric ? 'right' : 'left'}
             padding={headCell.disablePadding ? 'none' : 'normal'}
             sortDirection={orderBy === headCell.id ? order : false}
           >
-            <TableSortLabel
+            <CustomTableSortLabel
+              classes={{icon: classes.cell}}
               active={orderBy === headCell.id}
               direction={orderBy === headCell.id ? order : 'asc'}
               onClick={createSortHandler(headCell.id)}
@@ -148,7 +144,7 @@ function EnhancedTableHead(props: EnhancedTableProps) {
                   {order === 'desc' ? 'sorted descending' : 'sorted ascending'}
                 </span>
               ) : null}
-            </TableSortLabel>
+            </CustomTableSortLabel>
           </TableCell>
         ))}
       </TableRow>
@@ -156,40 +152,22 @@ function EnhancedTableHead(props: EnhancedTableProps) {
   );
 }
 
-const useToolbarStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    root: {
-      paddingLeft: theme.spacing(2),
-      paddingRight: theme.spacing(1),
-    },
-    highlight:
-      theme.palette.type === 'light'
-        ? {
-//            color: theme.palette.secondary.main,
-            backgroundColor: orange[100],
-          }
-        : {
-            color: theme.palette.text.primary,
-            backgroundColor: theme.palette.secondary.dark,
-          },
-    title: {
-      flex: '1 1 100%',
-    },
-  }),
-);
-
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
       width: '100%',
       maxWidth: 1000,
-      margin: 'auto'
+      margin: 'auto',
     },
     paper: {
       width: '100%',
       marginBottom: theme.spacing(2),
+      backgroundColor: "#2B2C3E",
     },
     table: {
+    },
+    cell: {
+      color: "#FFFFFF",
     },
     visuallyHidden: {
       border: 0,
@@ -205,7 +183,7 @@ const useStyles = makeStyles((theme: Theme) =>
     tableRow: {
       "&.Mui-selected, &.Mui-selected:hover": {
         // !important is bad practice, search better way later
-        backgroundColor: orange[100] + "!important",
+        backgroundColor: blue[500] + "!important",
       }
     }
   }),
@@ -219,25 +197,41 @@ const ColoredTableRow = withStyles({
   },
 })(TableRow);
 
-const OrangeSwitch = withStyles({
+const BlueSwitch = withStyles({
   switchBase: {
-    color: orange[100],
+    color: blue[500],
     '&$checked': {
-      color: orange[200],
+      color: blue[600],
     },
     '&$checked + $track': {
-      backgroundColor: orange[200],
+      backgroundColor: blue[600],
     },
   },
   checked: {},
   track: {},
 })(Switch);
 
-const OrangeCheckbox = withStyles({
+const CustomTableSortLabel = withStyles({
   root: {
-    color: orange[200],
+    color: '#ffffff',
+    "&:hover": {
+      color: '#ffffff',
+    },
+    '&$active': {
+      color: '#ffffff',
+    },
+  },
+  active: {},
+  icon: {
+    color: '#ffffff !important'
+  },
+})(TableSortLabel);
+
+const BlueCheckbox = withStyles({
+  root: {
+    color: blue[600],
     '&$checked': {
-      color: orange[300],
+      color: blue[700],
     },
   },
   checked: {},
@@ -256,7 +250,7 @@ export default function EnhancedTable(props: detailProps) {
   const [selected, setSelected] = React.useState<string[]>([]);
   const [page, setPage] = React.useState(0);
   const [dense, setDense] = React.useState(true);
-  const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
   const handleRequestSort = (event: React.MouseEvent<unknown>, property: keyof Data) => {
     const isAsc = orderBy === property && order === 'asc';
@@ -349,30 +343,31 @@ export default function EnhancedTable(props: detailProps) {
                       selected={isItemSelected}
                       className={classes.tableRow}
                     >
-                      <TableCell padding="checkbox">
-                        <OrangeCheckbox
+                      <TableCell className={classes.cell} padding="checkbox">
+                        <BlueCheckbox
                           checked={isItemSelected}
                           inputProps={{ 'aria-labelledby': labelId }}
                         />
                       </TableCell>
-                      <TableCell component="th" id={labelId} scope="row" padding="none">
+                      <TableCell className={classes.cell} component="th" id={labelId} scope="row" padding="none">
                         {row.hospitalName}
                       </TableCell>
-                      <TableCell align="right">{row.bedsSevere}</TableCell>
-                      <TableCell align="right">{row.bedsMild}</TableCell>
-                      <TableCell align="right">{row.totalBeds}</TableCell>
+                      <TableCell className={classes.cell} align="right">{row.bedsSevere}</TableCell>
+                      <TableCell className={classes.cell} align="right">{row.bedsMild}</TableCell>
+                      <TableCell className={classes.cell} align="right">{row.totalBeds}</TableCell>
                     </ColoredTableRow>
                   );
                 })}
               {emptyRows > 0 && (
                 <TableRow style={{ height: (dense ? 33 : 53) * emptyRows }}>
-                  <TableCell colSpan={6} />
+                  <TableCell className={classes.cell} colSpan={6} />
                 </TableRow>
               )}
             </TableBody>
           </Table>
         </TableContainer>
         <TablePagination
+          className={classes.cell}
           rowsPerPageOptions={[5, 10, 25]}
           component="div"
           count={rows.length}
@@ -382,9 +377,10 @@ export default function EnhancedTable(props: detailProps) {
           onRowsPerPageChange={handleChangeRowsPerPage}
         />
       </Paper>
-      <Paper>
+      <Paper className={classes.paper}>
         <FormControlLabel
-          control={<OrangeSwitch checked={dense} onChange={handleChangeDense} />}
+          className={classes.cell}
+          control={<BlueSwitch checked={dense} onChange={handleChangeDense} />}
           label="Dense padding"
         />
       </Paper>

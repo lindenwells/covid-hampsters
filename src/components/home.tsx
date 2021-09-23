@@ -5,7 +5,7 @@ const Home = () => (
     <>
         <h2></h2>
         <nav>
-          <Button style={{margin: 10}} component={Link} to="/detail" variant="contained">
+          <Button style={{margin: 10}} component={Link} to="/detail/Brisbane" variant="contained">
             View Data (Brisbane)
           </Button>
         </nav>
