@@ -12,9 +12,10 @@ import About from "./components/about";
 import MenuIcon from '@material-ui/icons/Menu';
 // import { Populator } from "./assets/database_populater_script";
 // import { db } from "./firebase";
-import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
+import { makeStyles, createStyles, Theme, createTheme } from "@material-ui/core/styles";
 import { StyledFirebaseAuth } from "react-firebaseui";
 import icon from "./COVID-19_Hampsters_2.png";
+import { dark } from "@material-ui/core/styles/createPalette";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -49,6 +50,8 @@ const useStyles = makeStyles((theme: Theme) =>
       // TODO: Feel free to play around with the login button styling
       padding: theme.spacing(2),
       minWidth: "200px",
+      backgroundColor: "#3f51b5",
+      color: "#ffffff",
     },
     icon: {
       maxHeight: "50px",
@@ -56,7 +59,6 @@ const useStyles = makeStyles((theme: Theme) =>
       marginLeft: "30px",
       marginRight: "30px",
     },
-
   })
 );
 
@@ -77,7 +79,7 @@ const App = () => {
 
     return () => unregisterAuthObserver();
   }, []);
-  
+
   type loginProps = {
     loggedIn: boolean;
   };
@@ -117,10 +119,10 @@ const App = () => {
             vertical: 'top',
             horizontal: 'center',
           }}
-          >
-            <Typography className={classes.login}>
-                <Login loggedIn={loggedIn} />
-            </Typography>
+        >
+          <Typography className={classes.login}>
+            <Login loggedIn={loggedIn} />
+          </Typography>
         </Popover>
       </React.Fragment>
     )
@@ -131,11 +133,13 @@ const App = () => {
       <div className="box">
         <Router>
           <div className="header">
-            <Tabs classes={{root: classes.tabs, 
-              indicator: classes.tabsIndicatorColor, 
-              flexContainer: classes.tabsFlexContainer}} 
+            <Tabs classes={{
+              root: classes.tabs,
+              indicator: classes.tabsIndicatorColor,
+              flexContainer: classes.tabsFlexContainer
+            }}
               value={selectedTab}
-              onChange={handleChange} 
+              onChange={handleChange}
               aria-label="tabs"
             >
               <img
@@ -146,7 +150,7 @@ const App = () => {
               <Tab value={0} label="Home" component={Link} to="/" variant="contained" />
               <Tab value={1} label="About" component={Link} to="/about" variant="contained" />
               <div className={classes.tabButtonsAlign}>
-              <LoginPopover />
+                <LoginPopover />
               </div>
             </Tabs>
           </div>
