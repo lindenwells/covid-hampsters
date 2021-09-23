@@ -14,34 +14,35 @@
  * https://www.openstreetmap.org/ (accessed Sep. 12, 2021).
  */
 
-import React from "react";
+import { useCallback } from "react";
+import { useHistory } from "react-router-dom";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
-import { MapContainer, TileLayer, Marker, Popup, Circle } from 'react-leaflet';
-import { LatLngExpression } from 'leaflet';
+import Paper from "@material-ui/core/Paper";
+import { MapContainer, TileLayer, Tooltip, Circle } from 'react-leaflet';
+import { LatLngExpression, LeafletMouseEventHandlerFn } from 'leaflet';
 // import "./Map.css"
 import "leaflet/dist/leaflet.css";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
-    root: {
-      background: "#f2f2f2",
-    },
     map: {
-      height: "500px",
+      height: "600px",
     },
     padding: {
       padding: "16px",
     },
     legend: {
-      background: "#bdbdbd",
+      background: "#2B2C3E",
       height: "150px",
       marginBottom: "50px",
+      color: "#ffffff",
     },
     filter: {
-      background: "#bdbdbd",
+      background: "#2B2C3E",
       height: "300px",
+      color: "#ffffff",
     },
     center: {
       margin: "auto",
@@ -53,11 +54,17 @@ const useStyles = makeStyles((theme: Theme) =>
 export default function Map() {
   const classes = useStyles();
   let position: LatLngExpression = [-27.4705, 153.0260]
-  const color = { color: 'red' }
+  const color = { color: "#0177FB" }
+
+  // Invoke "Link" (OnClick).
+  const history = useHistory();
+  function OnClick(area: string): LeafletMouseEventHandlerFn {
+    return useCallback(() => history.push('/detail/' + area), [history]);
+  };
 
   return (
     //<React.Fragment></React.Fragment>
-      <div className={classes.root}>
+      <div>
         <Grid container className={classes.center}>
           <Grid item className={classes.padding} xs={9}>
             <Box className={classes.map}>
@@ -66,18 +73,22 @@ export default function Map() {
                   attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                   url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 />
-                <Circle center={[-27.4705, 153.0260]} pathOptions={color} radius={10000}>
-                  <Popup>Brisbane Hospitals</Popup>
+                <Circle center={[-27.4705, 153.0260]} pathOptions={color} radius={10000} 
+                  eventHandlers={{ click: OnClick("Brisbane") }}
+                >
+                  <Tooltip>Brisbane Hospitals</Tooltip>
                 </Circle>
-                <Circle center={[-27.6146, 152.7608]} pathOptions={color} radius={6000}>
-                  <Popup>Ipswitch Hospitals</Popup>
+                <Circle center={[-27.6146, 152.7608]} pathOptions={color} radius={6000}
+                  eventHandlers={{ click: OnClick("Ipswitch") }}
+                >
+                  <Tooltip>Ipswitch Hospitals</Tooltip>
                 </Circle>
               </MapContainer>
             </Box>
           </Grid>
           <Grid item className={classes.padding} xs={3}>
-            <Box className={classes.legend}>Legend</Box>
-            <Box className={classes.filter}>Filter</Box>
+            <Paper className={classes.legend}>Legend</Paper>
+            <Paper className={classes.filter}>Filter</Paper>
           </Grid>
         </Grid>
       </div>
