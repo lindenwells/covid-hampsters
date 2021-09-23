@@ -10,10 +10,7 @@ function Reset() {
   const history = useHistory();
   useEffect(() => {
     if (loading) return;
-    {/*if (user) history.replace("/");*/}
-    if (user) {
-      return (<div>Already login</div>);
-    }
+    if (user) history.replace("/userpage");
   }, [user, loading]);
   return (
     <div className="reset">

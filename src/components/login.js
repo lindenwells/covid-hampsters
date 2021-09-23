@@ -1,4 +1,3 @@
-import firebase from "../firebase";
 import { Button } from "@material-ui/core";
 import { StyledFirebaseAuth } from "react-firebaseui";
 import React, { useEffect, useState } from "react";
@@ -22,7 +21,7 @@ function Login() {
     }
     {/*if (user) history.replace("/");*/}
     if (user) {
-      return (<div><h1>Hello, already login</h1></div>);
+      history.replace("/userpage");
     }
   }, [user, loading]);
   return (
