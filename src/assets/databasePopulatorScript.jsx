@@ -1,5 +1,5 @@
 import { db } from "../firebase";
-import { data } from "./MOCK_DATA";
+import { data } from "./hospitals";
 import { Button } from "@material-ui/core";
 
 // Function to print all documents in the firestore "hospital" collection
