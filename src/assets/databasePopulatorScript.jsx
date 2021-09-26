@@ -23,16 +23,17 @@ export const Populator = () => {
     <Button
       onClick={() => {
         data.forEach((hospital) => {
+          delete hospital["Occupied Beds"]
           db.collection("hospitals")
-            .add(hospital)
+            .doc(hospital._id.toString())
+            .set(hospital)
             .then((docRef) => {
               console.log("Document written with ID: ", docRef.id);
             })
             .catch((error) => {
               console.error("Error adding document: ", error);
-            });
-          console.log(data);
-        });
+            })
+        })
       }}
     >
       Click to add data to firestore
