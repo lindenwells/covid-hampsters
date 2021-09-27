@@ -17,6 +17,14 @@ import { StyledFirebaseAuth } from "react-firebaseui";
 import icon from "./COVID-19_Hampsters_2.png";
 import { dark } from "@material-ui/core/styles/createPalette";
 
+/*
+ * Primary colour palette inspired from:
+ *
+ * REFERENCE:
+ * Golo. "Banking App Dashboard Dark." dribbble. 
+ * https://dribbble.com/shots/14671619-Banking-App-Dashboard-Dark (accessed Sep. 12, 2021).
+ */
+
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {

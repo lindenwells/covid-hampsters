@@ -4,7 +4,7 @@
  * 
  * REFERENCE:
  * Material-UI. "Table." Material-UI. 
- * https://material-ui.com/components/tables/ (accessed Aug. 28, 2021).
+ * https://material-ui.com/components/tables/ (accessed Sep. 12, 2021).
  */
 
 import React from 'react';
@@ -34,7 +34,9 @@ import FilterListIcon from '@material-ui/icons/FilterList';
 
 interface Data {
   bedsMild: number;
+  bedsMildTotal: number;
   bedsSevere: number;
+  bedsSevereTotal: number;
   hospitalName: string;
   totalBeds: number;
 }
@@ -42,20 +44,22 @@ interface Data {
 function createData(
   hospitalName: string,
   bedsSevere: number,
+  bedsSevereTotal: number,
   bedsMild: number,
+  bedsMildTotal: number,
   totalBeds: number,
 ): Data {
-  return { hospitalName, bedsSevere, bedsMild, totalBeds };
+  return { hospitalName, bedsSevere, bedsSevereTotal, bedsMild, bedsMildTotal, totalBeds };
 }
 
 const rows = [
-  createData('Hospital 1', 100, 100, 200),
-  createData('Hospital 2', 200, 100, 300),
-  createData('Hospital 3', 300, 100, 400),
-  createData('Hospital 4', 400, 100, 500),
-  createData('Hospital 5', 500, 100, 600),
-  createData('Hospital 6', 600, 100, 700),
-  createData('Hospital 7', 700, 100, 800),
+  createData('Hospital 1', 100, 200, 100, 200, 200),
+  createData('Hospital 2', 200, 300, 100, 200, 300),
+  createData('Hospital 3', 300, 400, 100, 200, 400),
+  createData('Hospital 4', 400, 500, 100, 200, 500),
+  createData('Hospital 5', 500, 600, 100, 200, 600),
+  createData('Hospital 6', 600, 700, 100, 200, 700),
+  createData('Hospital 7', 700, 800, 100, 200, 800),
 ];
 
 function descendingComparator<T>(a: T, b: T, orderBy: keyof T) {
@@ -352,8 +356,8 @@ export default function EnhancedTable(props: detailProps) {
                       <TableCell className={classes.cell} component="th" id={labelId} scope="row" padding="none">
                         {row.hospitalName}
                       </TableCell>
-                      <TableCell className={classes.cell} align="right">{row.bedsSevere}</TableCell>
-                      <TableCell className={classes.cell} align="right">{row.bedsMild}</TableCell>
+                      <TableCell className={classes.cell} align="right">{row.bedsSevere} / {row.bedsSevereTotal}</TableCell>
+                      <TableCell className={classes.cell} align="right">{row.bedsMild} / {row.bedsMildTotal}</TableCell>
                       <TableCell className={classes.cell} align="right">{row.totalBeds}</TableCell>
                     </ColoredTableRow>
                   );
