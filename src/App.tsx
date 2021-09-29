@@ -21,9 +21,25 @@ import Map from "./components/map/Map";
 import Home from "./components/home";
 import About from "./components/about";
 import MenuIcon from "@material-ui/icons/Menu";
-import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
+// import { Populator } from "./assets/database_populater_script";
+// import { db } from "./firebase";
+import {
+  makeStyles,
+  createStyles,
+  Theme,
+  createTheme,
+} from "@material-ui/core/styles";
 import { StyledFirebaseAuth } from "react-firebaseui";
 import icon from "./COVID-19_Hampsters_2.png";
+import { dark } from "@material-ui/core/styles/createPalette";
+
+/*
+ * Primary colour palette inspired from:
+ *
+ * REFERENCE:
+ * Golo. "Banking App Dashboard Dark." dribbble.
+ * https://dribbble.com/shots/14671619-Banking-App-Dashboard-Dark (accessed Sep. 12, 2021).
+ */
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -58,6 +74,8 @@ const useStyles = makeStyles((theme: Theme) =>
       // TODO: Feel free to play around with the login button styling
       padding: theme.spacing(2),
       minWidth: "200px",
+      backgroundColor: "#3f51b5",
+      color: "#ffffff",
     },
     icon: {
       maxHeight: "50px",
