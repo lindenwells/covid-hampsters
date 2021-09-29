@@ -6,8 +6,6 @@ export type hospital = {
     "Address": string,
     "Phone Number": string,
     "Fax Number": string,
-    "Max Bed Capacity": number,
-    "Occupied Beds": 118,
     "lat": string,
     "lon": string,
 }
