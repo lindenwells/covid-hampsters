@@ -23,13 +23,13 @@ import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
 import Paper from "@material-ui/core/Paper";
 import Button from "@material-ui/core/Button";
-import { MapContainer, TileLayer, Tooltip, Circle, useMap, useMapEvent, Popup } from 'react-leaflet';
-import { LatLngExpression, LeafletMouseEventHandlerFn, latLngBounds, geoJSON, GeoJSON, popup, latLng } from 'leaflet';
+import { MapContainer, TileLayer, useMap, useMapEvent, Circle, Tooltip } from 'react-leaflet';
+import { LatLngExpression, geoJSON, GeoJSON, popup } from 'leaflet';
 // import "./Map.css"
 import "leaflet/dist/leaflet.css";
 import { data } from "../../assets/hospitals";
 import * as turf from '@turf/turf'
-import { Feature, Point, Polygon } from "@turf/turf";
+import { Feature, Point } from "@turf/turf";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -66,7 +66,7 @@ const useStyles = makeStyles((theme: Theme) =>
   
 export default function Map() {
   const classes = useStyles();
-  let position: LatLngExpression = [-27.4705, 153.0260]
+  let position: LatLngExpression = [-23.4141, 144.7852]
   const blue = { color: "#0177FB" }
   const red = { color: "#ff0000" }
 
@@ -75,7 +75,7 @@ export default function Map() {
         <Grid container className={classes.center}>
           <Grid item className={classes.padding} xs={9}>
             <Box className={classes.map}>
-              <MapContainer style={{ height: '100%', width: '100%' }} center={position} zoom={9} scrollWheelZoom={false}>
+              <MapContainer style={{ height: '100%', width: '100%' }} center={position} zoom={5} scrollWheelZoom={false}>
                 <TileLayer
                   attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                   url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
@@ -112,11 +112,14 @@ interface area {
  * Calculate convex hull using turf.js and latitudes/longitudes.
  */ 
 function polygonsCalc(): area[] {
-  let areas = [] as area[];
+  let areas = {} as Record<string, area>;
   let area = {} as area;
-
+  
   data.forEach(function (hospital, index) {
-    if (area.name !== hospital["Hospital and Health Service"]) {
+    if (areas[hospital["Hospital and Health Service"]])
+      area = areas[hospital["Hospital and Health Service"]]
+      
+    if (areas[hospital["Hospital and Health Service"]] === undefined) {
       // next area
       area = {} as area;
       area.points = [] as Feature<Point>[];
@@ -124,13 +127,15 @@ function polygonsCalc(): area[] {
       area.name = hospital["Hospital and Health Service"];
 
       // insert area
-      areas.push(area)
+      areas[area.name] = area;
     }
+    
     let hospitalCoordinate = turf.point([parseFloat(hospital.lon), parseFloat(hospital.lat)]);
     area.points.push(hospitalCoordinate);
   });
 
-  areas.forEach(function (area, index) {
+  for (const name in areas) {
+    const area: area = areas[name];
     area.polygons.push(turf.convex(turf.featureCollection(area.points)));
     if (area.polygons[0] === null) {
       // if there are less than two hospitals, just give them a circle each.
@@ -140,9 +145,9 @@ function polygonsCalc(): area[] {
         });
       }
     }
-  });
-
-  return areas;
+  }
+  
+  return Object.values(areas);
 }
 
 /*
@@ -170,7 +175,7 @@ function MapGeoJSONHook() {
   map = useMapEvent('click', (e) => {
     // turf = lon/lat
     // let clickBounds = latLngBounds(e.latlng, e.latlng);
-    let areasClicked: { [name: string] : area; } = {};
+    let areasClicked = {} as Record<string, area>;
 
     areas.forEach((area, index) => {
       area.polygons.forEach((polygon, index) => {
