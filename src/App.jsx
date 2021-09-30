@@ -6,6 +6,7 @@ import { Button } from "@material-ui/core";
 import Login from "./components/login";
 import Register from "./components/register";
 import Reset from "./components/reset";
+import UserPage from "./components/userPage"
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import DataGrid from "./components/table/DataGrid";
 import Map from "./components/map/Map";
@@ -107,6 +108,9 @@ const App = () => {
               </Route>
               <Route path="/reset">
                 <Reset />
+              </Route>
+              <Route path='/userpage'>
+                <UserPage />
               </Route>
             </Switch>
           </div>

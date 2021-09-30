@@ -22,7 +22,7 @@ function Login() {
     }
     {/*if (user) history.replace("/");*/}
     if (user) {
-      return (<div><h1>Hello, already login</h1></div>);
+      return (history.replace('/userpage'));
     }
   }, [user, loading]);
   return (

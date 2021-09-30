@@ -89,6 +89,7 @@ const signInWithGoogle = async () => {
 /** Sign in with Email and password. */
 const signInWithEmailAndPassword = async (email, password) => {
   try {
+    await auth.setPersistence(firebase.auth.Auth.Persistence.SESSION);
     await auth.signInWithEmailAndPassword(email, password);
   } catch (err) {
     console.error(err);
@@ -126,7 +127,7 @@ const sendPasswordResetEmail = async (email) => {
 
 /** Logout */
 const logout = () => {
-  auth.logout();
+  auth.signOut();
 }
 
 export {
