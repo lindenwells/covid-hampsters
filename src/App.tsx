@@ -1,20 +1,45 @@
 import "./App.css";
-import firebase, { authUiConfig } from "./firebase";
+import firebase from "./firebase";
 import React, { SetStateAction, useEffect, useState } from "react";
-import { AppBar, Button, Tab, Tabs, Toolbar, IconButton, Grid, Typography, Popover, Box } from "@material-ui/core";
+import {
+  AppBar,
+  Button,
+  Tab,
+  Tabs,
+  Toolbar,
+  IconButton,
+  Grid,
+  Typography,
+  Popover,
+  Box,
+} from "@material-ui/core";
 import Login from "./components/login";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import { RouteComponentProps } from 'react-router-dom';
+import { RouteComponentProps } from "react-router-dom";
 import DataGrid from "./components/table/DataGrid";
 import Map from "./components/map/Map";
 import Home from "./components/home";
 import About from "./components/about";
-import MenuIcon from '@material-ui/icons/Menu';
+import MenuIcon from "@material-ui/icons/Menu";
 // import { Populator } from "./assets/database_populater_script";
 // import { db } from "./firebase";
-import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
+import {
+  makeStyles,
+  createStyles,
+  Theme,
+  createTheme,
+} from "@material-ui/core/styles";
 import { StyledFirebaseAuth } from "react-firebaseui";
 import icon from "./COVID-19_Hampsters_2.png";
+import { dark } from "@material-ui/core/styles/createPalette";
+
+/*
+ * Primary colour palette inspired from:
+ *
+ * REFERENCE:
+ * Golo. "Banking App Dashboard Dark." dribbble.
+ * https://dribbble.com/shots/14671619-Banking-App-Dashboard-Dark (accessed Sep. 12, 2021).
+ */
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -49,6 +74,8 @@ const useStyles = makeStyles((theme: Theme) =>
       // TODO: Feel free to play around with the login button styling
       padding: theme.spacing(2),
       minWidth: "200px",
+      backgroundColor: "#3f51b5",
+      color: "#ffffff",
     },
     icon: {
       maxHeight: "50px",
@@ -56,7 +83,6 @@ const useStyles = makeStyles((theme: Theme) =>
       marginLeft: "30px",
       marginRight: "30px",
     },
-
   })
 );
 
@@ -77,10 +103,6 @@ const App = () => {
 
     return () => unregisterAuthObserver();
   }, []);
-  
-  type loginProps = {
-    loggedIn: boolean;
-  };
 
   const LoginPopover = () => {
     const classes = useStyles();
@@ -97,11 +119,16 @@ const App = () => {
     };
 
     const open = Boolean(anchorEl);
-    const id = open ? 'simple-popover' : undefined;
+    const id = open ? "simple-popover" : undefined;
 
     return (
       <React.Fragment>
-        <Button aria-describedby={id} variant="contained" color="primary" onClick={handleClick}>
+        <Button
+          aria-describedby={id}
+          variant="contained"
+          color="primary"
+          onClick={handleClick}
+        >
           Login
         </Button>
         <Popover
@@ -110,43 +137,54 @@ const App = () => {
           anchorEl={anchorEl}
           onClose={handleClose}
           anchorOrigin={{
-            vertical: 'bottom',
-            horizontal: 'center',
+            vertical: "bottom",
+            horizontal: "center",
           }}
           transformOrigin={{
-            vertical: 'top',
-            horizontal: 'center',
+            vertical: "top",
+            horizontal: "center",
           }}
-          >
-            <Typography className={classes.login}>
-                <Login loggedIn={loggedIn} />
-            </Typography>
+        >
+          <Typography className={classes.login}>
+            <Login loggedIn={loggedIn} />
+          </Typography>
         </Popover>
       </React.Fragment>
-    )
-  }
+    );
+  };
 
   const displayThis = () => {
     return (
       <div className="box">
         <Router>
           <div className="header">
-            <Tabs classes={{root: classes.tabs, 
-              indicator: classes.tabsIndicatorColor, 
-              flexContainer: classes.tabsFlexContainer}} 
+            <Tabs
+              classes={{
+                root: classes.tabs,
+                indicator: classes.tabsIndicatorColor,
+                flexContainer: classes.tabsFlexContainer,
+              }}
               value={selectedTab}
-              onChange={handleChange} 
+              onChange={handleChange}
               aria-label="tabs"
             >
-              <img
-                src={icon}
-                className={classes.icon}
-                alt="bedlam"
+              <img src={icon} className={classes.icon} alt="bedlam" />
+              <Tab
+                value={0}
+                label="Home"
+                component={Link}
+                to="/"
+                variant="contained"
               />
-              <Tab value={0} label="Home" component={Link} to="/" variant="contained" />
-              <Tab value={1} label="About" component={Link} to="/about" variant="contained" />
+              <Tab
+                value={1}
+                label="About"
+                component={Link}
+                to="/about"
+                variant="contained"
+              />
               <div className={classes.tabButtonsAlign}>
-              <LoginPopover />
+                <LoginPopover />
               </div>
             </Tabs>
           </div>
@@ -163,9 +201,7 @@ const App = () => {
               </Route>
             </Switch>
           </div>
-          <div className="footer">
-            Team '); DROP_TABLE
-          </div>
+          <div className="footer">Team '); DROP_TABLE</div>
         </Router>
       </div>
     );

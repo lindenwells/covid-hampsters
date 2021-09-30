@@ -17,8 +17,7 @@ import Typography from "@material-ui/core/Typography";
 import MapIcon from '@material-ui/icons/Map';
 import BarChartIcon from '@material-ui/icons/BarChart';
 import TrendingUpIcon from '@material-ui/icons/TrendingUp';
-import chartPicture from "./chart.png";
-import Chart from "./Chart";
+import { AreaBedChart, HospitalBedChart } from "./Chart";
 import Table from "./Table";
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -96,18 +95,14 @@ function Show(props: ShowInterface) {
     case ThingToShow.trend: {
       return (
         <Box className={classes.center} display="flex">
-          <Chart />
+          <AreaBedChart />
         </Box>
       );
     }
     case ThingToShow.specific: {
       return (
         <Box className={classes.center} display="flex">
-          <img
-            src={chartPicture}
-            className={`${classes.img} ${classes.center}`}
-            alt="scuffed chart2"
-          />
+          <HospitalBedChart />
         </Box>
       );
     }
@@ -168,7 +163,7 @@ export default function DataGrid() {
                   <Typography variant="subtitle1">
                     {show === ThingToShow.data && "Hospital Stats"}
                     {show === ThingToShow.trend && "Patients in Need of Beds"}
-                    {show === ThingToShow.specific && hospitalName}
+                    {show === ThingToShow.specific && hospitalName + " Available Beds"}
                   </Typography>
                 </Paper>
               </Grid>
@@ -179,7 +174,7 @@ export default function DataGrid() {
                 className={classes.buttonContainer}
               >
                 {show !== ThingToShow.specific && (
-                  <>
+                  <React.Fragment>
                     <Button
                       classes={{root: classes.button}}
                       variant="contained"
@@ -196,7 +191,7 @@ export default function DataGrid() {
                     >
                       <TrendingUpIcon classes={{root: classes.icon}} />
                     </Button>
-                  </>
+                  </React.Fragment>
                 )}
               </Grid>
             </Grid>
