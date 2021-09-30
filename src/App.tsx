@@ -1,5 +1,5 @@
 import "./App.css";
-import firebase, { authUiConfig } from "./firebase";
+import firebase from "./firebase";
 import React, { SetStateAction, useEffect, useState } from "react";
 import { AppBar, Button, Tab, Tabs, Toolbar, IconButton, Grid, Typography, Popover, Box } from "@material-ui/core";
 import Login from "./components/login";
@@ -80,10 +80,6 @@ const App = () => {
     return () => unregisterAuthObserver();
   }, []);
 
-  type loginProps = {
-    loggedIn: boolean;
-  };
-
   const LoginPopover = () => {
     const classes = useStyles();
     const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(
@@ -149,6 +145,8 @@ const App = () => {
               />
               <Tab value={0} label="Home" component={Link} to="/" variant="contained" />
               <Tab value={1} label="About" component={Link} to="/about" variant="contained" />
+              {/* TODO: Need to move this div out of Tabs object; causes bug - login popup 
+              closes if a tab is selected when trying to type text */}
               <div className={classes.tabButtonsAlign}>
                 <LoginPopover />
               </div>
