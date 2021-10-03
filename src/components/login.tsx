@@ -44,20 +44,20 @@ const IsRegister = () => {
         justify="center"
       >
         <ThemeProvider theme={customTheme}>
-            <TextField
-              color="primary"
-              label="Email"
-              margin="normal"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              InputProps={{
-                startAdornment: <InputAdornment position="start">
-                  <EmailOutlined />
-                </InputAdornment>
-              }}
-            />
-            <Button className={classes.loginBtns} variant="contained" onClick={() => { sendPasswordResetEmail(email); }}>Send password reset email</Button>
-            <Button className={classes.loginBtns} variant="contained" onClick={() => { setResetPass(false); }}>Back to login</Button>
+          <TextField
+            color="primary"
+            label="Email"
+            margin="normal"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            InputProps={{
+              startAdornment: <InputAdornment position="start">
+                <EmailOutlined />
+              </InputAdornment>
+            }}
+          />
+          <Button className={classes.loginBtns} variant="contained" onClick={() => { sendPasswordResetEmail(email); }}>Send password reset email</Button>
+          <Button className={classes.loginBtns} variant="contained" onClick={() => { setResetPass(false); }}>Back to login</Button>
         </ThemeProvider>
       </Grid>
     )
@@ -69,12 +69,12 @@ const IsRegister = () => {
         direction="column"
         alignItems="center"
         justify="center"
-        style={{ minHeight: '75vh' }}
+        style={{ minHeight: '75vh', maxWidth: 300 }}
       >
-        <Avatar style={{ margin: 1, backgroundColor: "secondary.main" }}>
-          <LockOutlined />
-        </Avatar>
         <ThemeProvider theme={customTheme}>
+          <Avatar style={{ margin: 1, backgroundColor: "secondary.main" }}>
+            <LockOutlined />
+          </Avatar>
           <form onSubmit={(e) => { e.preventDefault() }}> {/* Again this form allows submission on enter, div below needs styling */}
             <Typography component="h1" variant="h5">
               Sign up
@@ -129,7 +129,7 @@ const IsRegister = () => {
         direction="column"
         alignItems="center"
         justify="center"
-        style={{ minHeight: '75vh' }}
+        style={{ minHeight: '75vh', maxWidth: 300 }}
       >
         <Avatar style={{ margin: 1, backgroundColor: "secondary" }}>
           <LockOutlined />
