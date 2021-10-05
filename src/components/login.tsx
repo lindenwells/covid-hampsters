@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import firebase, { registerWithEmailAndPassword, sendPasswordResetEmail, signInWithEmailAndPassword, signInWithGoogle } from "../firebase";
-import { Button, Grid, TextField, InputAdornment, Input } from "@material-ui/core";
-import { AccountCircle, LockRounded } from "@material-ui/icons";
-import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
+import { Avatar, Button, Grid, TextField, InputAdornment, Typography, Input, Link } from "@material-ui/core";
+import { AccountCircleOutlined, LockOutlined, EmailOutlined } from "@material-ui/icons";
+import { makeStyles, createStyles, Theme, ThemeProvider, createTheme } from "@material-ui/core/styles";
+import { palette } from "@mui/system";
 // import Register from "./register";
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -10,13 +11,24 @@ const useStyles = makeStyles((theme: Theme) =>
     loginBtns: {
       // TODO: Feel free to play around with the login buttons styling
       margin: theme.spacing(2),
+      minWidth: 250
     },
+<<<<<<< HEAD
     loginForm: {
       width: "80px",
       height: "200px"
     }
   })
+=======
+  }),
+>>>>>>> refs/remotes/origin/main
 );
+
+const customTheme = createTheme({
+  palette: {
+    type: 'dark',
+  },
+});
 
 type loginProps = {
   loggedIn: boolean;
@@ -32,42 +44,15 @@ const IsRegister = () => {
 
   if (resetPass) {
     return (
-      <>
-      <TextField 
-        color="primary"
-        label="Email"
-        margin="normal"
-        value={email}
-        onChange={(e) => setEmail(e.target.value)}
-        InputProps={{
-          startAdornment: <InputAdornment position="start">
-            <AccountCircle />
-          </InputAdornment>
-        }}
-      />
-      <Button className={classes.loginBtns} variant="contained" onClick={() => {sendPasswordResetEmail(email);}}>Send password reset email</Button>
-      <Button className={classes.loginBtns} variant="contained" onClick={() => {setResetPass(false);}}>Back to login</Button>
-      </>
-    )
-  } else if (registered) {
-    return (
-      <>
-      <form onSubmit={(e) => {e.preventDefault()}}> {/* Again this form allows submission on enter, div below needs styling */}
-        <div style={{ display: 'flex', flexDirection: 'column', maxWidth: 400, minWidth: 300 }}>
-          Register
-          <TextField 
-            color="primary"
-            label="Name"
-            margin="normal"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            InputProps={{
-              startAdornment: <InputAdornment position="start">
-                <AccountCircle />
-              </InputAdornment>
-            }}
-          />
-          <TextField 
+      <Grid
+        container
+        spacing={0}
+        direction="column"
+        alignItems="center"
+        justify="center"
+      >
+        <ThemeProvider theme={customTheme}>
+          <TextField
             color="primary"
             label="Email"
             margin="normal"
@@ -75,88 +60,150 @@ const IsRegister = () => {
             onChange={(e) => setEmail(e.target.value)}
             InputProps={{
               startAdornment: <InputAdornment position="start">
-                <AccountCircle />
+                <EmailOutlined />
               </InputAdornment>
             }}
           />
-          <TextField 
-            color="primary"
-            label="Password" 
-            type="password"
-            margin="normal"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            InputProps={{ startAdornment: 
-            <InputAdornment position="start">
-              <LockRounded />
-            </InputAdornment>
-            }}
-          />
-          <Button className={classes.loginBtns} variant="contained" type="submit" onClick={() => {registerWithEmailAndPassword(name, email, password);}}>Register</Button>
-          </div>
-        </form>
-      <Button className={classes.loginBtns} variant="contained" onClick={() => {setRegistered(false);}}>Back to login</Button>
-      </>
+          <Button className={classes.loginBtns} variant="contained" onClick={() => { sendPasswordResetEmail(email); }}>Send password reset email</Button>
+          <Button className={classes.loginBtns} variant="contained" onClick={() => { setResetPass(false); }}>Back to login</Button>
+        </ThemeProvider>
+      </Grid>
+    )
+  } else if (registered) {
+    return (
+      <Grid
+        container
+        spacing={0}
+        direction="column"
+        alignItems="center"
+        justify="center"
+        style={{ minHeight: '75vh', maxWidth: 300 }}
+      >
+        <ThemeProvider theme={customTheme}>
+          <Avatar style={{ margin: 1, backgroundColor: "secondary.main" }}>
+            <LockOutlined />
+          </Avatar>
+          <form onSubmit={(e) => { e.preventDefault() }}> {/* Again this form allows submission on enter, div below needs styling */}
+            <Typography component="h1" variant="h5">
+              Sign up
+            </Typography>
+            <TextField
+              color="primary"
+              label="Name"
+              margin="normal"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              InputProps={{
+                startAdornment: <InputAdornment position="start">
+                  <AccountCircleOutlined />
+                </InputAdornment>
+              }}
+            />
+            <TextField
+              label="Email"
+              margin="normal"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              InputProps={{
+                startAdornment: <InputAdornment position="start">
+                  <EmailOutlined />
+                </InputAdornment>
+              }}
+            />
+            <TextField
+              label="Password"
+              type="password"
+              margin="normal"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              InputProps={{
+                startAdornment:
+                  <InputAdornment position="start">
+                    <LockOutlined />
+                  </InputAdornment>
+              }}
+            />
+            <Button className={classes.loginBtns} variant="contained" type="submit" onClick={() => { registerWithEmailAndPassword(name, email, password); }}>Register</Button>
+          </form>
+          <Button className={classes.loginBtns} variant="contained" onClick={() => { setRegistered(false); }}>Back to login</Button>
+        </ThemeProvider>
+      </Grid>
     );
   } else {
     return (
-      <>
-      <p>You're logged out</p>
+      <Grid
+        container
+        spacing={0}
+        direction="column"
+        alignItems="center"
+        justify="center"
+        style={{ minHeight: '75vh', maxWidth: 300 }}
+      >
+        <Avatar style={{ margin: 1, backgroundColor: "secondary" }}>
+          <LockOutlined />
+        </Avatar>
+        <ThemeProvider theme={customTheme}>
+          <form onSubmit={(e) => { e.preventDefault() }}> {/* This form allows form submission on enter */}
+            <div> {/* This div keeps things in one column */}
+              {/* TODO: This div makes login too wide, not sure how to fix */}
+              <Typography component="h1" variant="h5">
+                Sign in
+              </Typography>
+              <TextField
+                label="Email"
+                margin="normal"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                InputProps={{
+                  startAdornment: <InputAdornment position="start">
+                    <EmailOutlined />
+                  </InputAdornment>
+                }}
+              />
 
-      <form onSubmit={(e) => {e.preventDefault()}}> {/* This form allows form submission on enter */}
-        <div> {/* This div keeps things in one column */}
-        {/* TODO: This div makes login too wide, not sure how to fix */}
-        <p>Sign In</p>
-        <TextField 
-          color="primary"
-          label="Email"
-          margin="normal"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          InputProps={{
-            startAdornment: <InputAdornment position="start">
-              <AccountCircle />
-            </InputAdornment>
-          }}
-        />
+              <TextField
+                label="Password"
+                type="password"
+                margin="normal"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                InputProps={{
+                  startAdornment:
+                    <InputAdornment position="start">
+                      <LockOutlined />
+                    </InputAdornment>
+                }}
+              />
+            </div>
+            <Button
+              variant="contained"
+              type="submit"
+              // replace onClick func with email/pass firebase stuff
+              onClick={(e) =>
+              (e.preventDefault,
+                signInWithEmailAndPassword(email, password))}
+              className={classes.loginBtns}
 
-        <TextField 
-          color="primary"
-          label="Password" 
-          type="password"
-          margin="normal"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          InputProps={{ startAdornment: 
-          <InputAdornment position="start">
-            <LockRounded />
-          </InputAdornment>
-          }}
-        />
-        </div>
-        <Button 
-          variant="contained"
-          type="submit"
-          // replace onClick func with email/pass firebase stuff
-          onClick={(e) => 
-            (e.preventDefault,
-            signInWithEmailAndPassword(email, password))}
-          className={classes.loginBtns}
+            >
+              Log In
+            </Button>
+          </form>
+
+          <Button
+            variant="contained"
+            onClick={signInWithGoogle}
+            className={classes.loginBtns}
           >
-          Log In
-        </Button>
-      </form>
-
-      <Button
-        variant="contained"
-        onClick={signInWithGoogle}
-        className={classes.loginBtns}>
-        Sign in with Google
-      </Button>
-
-      <Button className={classes.loginBtns} variant="contained" onClick={() => {setRegistered(true)}}>Create account</Button>
-      <Button className={classes.loginBtns} variant="contained" onClick={() => {setResetPass(true)}}>Forgot password? Click here</Button>
-      </>
+            Sign in with Google
+          </Button>
+          <Link color="primary" href="#" variant="body2" onClick={() => { setResetPass(true) }}>
+            Forgot password?
+          </Link>
+          <Link color="primary" href="#" variant="body2" onClick={() => { setRegistered(true) }}>
+            {"Don't have an account? Sign Up"}
+          </Link>
+        </ThemeProvider>
+      </Grid>
     );
   }
 }
