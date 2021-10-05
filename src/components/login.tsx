@@ -13,15 +13,7 @@ const useStyles = makeStyles((theme: Theme) =>
       margin: theme.spacing(2),
       minWidth: 250
     },
-<<<<<<< HEAD
-    loginForm: {
-      width: "80px",
-      height: "200px"
-    }
-  })
-=======
   }),
->>>>>>> refs/remotes/origin/main
 );
 
 const customTheme = createTheme({
