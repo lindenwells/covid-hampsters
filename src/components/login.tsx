@@ -11,6 +11,10 @@ const useStyles = makeStyles((theme: Theme) =>
       // TODO: Feel free to play around with the login buttons styling
       margin: theme.spacing(2),
     },
+    loginForm: {
+      width: "80px",
+      height: "200px"
+    }
   })
 );
 
@@ -176,7 +180,7 @@ const Login = (props: loginProps) => {
   } else {
     return (
       <div className="App">
-        <div style={{ display: 'flex', flexDirection: 'column', maxWidth: 400, minWidth: 300 }}>
+        <div style={{ display: 'flex', flexDirection: 'column', maxWidth: 300, minWidth: 300 }}>
           <Grid container item alignItems="center" direction="column">
             {IsRegister()}
           </Grid>
