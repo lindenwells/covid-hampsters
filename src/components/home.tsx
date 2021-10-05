@@ -3,9 +3,9 @@ import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 
 const Home = () => (
     <>
-        <h2>Home [map todo]</h2>
+        <h2></h2>
         <nav>
-          <Button style={{margin: 10}} component={Link} to="/detail" variant="contained">
+          <Button style={{margin: 10}} component={Link} to="/detail/Brisbane" variant="contained">
             View Data (Brisbane)
           </Button>
         </nav>
