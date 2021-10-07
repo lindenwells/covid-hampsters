@@ -171,9 +171,10 @@ interface area {
   points: Feature<Point>[];
   polygons: any[]; // Feature<Polygon> | null
   name: string; // area name
-  hospitals: Record<number, typeof data[0]>; // hospital in area from hospitals.json 
+  hospitals: Record<string, typeof data[0]>; // hospital in area from hospitals.json 
   geoJSONs: GeoJSON<any>[]; // on map
-  areaPercentage: number;
+  occupancy: number;
+  maxBeds: number;
 }
 
 /*
@@ -201,7 +202,7 @@ function polygonsCalc(): area[] {
     
     let hospitalCoordinate = turf.point([parseFloat(hospital.lon), parseFloat(hospital.lat)]);
     area.points.push(hospitalCoordinate);
-    area.hospitals[hospital["_id"]] = hospital;
+    area.hospitals[hospital["Facility Name"]] = hospital;
   });
 
   for (const name in areas) {
@@ -274,7 +275,7 @@ function MapGeoJSONHook() {
         <div className={classes.mapBox}>
           <Button key={area.name} classes={{root: classes.button}} 
           onClick={linkInvoke(area.name)}>Go To: {area.name}</Button>
-          <Paper className={classes.mapBoxBedNumber}>50 / 100 Beds</Paper>
+          <Paper className={classes.mapBoxBedNumber}>{area.occupancy} / {area.maxBeds} Beds Occupied</Paper>
         </div>
       );
       console.log('CLICKED: ' + area.name);
@@ -297,19 +298,20 @@ function MapGeoJSONHook() {
     mapQuery().then(function(query: void | firebase.firestore.DocumentData) {
       if (query instanceof Object) {
         areas.forEach((area, index) => {
-          let occupancy: number = 0;
+          area.occupancy = 0;
+          area.maxBeds = 0;
           for (const hospitalId in area.hospitals) {
             if (query[area.hospitals[hospitalId]["Facility Name"]])
-              occupancy += query[area.hospitals[hospitalId]["Facility Name"]];
+              area.occupancy += query[area.hospitals[hospitalId]["Facility Name"]];
+            area.maxBeds += area.hospitals[hospitalId]["Max Bed Capacity"];
           }
-          console.log("occupancy for:" + area.name + occupancy);
+          console.log("occupancy for:" + area.name + area.occupancy);
           // create geoJSONs
           area.geoJSONs = [];
           area.polygons.forEach((polygon, index) => {
             let color = "#42f545"; // green
-            if (occupancy !== 0) {
-              area.areaPercentage = Math.random();
-              color = getColorForPercentage(area.areaPercentage);
+            if (area.occupancy !== 0) {
+              color = getColorForPercentage(1 - (area.occupancy / area.maxBeds));
             }
   
             area.geoJSONs.push(geoJSON(polygon, {
