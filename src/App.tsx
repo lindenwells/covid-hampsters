@@ -154,17 +154,14 @@ const App = () => {
     return (
       <div className="box">
         <Router>
-          <AppBar position="static" style={{ backgroundColor: "#1E1D2B" }}>
-            <Toolbar>
+          {/* <AppBar position="static" style={{ backgroundColor: "#1E1D2B" }}> */}
+            <Toolbar style={{ backgroundColor: "#1E1D2B" }}>
               <img src={icon} className={classes.icon} alt="bedlam" />
               <Typography variant="h6" component="div" style={{ marginLeft: "30px" }}>
-                bedlam
+                {/* Covid bed tracker */}
               </Typography>
-              <div className={classes.tabButtonsAlign}>
-                <LoginPopover />
-              </div>
-            </Toolbar>
-            <Tabs
+
+              <Tabs
               classes={{
                 root: classes.tabs,
                 indicator: classes.tabsIndicatorColor,
@@ -173,23 +170,28 @@ const App = () => {
               value={selectedTab}
               onChange={handleChange}
               aria-label="tabs"
-            >
-              <Tab
-                value={0}
-                label="Home"
-                component={Link}
-                to="/"
-                variant="contained"
-              />
-              <Tab
-                value={1}
-                label="About"
-                component={Link}
-                to="/about"
-                variant="contained"
-              />
-            </Tabs>
-          </AppBar>
+              >
+                <Tab
+                  value={0}
+                  label="Home"
+                  component={Link}
+                  to="/"
+                  variant="contained"
+                />
+                <Tab
+                  value={1}
+                  label="About"
+                  component={Link}
+                  to="/about"
+                  variant="contained"
+                />
+              </Tabs>
+
+              <div className={classes.tabButtonsAlign}>
+                <LoginPopover />
+              </div>
+            </Toolbar>
+          {/* </AppBar> */}
           <div className="content">
             <Switch>
               <Route exact path="/">
