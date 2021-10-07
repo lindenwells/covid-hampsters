@@ -32,6 +32,7 @@ import { data } from "../../assets/hospitals";
 import { mapQuery } from "../../assets/databaseMap";
 import * as turf from '@turf/turf'
 import { Feature, Point } from "@turf/turf";
+import { auth } from "../../firebase"
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -228,13 +229,28 @@ var areas = polygonsCalc();
 function MapGeoJSONHook() {
   const classes = useStyles();
   let map = useMap();
-  
   let clicks = 0;
   
   const history = useHistory();
   function linkInvoke(area: string) {
-    polygons = false;
-    return () => history.push('/detail/' + area)
+    if (!auth) {
+        window.alert("please login to view data");
+        return
+    }
+    const email = auth.currentUser?.email;
+    const emailExp1 = /^\w+([-+.]\w+)*@uqconnect.edu.au$/;
+    const emailExp2 = /^\w+([-+.]\w+)*@student.uq.edu.au$/;
+    const emailExp3 = /^\w+([-+.]\w+)*@uq.net.edu.au$/;
+    let valid = null;
+    if (email) {
+        valid = emailExp1.test(email) || emailExp2.test(email) || emailExp3.test(email);
+    }
+    if (valid) {
+      polygons = false;
+      return () => history.push('/detail/' + area)
+    } else {
+      window.alert("please login to view data");
+    }
   };
 
   map = useMapEvent('click', (e) => {
