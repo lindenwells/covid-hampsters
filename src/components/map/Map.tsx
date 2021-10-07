@@ -30,6 +30,7 @@ import "leaflet/dist/leaflet.css";
 import { data } from "../../assets/hospitals";
 import * as turf from '@turf/turf'
 import { Feature, Point } from "@turf/turf";
+import { auth } from "../../firebase"
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -158,10 +159,28 @@ function MapGeoJSONHook() {
   let map = useMap();
   let areas = polygonsCalc();
   let clicks = 0;
+  
 
   const history = useHistory();
   function linkInvoke(area: string) {
-    return () => history.push('/detail/' + area)
+    if (!auth) {
+        window.alert("please login to view data");
+        return
+    }
+    const email = auth.currentUser?.email;
+    const emailExp1 = /^\w+([-+.]\w+)*@uqconnect.edu.au$/;
+    const emailExp2 = /^\w+([-+.]\w+)*@student.uq.edu.au$/;
+    const emailExp3 = /^\w+([-+.]\w+)*@uq.net.edu.au$/;
+    let valid = null;
+    if (email) {
+        valid = emailExp1.test(email) || emailExp2.test(email) || emailExp3.test(email);
+    }
+    if (valid) {
+      return () => history.push('/detail/' + area)
+    } else {
+      window.alert("please login to view data");
+    }
+    
   };
   
   areas.forEach((area, index) => {
