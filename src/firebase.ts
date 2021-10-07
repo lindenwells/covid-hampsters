@@ -63,7 +63,7 @@ const signInWithEmailAndPassword = async (email: any, password: any) => {
 /** Register with email and password. */
 const registerWithEmailAndPassword = async (name: string, email: string, password: string) => {
   try {
-    const result = await auth.createUserWithEmailAndPassword(email, password)
+    const res = await auth.createUserWithEmailAndPassword(email, password)
     .then((res) => {
         return res.user?.updateProfile({
             displayName: name
@@ -72,6 +72,7 @@ const registerWithEmailAndPassword = async (name: string, email: string, passwor
   } catch (err) {
     catchErr(err);
   }
+  
 };
 
 /** Reset password and email. */

@@ -74,14 +74,11 @@ const useStyles = makeStyles((theme: Theme) =>
       // TODO: Feel free to play around with the login button styling
       padding: theme.spacing(2),
       minWidth: "200px",
-      backgroundColor: "#3f51b5",
+      backgroundColor: "#252736",
       color: "#ffffff",
     },
     icon: {
-      maxHeight: "50px",
-      minWidth: "50px",
-      marginLeft: "30px",
-      marginRight: "30px",
+      maxWidth: 50,
     },
   })
 );
@@ -157,7 +154,16 @@ const App = () => {
     return (
       <div className="box">
         <Router>
-          <div className="header">
+          <AppBar position="static" style={{ backgroundColor: "#1E1D2B" }}>
+            <Toolbar>
+              <img src={icon} className={classes.icon} alt="bedlam" />
+              <Typography variant="h6" component="div" style={{ marginLeft: "30px" }}>
+                bedlam
+              </Typography>
+              <div className={classes.tabButtonsAlign}>
+                <LoginPopover />
+              </div>
+            </Toolbar>
             <Tabs
               classes={{
                 root: classes.tabs,
@@ -168,7 +174,6 @@ const App = () => {
               onChange={handleChange}
               aria-label="tabs"
             >
-              <img src={icon} className={classes.icon} alt="bedlam" />
               <Tab
                 value={0}
                 label="Home"
@@ -183,11 +188,8 @@ const App = () => {
                 to="/about"
                 variant="contained"
               />
-              <div className={classes.tabButtonsAlign}>
-                <LoginPopover />
-              </div>
             </Tabs>
-          </div>
+          </AppBar>
           <div className="content">
             <Switch>
               <Route exact path="/">
