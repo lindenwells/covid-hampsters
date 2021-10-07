@@ -74,7 +74,7 @@ const useStyles = makeStyles((theme: Theme) =>
       // TODO: Feel free to play around with the login button styling
       padding: theme.spacing(2),
       minWidth: "200px",
-      backgroundColor: "#3f51b5",
+      backgroundColor: "#252736",
       color: "#ffffff",
     },
     icon: {
