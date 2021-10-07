@@ -52,6 +52,19 @@ const useStyles = makeStyles((theme: Theme) =>
         background: "#8a8a8a",
       },
     },
+    mapBox: {
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      flexDirection: "column",
+    },
+    mapBoxBedNumber: {
+      background: "#3278c5",
+      margin: "10px",
+      marginTop: "5px",
+      padding: "5px",
+      color: "#ffffff",
+    },
     legend: {
       background: "#2B2C3E",
       height: "125px",
@@ -241,8 +254,13 @@ function MapGeoJSONHook() {
     const content = [];
     for (const name in areasClicked) {
       const area: area = areasClicked[name];
-      content.push(<React.Fragment><Button key={area.name} classes={{root: classes.button}} 
-          onClick={linkInvoke(area.name)}>{area.name}</Button>{area.areaPercentage}</React.Fragment>);
+      content.push(
+        <div className={classes.mapBox}>
+          <Button key={area.name} classes={{root: classes.button}} 
+          onClick={linkInvoke(area.name)}>Go To: {area.name}</Button>
+          <Paper className={classes.mapBoxBedNumber}>50 / 100 Beds</Paper>
+        </div>
+      );
       console.log('CLICKED: ' + area.name);
     }
     
