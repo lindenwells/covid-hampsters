@@ -7,8 +7,13 @@ export const data =
         "Address": "Cnr Louise & Jack Streets, Atherton, 4883",
         "Phone Number": "(07) 4091 0211",
         "Fax Number": "(07) 4091 0401",
+<<<<<<< HEAD
         "lat": "40.331486",
         "lon": "-74.285687",
+=======
+        "lat": "-17.2670971",
+        "lon": "145.4825365",
+>>>>>>> main
         "Max Bed Capacity": 200
     },
     {
@@ -260,8 +265,13 @@ export const data =
         "Address": "Bloomfield Street, Winton, 4735",
         "Phone Number": "(07) 4657 2700",
         "Fax Number": "(07) 4657 2799",
+<<<<<<< HEAD
         "lat": "50.7542015",
         "lon": "-1.8746369",
+=======
+        "lat": "-22.3830405",
+        "lon": "143.0424253",
+>>>>>>> main
         "Max Bed Capacity": 20
     },
     {
@@ -700,8 +710,13 @@ export const data =
         "Address": "Cnr Armstrong & Loganlea Roads, Meadowbrook, 4131",
         "Phone Number": "(07) 3299 8899",
         "Fax Number": "(07) 3299 8888",
+<<<<<<< HEAD
         "lat": "40.9078419",
         "lon": "-79.5406009",
+=======
+        "lat": "-27.6700260",
+        "lon": "153.1413419",
+>>>>>>> main
         "Max Bed Capacity": 2188
     },
     {
@@ -1184,8 +1199,13 @@ export const data =
         "Address": "Cnr Nissen Street & Urraween Road, Pialba, 4655",
         "Phone Number": "(07) 4325 6666",
         "Fax Number": "(07) 4325 6794",
+<<<<<<< HEAD
         "lat": "36.375345",
         "lon": "-79.662794",
+=======
+        "lat": "-25.3004180",
+        "lon": "152.8221968",
+>>>>>>> main
         "Max Bed Capacity": 532
     },
     {
@@ -1220,6 +1240,7 @@ export const data =
         "lat": "-25.5873281",
         "lon": "151.295851",
         "Max Bed Capacity": 11
+<<<<<<< HEAD
     },
     {
         "Hospital and Health Service": "Hospital and Health Service",
@@ -1231,6 +1252,8 @@ export const data =
         "lat": "3.1073767500000002",
         "lon": "101.69093242846053",
         "Max Bed Capacity": 448
+=======
+>>>>>>> main
     },
     {
         "Hospital and Health Service": "Cairns and Hinterland",
@@ -1349,8 +1372,13 @@ export const data =
         "Address": "Cnr Elizabeth & William Streets, Duaringa, 4712",
         "Phone Number": "(07) 4935 7991",
         "Fax Number": "",
+<<<<<<< HEAD
         "lat": "40.67394655",
         "lon": "-74.2021903493112",
+=======
+        "lat": "-23.71738737118558",
+        "lon": "149.67172169688774",
+>>>>>>> main
         "Max Bed Capacity": 138
     },
     {
@@ -1712,8 +1740,13 @@ export const data =
         "Address": "Murray Island, 4875",
         "Phone Number": "(07) 4069 4089",
         "Fax Number": "(07) 4069 4369",
+<<<<<<< HEAD
         "lat": "-34.0140174",
         "lon": "151.1140792",
+=======
+        "lat": "-9.918574108168519",
+        "lon": "144.04954998985585",
+>>>>>>> main
         "Max Bed Capacity": 420
     },
     {
@@ -1800,8 +1833,13 @@ export const data =
         "Address": "Yorke Island, 4875",
         "Phone Number": "(07) 4069 4296",
         "Fax Number": "(07) 4069 4372",
+<<<<<<< HEAD
         "lat": "50.7919113",
         "lon": "-1.0940589",
+=======
+        "lat": "-9.7519646",
+        "lon": "143.4150693",
+>>>>>>> main
         "Max Bed Capacity": 138
     },
     {
@@ -1814,6 +1852,7 @@ export const data =
         "lat": "-19.1627913",
         "lon": "146.8468414",
         "Max Bed Capacity": 321
+<<<<<<< HEAD
     },
     {
         "Hospital and Health Service": "Hospital and Health Service",
@@ -1825,6 +1864,8 @@ export const data =
         "lat": "3.1073767500000002",
         "lon": "101.69093242846053",
         "Max Bed Capacity": 225
+=======
+>>>>>>> main
     },
     {
         "Hospital and Health Service": "North West",

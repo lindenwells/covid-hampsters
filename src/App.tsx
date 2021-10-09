@@ -52,11 +52,19 @@ const useStyles = makeStyles((theme: Theme) =>
     title: {
       flexGrow: 1,
     },
+    bar: {
+      display: "flex",
+      alignItems: "center",
+      flexDirection: "row",
+      background: "#1E1D2B",
+      boxShadow: "inset 0 -2px 0 0 #252736",
+    },
     tabs: {
       background: "#1E1D2B",
       color: "#ffffff",
       indicatorColor: "#0177FB",
       boxShadow: "inset 0 -2px 0 0 #252736",
+      width: "100%",
     },
     tabsIndicatorColor: {
       backgroundColor: "#0177FB",
@@ -65,10 +73,10 @@ const useStyles = makeStyles((theme: Theme) =>
       alignContent: "center",
     },
     tabButtonsAlign: {
-      marginTop: "auto",
-      marginBottom: "auto",
-      marginLeft: "auto",
+      height: "100%",
       marginRight: "20px",
+      background: "#1E1D2B",
+      boxShadow: "inset 0 -2px 0 0 #252736",
     },
     login: {
       // TODO: Feel free to play around with the login button styling
@@ -158,35 +166,37 @@ const App = () => {
       <div className="box">
         <Router>
           <div className="header">
-            <Tabs
-              classes={{
-                root: classes.tabs,
-                indicator: classes.tabsIndicatorColor,
-                flexContainer: classes.tabsFlexContainer,
-              }}
-              value={selectedTab}
-              onChange={handleChange}
-              aria-label="tabs"
-            >
-              <img src={icon} className={classes.icon} alt="bedlam" />
-              <Tab
-                value={0}
-                label="Home"
-                component={Link}
-                to="/"
-                variant="contained"
-              />
-              <Tab
-                value={1}
-                label="About"
-                component={Link}
-                to="/about"
-                variant="contained"
-              />
+            <div className={classes.bar}>
+              <Tabs
+                classes={{
+                  root: classes.tabs,
+                  indicator: classes.tabsIndicatorColor,
+                  flexContainer: classes.tabsFlexContainer,
+                }}
+                value={selectedTab}
+                onChange={handleChange}
+                aria-label="tabs"
+              >
+                <img src={icon} className={classes.icon} alt="bedlam" />
+                <Tab
+                  value={0}
+                  label="Home"
+                  component={Link}
+                  to="/"
+                  variant="contained"
+                />
+                <Tab
+                  value={1}
+                  label="About"
+                  component={Link}
+                  to="/about"
+                  variant="contained"
+                />
+              </Tabs>
               <div className={classes.tabButtonsAlign}>
                 <LoginPopover />
               </div>
-            </Tabs>
+            </div>
           </div>
           <div className="content">
             <Switch>
