@@ -1221,17 +1221,6 @@
         "Max Bed Capacity": 11
     },
     {
-        "Hospital and Health Service": "Hospital and Health Service",
-        "Facility Idenitifier": "Facility Idenitifier",
-        "Facility Name": "Facility Name",
-        "Address": "Address",
-        "Phone Number": "Phone Number",
-        "Fax Number": "Fax Number",
-        "lat": "3.1073767500000002",
-        "lon": "101.69093242846053",
-        "Max Bed Capacity": 448
-    },
-    {
         "Hospital and Health Service": "Cairns and Hinterland",
         "Facility Idenitifier": "00217",
         "Facility Name": "Croydon Hospital (PHC)",
@@ -1813,17 +1802,6 @@
         "lat": "-19.1627913",
         "lon": "146.8468414",
         "Max Bed Capacity": 321
-    },
-    {
-        "Hospital and Health Service": "Hospital and Health Service",
-        "Facility Idenitifier": "Facility Idenitifier",
-        "Facility Name": "Facility Name",
-        "Address": "Address",
-        "Phone Number": "Phone Number",
-        "Fax Number": "Fax Number",
-        "lat": "3.1073767500000002",
-        "lon": "101.69093242846053",
-        "Max Bed Capacity": 225
     },
     {
         "Hospital and Health Service": "North West",
