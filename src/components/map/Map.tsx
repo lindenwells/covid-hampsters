@@ -124,7 +124,7 @@ export default function Map() {
         <Grid container className={classes.center}>
           <Grid item className={classes.padding} xs={9}>
             <Box className={classes.map}>
-              <MapContainer style={{ height: '100%', width: '100%' }} center={position} zoom={5} scrollWheelZoom={false}>
+              <MapContainer style={{ height: '100%', width: '100%' }} center={position} zoom={5} scrollWheelZoom={true}>
                 <TileLayer
                   attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
                   url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
