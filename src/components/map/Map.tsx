@@ -352,10 +352,11 @@ function MapGeoJSONHook(props: MapInterface) {
 
   const history = useHistory();
   function linkInvoke(area: string) {
-    if (!auth) {
-        window.alert("please login to view data");
-        return
-    }
+    // console.log("test");
+    // if (!auth) {
+    //     window.alert("please login to view data");
+    //     return
+    // }
     const email = auth.currentUser?.email;
     const emailExp1 = /^\w+([-+.]\w+)*@uqconnect.edu.au$/;
     const emailExp2 = /^\w+([-+.]\w+)*@student.uq.edu.au$/;
@@ -366,7 +367,8 @@ function MapGeoJSONHook(props: MapInterface) {
     }
     if (valid) {
       polygons = false;
-      return history.push('/detail/' + area)
+      // return () => history.push('/detail/' + area)
+      return (history.push('/detail/' + area));
     } else {
       window.alert("please login to view data");
     }
