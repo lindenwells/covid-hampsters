@@ -234,10 +234,11 @@ function MapGeoJSONHook() {
   
   const history = useHistory();
   function linkInvoke(area: string) {
-    if (!auth) {
-        window.alert("please login to view data");
-        return
-    }
+    // console.log("test");
+    // if (!auth) {
+    //     window.alert("please login to view data");
+    //     return
+    // }
     const email = auth.currentUser?.email;
     const emailExp1 = /^\w+([-+.]\w+)*@uqconnect.edu.au$/;
     const emailExp2 = /^\w+([-+.]\w+)*@student.uq.edu.au$/;
@@ -248,7 +249,8 @@ function MapGeoJSONHook() {
     }
     if (valid) {
       polygons = false;
-      return () => history.push('/detail/' + area)
+      // return () => history.push('/detail/' + area)
+      return (history.push('/detail/' + area));
     } else {
       window.alert("please login to view data");
     }
@@ -274,7 +276,8 @@ function MapGeoJSONHook() {
       content.push(
         <div className={classes.mapBox}>
           <Button key={area.name} classes={{root: classes.button}} 
-          onClick={linkInvoke(area.name)}>Go To: {area.name}</Button>
+          onClick={() => {
+            linkInvoke(area.name)}}>Go To: {area.name}</Button>
           <Paper className={classes.mapBoxBedNumber}>{area.occupancy} / {area.maxBeds} Beds Occupied</Paper>
         </div>
       );
