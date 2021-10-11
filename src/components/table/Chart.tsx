@@ -51,6 +51,7 @@ export function AreaBedChart() {
           dot={{ r: 4 }}
         />
         <ReferenceLine x='12/09/2021' stroke="#42a5f5" label={{ value: "Today", fill: "#ffffff" }} />
+        <ReferenceLine y='8500' stroke="#ff1900" label={{ value: "Max Beds", fill: "#ffffff" }} />
         <Brush dataKey="name" height={50} stroke="#8884d8" >
           <AreaChart>
             <CartesianGrid fill="#1E1D2B" />
@@ -202,6 +203,7 @@ export function HospitalBedChart() {
           dot={{ r: 4 }}
         />
         <ReferenceLine x='12/09/2021' stroke="#42a5f5" label={{ value: "Today", fill: "#ffffff" }} />
+        <ReferenceLine y='7000' stroke="#ff1900" label={{ value: "Max Beds", fill: "#ffffff" }} />
         <Brush dataKey="name" height={50} stroke="#8884d8" >
           <LineChart>
             <CartesianGrid fill="#1E1D2B" />
