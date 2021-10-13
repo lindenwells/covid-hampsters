@@ -214,6 +214,9 @@ export default function Map() {
             </Paper>
             <Paper className={classes.guide}>
               Map Guide
+              <Paper className={classes.guide}>
+
+              </Paper>
             </Paper>
           </Grid>
         </Grid>
