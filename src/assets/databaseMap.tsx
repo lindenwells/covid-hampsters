@@ -1,6 +1,7 @@
 import firebase from "../firebase";
 import { db } from "../firebase";
 
+/* Gets the occupancy data from hospitals in Firebase */
 export function mapQuery(): Promise<void | firebase.firestore.DocumentData> {
   /*
    * orderBy(firebase.firestore.FieldPath.documentId(), 'desc').limit(1), does not work on v8

@@ -69,7 +69,7 @@ const IsRegister = () => {
         direction="column"
         alignItems="center"
         justify="center"
-        style={{ height: '75vh', maxWidth: 300 }}
+        style={{ height: 400, maxWidth: 300 }}
       >
         <ThemeProvider theme={customTheme}>
           <Avatar style={{ margin: 1, backgroundColor: "secondary.main" }}>
@@ -129,7 +129,7 @@ const IsRegister = () => {
         direction="column"
         alignItems="center"
         justify="center"
-        style={{ height: '75vh', maxWidth: 300 }}
+        style={{ height: 400, maxWidth: 300 }}
       >
         <Avatar style={{ margin: 1, backgroundColor: "secondary" }}>
           <LockOutlined />
