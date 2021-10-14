@@ -117,7 +117,7 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     guide: {
       background: "#2B2C3E",
-      height: "200px",
+      minheight: "200px",
       color: "#ffffff",
     },
     formControl: {
@@ -161,7 +161,7 @@ interface FilterInterface {
 /* Contains the entire map and its components. */
 export default function Map() {
   const classes = useStyles();
-  let position: LatLngExpression = [-23.4141, 144.7852]
+  let position: LatLngExpression = [-23.4141, 144.7852];
   const [map, setMap] = React.useState<LeafletMap>();
   const [areas, setAreas] = React.useState(polygonsCalc());
   const [rendered, setRendered] = React.useState(false); // Check if rendered polygons
@@ -173,17 +173,17 @@ export default function Map() {
   };
 
   return (
-      <div>
-        <Grid container className={classes.center}>
-          <Grid item className={classes.padding} xs={12} md={9}>
-            <Box className={classes.map}>
-              <MapContainer style={{ height: '100%', width: '100%' }} center={position} zoom={5} scrollWheelZoom={true}>
-                <TileLayer
-                  attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-                  url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                />
-                <MapGeoJSONHook layersMapHandle={layersMapHandle} areas={areas} rendered={rendered} />
-                {/*data.map((element, index) => {
+    <div>
+      <Grid container className={classes.center}>
+        <Grid item className={classes.padding} xs={12} md={9}>
+          <Box className={classes.map}>
+            <MapContainer style={{ height: '100%', width: '100%' }} center={position} zoom={5} scrollWheelZoom={true}>
+              <TileLayer
+                attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+              />
+              <MapGeoJSONHook layersMapHandle={layersMapHandle} areas={areas} rendered={rendered} />
+              {/*data.map((element, index) => {
                     // Hospitals
                     return (
                       <Circle center={[parseFloat(element.lat), parseFloat(element.lon)]} pathOptions={red} radius={250}>
@@ -191,35 +191,42 @@ export default function Map() {
                       </Circle>
                     );
                 })*/}
-              </MapContainer>
-            </Box>
-          </Grid>
-          <Grid item className={classes.padding} xs={12} sm={9} md={3}>
-            <Paper className={classes.legend}>
-              Bed Availability
-              <Paper className={classes.legendBox}></Paper>
-              <Grid container className={classes.center}>
-                <Grid item className={classes.legendGridItem} xs={4}>
-                  <Paper className={classes.legendGridItemRedBox}></Paper>
-                  <span>0%</span>
-                </Grid>
-                <Grid item className={classes.legendGridItem} xs={4}>
-                  <Paper className={classes.legendGridItemYellowBox}></Paper>
-                  <span>50%</span>
-                </Grid>
-                <Grid item className={classes.legendGridItem} xs={4}>
-                  <Paper className={classes.legendGridItemGreenBox}></Paper>
-                  <span>100%</span>
-                </Grid>
-              </Grid>
-              <FilterSelect setAreas={setAreas} map={map} areas={areas} />
-            </Paper>
-            <Paper className={classes.guide}>
-              Map Guide
-            </Paper>
-          </Grid>
+            </MapContainer>
+          </Box>
         </Grid>
-      </div>
+        <Grid item className={classes.padding} xs={12} sm={9} md={3}>
+          <Paper className={classes.legend}>
+            Bed Availability
+            <Paper className={classes.legendBox}></Paper>
+            <Grid container className={classes.center}>
+              <Grid item className={classes.legendGridItem} xs={4}>
+                <Paper className={classes.legendGridItemRedBox}></Paper>
+                <span>0%</span>
+              </Grid>
+              <Grid item className={classes.legendGridItem} xs={4}>
+                <Paper className={classes.legendGridItemYellowBox}></Paper>
+                <span>50%</span>
+              </Grid>
+              <Grid item className={classes.legendGridItem} xs={4}>
+                <Paper className={classes.legendGridItemGreenBox}></Paper>
+                <span>100%</span>
+              </Grid>
+            </Grid>
+            <FilterSelect setAreas={setAreas} map={map} areas={areas} />
+          </Paper>
+          <Paper className={classes.guide}>
+            Map Guide
+            <div style={{
+              whiteSpace: 'pre-wrap', textAlign: 'left', paddingLeft: 20, paddingRight: 20, paddingBottom: 20
+            }}>
+              <p>1. Please log in to view the datas.</p>
+              <p>2. Press the +/- keys or scroll up and down the mouse on the map to zoom in and out of the map.</p>
+              <p>3. Each color of colored area represents different levels of bed availability for each area. Click the colored area to view the number of occupied beds and click the button to view the data charts.</p>
+            </div>
+          </Paper>
+        </Grid>
+      </Grid>
+    </div>
   );
 }
 
@@ -238,8 +245,8 @@ function FilterSelect(props: FilterInterface) {
         });
         area.active = true;
       });
-      setOldAreas([]);
-      setAreas(areas);
+    setOldAreas([]);
+    setAreas(areas);
   }
 
   function oldAreaInsert(area: area, areas: area[], map: LeafletMap) {
@@ -266,8 +273,8 @@ function FilterSelect(props: FilterInterface) {
             oldAreaInsert(area, areas, map);
 
         if (event.target.value === "20-80")
-          if ((1 - (area.occupancy / area.maxBeds) < 0.2 || 
-              (1 - (area.occupancy / area.maxBeds)) > 0.8))
+          if ((1 - (area.occupancy / area.maxBeds) < 0.2 ||
+            (1 - (area.occupancy / area.maxBeds)) > 0.8))
             oldAreaInsert(area, areas, map);
       });
     }
@@ -298,15 +305,15 @@ function FilterSelect(props: FilterInterface) {
 
 /*
  * Calculate convex hull using turf.js and latitudes/longitudes.
- */ 
+ */
 function polygonsCalc(): area[] {
   let areas = {} as Record<string, area>;
   let area = {} as area;
-  
+
   data.forEach(function (hospital, index) {
     if (areas[hospital["Hospital and Health Service"]])
       area = areas[hospital["Hospital and Health Service"]]
-      
+
     if (areas[hospital["Hospital and Health Service"]] === undefined) {
       // next area
       area = {} as area;
@@ -319,7 +326,7 @@ function polygonsCalc(): area[] {
       // insert area
       areas[area.name] = area;
     }
-    
+
     let hospitalCoordinate = turf.point([parseFloat(hospital.lon), parseFloat(hospital.lat)]);
     area.points.push(hospitalCoordinate);
     area.hospitals[hospital["Facility Name"]] = hospital;
@@ -332,25 +339,25 @@ function polygonsCalc(): area[] {
       // if there are less than two hospitals, just give them a circle each.
       if (area.points.length <= 2) {
         area.points.forEach((point, index) => {
-          area.polygons[index] = turf.circle(point, 2, {steps: 10, units: 'kilometers'});
+          area.polygons[index] = turf.circle(point, 2, { steps: 10, units: 'kilometers' });
         });
       }
     }
   }
-  
+
   return Object.values(areas);
 }
 
 
 /*
  * Insert polygons created by polygonsCalc(), and handle clicks.
- */ 
+ */
 var polygons: boolean = false; // Have the polygons already been put onto the map?
 function MapGeoJSONHook(props: MapInterface) {
   const classes = useStyles();
   let map = useMap();
   let clicks = 0;
-  
+
   const { layersMapHandle, areas, rendered } = props;
 
   const history = useHistory();
@@ -366,7 +373,7 @@ function MapGeoJSONHook(props: MapInterface) {
     const emailExp3 = /^\w+([-+.]\w+)*@uq.net.edu.au$/;
     let valid = null;
     if (email) {
-        valid = emailExp1.test(email) || emailExp2.test(email) || emailExp3.test(email);
+      valid = emailExp1.test(email) || emailExp2.test(email) || emailExp3.test(email);
     }
     if (valid) {
       polygons = false;
@@ -380,7 +387,7 @@ function MapGeoJSONHook(props: MapInterface) {
   map = useMapEvent('click', (e) => {
     if (areas === undefined)
       return;
-      
+
     // turf = lon/lat
     // let clickBounds = latLngBounds(e.latlng, e.latlng);
     let areasClicked = {} as Record<string, area>;
@@ -401,31 +408,31 @@ function MapGeoJSONHook(props: MapInterface) {
       const area: area = areasClicked[name];
       content.push(
         <div className={classes.mapBox}>
-          <Button key={area.name} classes={{root: classes.button}} 
-            onClick={() => {linkInvoke(area.name)}}>Go To: {area.name}</Button>
+          <Button key={area.name} classes={{ root: classes.button }}
+            onClick={() => { linkInvoke(area.name) }}>Go To: {area.name}</Button>
           <Paper className={classes.mapBoxBedNumber}>{area.occupancy} / {area.maxBeds} Beds Occupied</Paper>
         </div>
       );
     }
-    
+
     if (Object.keys(areasClicked).length !== 0) {
       // .bindPopup?
       popup()
-      .setLatLng(e.latlng)
-      .setContent('<div id="popup' + clicks + '">' + 
+        .setLatLng(e.latlng)
+        .setContent('<div id="popup' + clicks + '">' +
           ReactDOMServer.renderToString(<Fragment>{content}</Fragment>) + '</div>')
-      .openOn(map);
+        .openOn(map);
       ReactDOM.hydrate(content, document.getElementById("popup" + clicks++));
     }
   });
 
   if (!rendered && areas !== undefined) {
     let i = 0;
-    map.eachLayer(() => {i++});
+    map.eachLayer(() => { i++ });
     if (i > 0) // more than 1 layer
       return null;
 
-    mapQuery().then(function(query: void | firebase.firestore.DocumentData) {
+    mapQuery().then(function (query: void | firebase.firestore.DocumentData) {
       if (query instanceof Object) {
         areas.forEach((area, index) => {
           area.occupancy = 0;
@@ -440,7 +447,7 @@ function MapGeoJSONHook(props: MapInterface) {
           // create geoJSONs
           area.polygons.forEach((polygon, index) => {
             let color = getColorForPercentage(1 - (area.occupancy / area.maxBeds));
-  
+
             area.layers.push((geoJSON(polygon, {
               style: {
                 "color": color
@@ -471,15 +478,15 @@ var percentColors = [
   { pct: 0.0, color: { r: 0xff, g: 0x19, b: 0 } },
   { pct: 0.25, color: { r: 0xff, g: 0x6f, b: 0 } },
   { pct: 0.5, color: { r: 0xff, g: 0xf2, b: 0 } },
-  { pct: 1.0, color: { r: 0x42, g: 0xf5, b: 0x45 } } ];
+  { pct: 1.0, color: { r: 0x42, g: 0xf5, b: 0x45 } }];
 
-var getColorForPercentage = function(pct: any) {
+var getColorForPercentage = function (pct: any) {
   if (pct < 0.0) // over capacity
-    return 'rgb(' + [percentColors[0].color.r, percentColors[0].color.g, 
-        percentColors[0].color.b].join(',') + ')';
+    return 'rgb(' + [percentColors[0].color.r, percentColors[0].color.g,
+    percentColors[0].color.b].join(',') + ')';
   for (var i = 1; i < percentColors.length - 1; i++)
-      if (pct < percentColors[i].pct)
-          break;
+    if (pct < percentColors[i].pct)
+      break;
   var lower = percentColors[i - 1];
   var upper = percentColors[i];
   var range = upper.pct - lower.pct;
@@ -487,9 +494,9 @@ var getColorForPercentage = function(pct: any) {
   var pctLower = 1 - rangePct;
   var pctUpper = rangePct;
   var color = {
-      r: Math.floor(lower.color.r * pctLower + upper.color.r * pctUpper),
-      g: Math.floor(lower.color.g * pctLower + upper.color.g * pctUpper),
-      b: Math.floor(lower.color.b * pctLower + upper.color.b * pctUpper)
+    r: Math.floor(lower.color.r * pctLower + upper.color.r * pctUpper),
+    g: Math.floor(lower.color.g * pctLower + upper.color.g * pctUpper),
+    b: Math.floor(lower.color.b * pctLower + upper.color.b * pctUpper)
   };
   return 'rgb(' + [color.r, color.g, color.b].join(',') + ')';
 };
