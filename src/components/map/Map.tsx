@@ -1,6 +1,6 @@
 /*
  * Map shows:
- *   - Map w/ circle vector layers.
+ *   - Map w/ geoJSON vector layers, interactable.
  *   - Uses leaflet, react-leaflet & OpenStreetMap.
  * 
  * REFERENCES:
@@ -134,6 +134,7 @@ const useStyles = makeStyles((theme: Theme) =>
   })
 );
 
+/* Describes the geoJSON data on the map */
 interface area {
   points: Feature<Point>[];
   polygons: any[]; // Feature<Polygon> | null
@@ -157,6 +158,7 @@ interface FilterInterface {
   map: LeafletMap | undefined;
 }
 
+/* Contains the entire map and its components. */
 export default function Map() {
   const classes = useStyles();
   let position: LatLngExpression = [-23.4141, 144.7852]
@@ -221,6 +223,7 @@ export default function Map() {
   );
 }
 
+/* Contains the filter which filters the area on the map */
 function FilterSelect(props: FilterInterface) {
   const classes = useStyles();
   const [filter, setFilter] = React.useState('');

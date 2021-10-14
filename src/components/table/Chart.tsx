@@ -1,4 +1,5 @@
 /*
+ * This file contains the charts within our app.
  * The below charts are built with the Recharts library.
  * 
  * REFERENCE:
