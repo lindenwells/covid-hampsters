@@ -4,6 +4,7 @@ from datetime import date
 from typing import Any, Dict, List
 import numpy as np
 from google.cloud import firestore #pip3 install google-cloud-firestore
+from random import randint
 
 db = firestore.Client()
 rng = np.random.default_rng(seed=42)
@@ -28,7 +29,6 @@ def population(r : float, N : int, K : int):
 with open("src/assets/starting_occupancy.json", "r") as f:
     gen_occupancy[dates[0]] = json.load(f)
 
-    print(gen_occupancy)
 
 for i, day in enumerate(dates[1:], start=1):
     gen_occupancy[day] = {}
@@ -38,7 +38,7 @@ for i, day in enumerate(dates[1:], start=1):
             prev = gen_occupancy[dates[i - 1]][name]
             max = max_beds[name]
             r = rands.get(name).get(day)
-            gen_occupancy[day][name] = population(r, prev, max)
+            gen_occupancy[day][name] = randint(1, max)
         except:
             continue
 
@@ -46,5 +46,4 @@ for i, day in enumerate(dates[1:], start=1):
 for day in dates:
     db.collection("occupancy_data").document(day).set(gen_occupancy[day])
 
-    
 
