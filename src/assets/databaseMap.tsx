@@ -10,9 +10,6 @@ export function mapQuery(): Promise<void | firebase.firestore.DocumentData> {
   return db.collection("occupancy_data").orderBy(firebase.firestore.FieldPath.documentId())
     .get()
     .then((querySnapshot) => { // Twice?
-      querySnapshot.forEach((docRef) => {
-        console.log(docRef.id, " => ", docRef.data());
-      });
       return querySnapshot.docs[querySnapshot.docs.length - 1].data();
     })
     .catch((error) => {
