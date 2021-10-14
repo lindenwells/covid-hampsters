@@ -34,6 +34,7 @@ import icon from "./COVID-19_Hampsters_2.png";
 import { dark } from "@material-ui/core/styles/createPalette";
 
 /*
+ * Describes our general app structure.
  * Primary colour palette inspired from:
  *
  * REFERENCE:
