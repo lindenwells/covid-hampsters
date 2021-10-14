@@ -9,8 +9,6 @@ import avatar3 from "./avatar/36.png";
 import avatar4 from "./avatar/13.png";
 import avatar5 from "./avatar/23.png";
 
-import { SignalCellularConnectedNoInternet2BarTwoTone } from "@material-ui/icons";
-
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
         about: {
