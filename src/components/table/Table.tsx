@@ -27,39 +27,44 @@ import Tooltip from '@material-ui/core/Tooltip';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch';
 import { blue } from '@material-ui/core/colors';
+import { data as hospitalData } from "../../assets/hospitals";
 /*
 import DeleteIcon from '@material-ui/icons/Delete';
 import FilterListIcon from '@material-ui/icons/FilterList';
 */
 
 interface Data {
-  bedsMild: number;
-  bedsMildTotal: number;
-  bedsSevere: number;
-  bedsSevereTotal: number;
+  // bedsMild: number;
+  // bedsMildTotal: number;
+  // bedsSevere: number;
+  // bedsSevereTotal: number;
+  beds: number;
+  bedsTotal: number;
   hospitalName: string;
   totalBeds: number;
 }
 
 function createData(
   hospitalName: string,
-  bedsSevere: number,
-  bedsSevereTotal: number,
-  bedsMild: number,
-  bedsMildTotal: number,
+  beds: number,
+  bedsTotal: number,
+  // bedsSevere: number,
+  // bedsSevereTotal: number,
+  // bedsMild: number,
+  // bedsMildTotal: number,
   totalBeds: number,
 ): Data {
-  return { hospitalName, bedsSevere, bedsSevereTotal, bedsMild, bedsMildTotal, totalBeds };
+  return { hospitalName, beds, bedsTotal, totalBeds };//bedsSevere, bedsSevereTotal, bedsMild, bedsMildTotal, totalBeds };
 }
 
 const rows = [
-  createData('Hospital 1', 100, 200, 100, 200, 200),
-  createData('Hospital 2', 200, 300, 100, 200, 300),
-  createData('Hospital 3', 300, 400, 100, 200, 400),
-  createData('Hospital 4', 400, 500, 100, 200, 500),
-  createData('Hospital 5', 500, 600, 100, 200, 600),
-  createData('Hospital 6', 600, 700, 100, 200, 700),
-  createData('Hospital 7', 700, 800, 100, 200, 800),
+  createData('Hospital 1', 100, 200, 200),
+  createData('Hospital 2', 200, 300, 300),
+  createData('Hospital 3', 300, 400, 400),
+  createData('Hospital 4', 400, 500, 500),
+  createData('Hospital 5', 500, 600, 600),
+  createData('Hospital 6', 600, 700, 700),
+  createData('Hospital 7', 700, 800, 800),
 ];
 
 function descendingComparator<T>(a: T, b: T, orderBy: keyof T) {
@@ -102,8 +107,8 @@ interface HeadCell {
 
 const headCells: HeadCell[] = [
   { id: 'hospitalName', numeric: false, disablePadding: true, label: 'Hospital Name' },
-  { id: 'bedsSevere', numeric: true, disablePadding: false, label: 'Available beds for severe patients' },
-  { id: 'bedsMild', numeric: true, disablePadding: false, label: 'Available beds for mild patients' },
+  { id: 'beds', numeric: true, disablePadding: false, label: 'Available beds for patients' },
+  // { id: 'bedsMild', numeric: true, disablePadding: false, label: 'Available beds for mild patients' },
   { id: 'totalBeds', numeric: true, disablePadding: false, label: 'Total number of beds' },
 ];
 
@@ -248,6 +253,16 @@ interface detailProps {
 export default function EnhancedTable(props: detailProps) {
   const { clickHandle } = props;
 
+  function test() {
+    hospitalData.forEach(function (hospital, index) {
+      // if (areas[hospital["Hospital and Health Service"]])
+      //   area = areas[hospital["Hospital and Health Service"]]
+
+      console.log(hospital["Facility Name"]);
+    });
+  }
+  test();
+
   const classes = useStyles();
   const [order, setOrder] = React.useState<Order>('desc');
   const [orderBy, setOrderBy] = React.useState<keyof Data>('totalBeds');
@@ -356,8 +371,8 @@ export default function EnhancedTable(props: detailProps) {
                       <TableCell className={classes.cell} component="th" id={labelId} scope="row" padding="none">
                         {row.hospitalName}
                       </TableCell>
-                      <TableCell className={classes.cell} align="right">{row.bedsSevere} / {row.bedsSevereTotal}</TableCell>
-                      <TableCell className={classes.cell} align="right">{row.bedsMild} / {row.bedsMildTotal}</TableCell>
+                      <TableCell className={classes.cell} align="right">{row.beds} / {row.bedsTotal}</TableCell>
+                      {/* <TableCell className={classes.cell} align="right">{row.bedsMild} / {row.bedsMildTotal}</TableCell> */}
                       <TableCell className={classes.cell} align="right">{row.totalBeds}</TableCell>
                     </ColoredTableRow>
                   );
