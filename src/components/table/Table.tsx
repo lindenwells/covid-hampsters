@@ -59,6 +59,8 @@ function createData(
   return { hospitalName, beds, bedsTotal, totalBeds };//bedsSevere, bedsSevereTotal, bedsMild, bedsMildTotal, totalBeds };
 }
 
+// TODO: replace this with hospitalData
+// i.e. set rows to the rows of hospitals in a certain area
 const rows = [
   createData('Hospital 1', 100, 200, 200),
   createData('Hospital 2', 200, 300, 300),
@@ -255,15 +257,17 @@ interface detailProps {
 export default function EnhancedTable(props: detailProps) {
   const { clickHandle } = props;
 
-  function test() {
+  function test(region: string) {
     hospitalData.forEach(function (hospital, index) {
       // if (areas[hospital["Hospital and Health Service"]])
       //   area = areas[hospital["Hospital and Health Service"]]
 
-      console.log(hospital["Facility Name"]);
+      //TODO: somehow get hospitalName here in props or something
+      if (hospital["Hospital and Health Service"] == region) {
+        console.log(hospital["Facility Name"]);
+      }
     });
   }
-  test();
 
   const classes = useStyles();
   const [order, setOrder] = React.useState<Order>('desc');
@@ -289,6 +293,10 @@ export default function EnhancedTable(props: detailProps) {
   };
 
   const handleClick = (event: React.MouseEvent<unknown>, name: string) => {
+    console.log("testing: " + name);
+    test(name); // TODO: function called here
+
+
     clickHandle(name)
 
     const selectedIndex = selected.indexOf(name);
