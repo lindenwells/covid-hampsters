@@ -34,6 +34,7 @@ import icon from "./COVID-19_Hampsters_2.png";
 import { dark } from "@material-ui/core/styles/createPalette";
 
 /*
+ * Describes our general app structure.
  * Primary colour palette inspired from:
  *
  * REFERENCE:
@@ -177,7 +178,9 @@ const App = () => {
                 onChange={handleChange}
                 aria-label="tabs"
               >
-                <img src={icon} className={classes.icon} alt="bedlam" />
+                <Link to="/" onClick={() => {setSelectedTab(0)}}>
+                  <img src={icon} className={classes.icon} alt="bedlam" />
+                </Link>
                 <Tab
                   value={0}
                   label="Home"

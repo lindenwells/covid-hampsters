@@ -1,4 +1,6 @@
 /*
+ * This file contains the tables used for DataGrid, which displays our
+ * hospital data.
  * The below table is built with the material-ui framework, using the code 
  * example "Sorting & selecting" given in their website referenced below:
  * 

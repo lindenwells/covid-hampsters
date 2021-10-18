@@ -84,6 +84,7 @@ interface ShowInterface {
   clickHandle: (hospitalName: string) => void;
 }
 
+/* Decides what to show based on current state of DataGrid */
 function Show(props: ShowInterface) {
   const classes = useStyles();
   const { thingToShow, clickHandle } = props;
