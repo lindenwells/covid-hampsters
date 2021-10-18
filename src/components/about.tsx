@@ -101,7 +101,7 @@ export default function About() {
                             </div>
                         </div>
                         <div className={classes.str1}>
-                            <p>This application is built for keeping track of hospital beds to help the health sector cope. It has a website, a database and a predictive model, which all work together to provide vital information such as dates patient beds will become available, the number of remaining beds, and statistics on space availability in the future.It is aim to help hospitals plan accordingly, and avoid running out of beds for patients.</p>
+                            <p>This application is built for keeping track of hospital beds to help the health sector cope. It has a website, a database and a predictive model, which all work together to provide vital information such as dates patient beds will become available, the number of remaining beds, and statistics on space availability in the future. It is aim to help hospitals plan accordingly, and avoid running out of beds for patients.</p>
                         </div>
                     </div>
                 </Paper>
@@ -148,11 +148,66 @@ export default function About() {
         )
     } else {
         return (
-            <div className={classes.about}>
-                <h1>
-                    Nothing else.
-                </h1>
-            </div>
+            <Grid
+                container
+                spacing={0}
+                direction="column"
+                alignItems="center"
+                justify="center"
+                style={{ minWidth: "100%" }}
+            >
+                <Paper className={classes.about}>
+                    <div>
+                        <div>
+                            <div>
+                                <h1>About this application</h1>
+                            </div>
+                        </div>
+                        <div className={classes.str1}>
+                            <p>This application is built for keeping track of hospital beds to help the health sector cope. It has a website, a database and a predictive model, which all work together to provide vital information such as dates patient beds will become available, the number of remaining beds, and statistics on space availability in the future. It is aim to help hospitals plan accordingly, and avoid running out of beds for patients.</p>
+                        </div>
+                    </div>
+                </Paper>
+                <Paper className={classes.team}>
+                    <div>
+                        <div>
+                            <h1>Team '); DROP_TABLE</h1>
+                        </div>
+                        <div className={classes.memberContainer}>
+                            <div className={classes.members}>
+                                <Avatar className={classes.avatar} src={avatar1} />
+                                <h3>Jason Hassell</h3>
+                                <h6>Team Leader, Programming</h6>
+                                <p></p>
+                            </div>
+                            <div className={classes.members}>
+                                <Avatar className={classes.avatar} src={avatar2} />
+                                <h3>Linden Wells</h3>
+                                <h6>Firebase stuff, devOps (github), react</h6>
+                                <p></p>
+                            </div>
+                            <div className={classes.members}>
+                                <Avatar className={classes.avatar} src={avatar3} />
+                                <h3>James Guanzon</h3>
+                                <h6>UI/UX work, programming</h6>
+                                <p></p>
+                            </div>
+                            <div className={classes.members}>
+                                <Avatar className={classes.avatar} src={avatar4} />
+                                <h3>Bowen Yuan</h3>
+                                <h6>Programming, constructing database</h6>
+                                <p></p>
+                            </div>
+                            <div className={classes.members}>
+                                <Avatar className={classes.avatar} src={avatar5} />
+                                <h3>Diya Shi</h3>
+                                <h6>Webpage Design</h6>
+                                <p></p>
+                            </div>
+                        </div>
+                    </div>
+                </Paper>
+            </Grid>
         )
     }
 }
