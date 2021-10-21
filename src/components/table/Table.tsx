@@ -41,28 +41,28 @@ interface Data {
   // bedsSevere: number;
   // bedsSevereTotal: number;
   beds: number;
-  bedsTotal: number;
+  // bedsTotal: number;
   hospitalName: string;
   totalBeds: number;
 }
-
+// TODO: clean up commented code here
 function createData(
   hospitalName: string,
   beds: number,
-  bedsTotal: number,
+  // bedsTotal: number,
   // bedsSevere: number,
   // bedsSevereTotal: number,
   // bedsMild: number,
   // bedsMildTotal: number,
   totalBeds: number,
 ): Data {
-  return { hospitalName, beds, bedsTotal, totalBeds };//bedsSevere, bedsSevereTotal, bedsMild, bedsMildTotal, totalBeds };
+  return { hospitalName, beds, totalBeds };//bedsSevere, bedsSevereTotal, bedsMild, bedsMildTotal, totalBeds };
 }
 
-// TODO: replace this with hospitalData
+// TODO: replace this with hospitalData <-- in progress, remove this section once complete
 // i.e. set rows to the rows of hospitals in a certain area
-var rows = [
-  createData('Hospital x', 0, 0, 0),
+// var rows = [
+  // createData('Hospital x', 0, 0, 0),
   // createData('Hospital 1', 100, 200, 200),
   // createData('Hospital 2', 200, 300, 300),
   // createData('Hospital 3', 300, 400, 400),
@@ -70,7 +70,7 @@ var rows = [
   // createData('Hospital 5', 500, 600, 600),
   // createData('Hospital 6', 600, 700, 700),
   // createData('Hospital 7', 700, 800, 800),
-];
+// ];
 
 function descendingComparator<T>(a: T, b: T, orderBy: keyof T) {
   if (b[orderBy] < a[orderBy]) {
@@ -257,29 +257,37 @@ interface detailProps {
 }
 
 export default function EnhancedTable(props: detailProps) {
-  console.log("props: " + props.area);
+  console.log("Region: " + props.area);
+  console.log("Hospitals: ");
   // TODO: use this props.area
   const { clickHandle } = props;
 
   // Setup rows data
-  rows = [
+  const rows = getHospitals(props.area);
+  console.log(rows);
+  // [
 
-    createData('Hospital 1', 100, 200, 200),
-    createData('Hospital 2', 200, 300, 300),
-    createData('Hospital 3', 300, 400, 400),
-    createData('Hospital 4', 400, 500, 500),
-    createData('Hospital 5', 500, 600, 600),
-    createData('Hospital 6', 600, 700, 700),
-    createData('Hospital 7', 700, 800, 800),
-  ];
+  //   createData('Hospital 1', 100, 200, 200),
+  //   createData('Hospital 2', 200, 300, 300),
+  //   createData('Hospital 3', 300, 400, 400),
+  //   createData('Hospital 4', 400, 500, 500),
+  //   createData('Hospital 5', 500, 600, 600),
+  //   createData('Hospital 6', 600, 700, 700),
+  //   createData('Hospital 7', 700, 800, 800),
+  // ];
 
-  function test(region: string) {
+  function getHospitals(area: string): Data[] {
+    var rows: Data[];
+    rows = [];
     hospitalData.forEach(function (hospital, index) {
-      //TODO: somehow get hospitalName here in props or something
-      if (hospital["Hospital and Health Service"] == region) {
-        console.log("   Facility name: " + hospital["Facility Name"]);
+      if (hospital["Hospital and Health Service"] == area) {
+        var facilityName = hospital["Facility Name"];
+        console.log("   Facility name: " + facilityName);
+        // TODO: get current beds (from firebase) and replace the 0 below with that
+        rows.push(createData(facilityName, 0, hospital["Max Bed Capacity"]));
       }
     });
+    return rows;
   }
 
   const classes = useStyles();
@@ -306,8 +314,6 @@ export default function EnhancedTable(props: detailProps) {
   };
 
   const handleClick = (event: React.MouseEvent<unknown>, name: string) => {
-    console.log("Hospital Name: " + name);
-    test(name); // TODO: function called here
     clickHandle(name);
 
     const selectedIndex = selected.indexOf(name);
@@ -392,7 +398,7 @@ export default function EnhancedTable(props: detailProps) {
                       <TableCell className={classes.cell} component="th" id={labelId} scope="row" padding="none">
                         {row.hospitalName}
                       </TableCell>
-                      <TableCell className={classes.cell} align="right">{row.beds} / {row.bedsTotal}</TableCell>
+                      <TableCell className={classes.cell} align="right">{row.beds} / {row.totalBeds}</TableCell>
                       {/* <TableCell className={classes.cell} align="right">{row.bedsMild} / {row.bedsMildTotal}</TableCell> */}
                       <TableCell className={classes.cell} align="right">{row.totalBeds}</TableCell>
                     </ColoredTableRow>
