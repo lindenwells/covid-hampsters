@@ -1,7 +1,6 @@
 export const data = 
 [
     {
-        "_id": 1,
         "Hospital and Health Service": "Cairns and Hinterland",
         "Facility Idenitifier": "00211",
         "Facility Name": "Atherton Hospital",
@@ -9,10 +8,10 @@ export const data =
         "Phone Number": "(07) 4091 0211",
         "Fax Number": "(07) 4091 0401",
         "lat": "-17.2670971",
-        "lon": "145.4825365"
+        "lon": "145.4825365",
+        "Max Bed Capacity": 200
     },
     {
-        "_id": 2,
         "Hospital and Health Service": "Cairns and Hinterland",
         "Facility Idenitifier": "00212",
         "Facility Name": "Babinda Hospital",
@@ -20,10 +19,10 @@ export const data =
         "Phone Number": "(07) 4067 8200",
         "Fax Number": "(07) 4067 1641",
         "lat": "-17.3445308",
-        "lon": "145.9146383"
+        "lon": "145.9146383",
+        "Max Bed Capacity": 67
     },
     {
-        "_id": 3,
         "Hospital and Health Service": "Cairns and Hinterland",
         "Facility Idenitifier": "00214",
         "Facility Name": "Cairns Hospital",
@@ -31,10 +30,10 @@ export const data =
         "Phone Number": "(07) 4226 0000",
         "Fax Number": "(07) 4031 1168",
         "lat": "-16.91225155",
-        "lon": "145.7682767517473"
+        "lon": "145.7682767517473",
+        "Max Bed Capacity": 2687
     },
     {
-        "_id": 4,
         "Hospital and Health Service": "Cairns and Hinterland",
         "Facility Idenitifier": "00220",
         "Facility Name": "Gordonvale Hospital",
@@ -42,10 +41,10 @@ export const data =
         "Phone Number": "(07) 4043 3100",
         "Fax Number": "(07) 4043 3199",
         "lat": "-17.0809977",
-        "lon": "145.7995527"
+        "lon": "145.7995527",
+        "Max Bed Capacity": 58
     },
     {
-        "_id": 5,
         "Hospital and Health Service": "Cairns and Hinterland",
         "Facility Idenitifier": "00221",
         "Facility Name": "Herberton Hospital",
@@ -53,10 +52,10 @@ export const data =
         "Phone Number": "(07) 4096 1000",
         "Fax Number": "(07) 4096 2451",
         "lat": "-17.3820284",
-        "lon": "145.3842232"
+        "lon": "145.3842232",
+        "Max Bed Capacity": 158
     },
     {
-        "_id": 6,
         "Hospital and Health Service": "Cairns and Hinterland",
         "Facility Idenitifier": "00222",
         "Facility Name": "Innisfail Hospital",
@@ -64,10 +63,10 @@ export const data =
         "Phone Number": "(07) 4016 1411",
         "Fax Number": "(07) 4016 1260",
         "lat": "-17.5202141",
-        "lon": "146.0297908"
+        "lon": "146.0297908",
+        "Max Bed Capacity": 113
     },
     {
-        "_id": 7,
         "Hospital and Health Service": "Cairns and Hinterland",
         "Facility Idenitifier": "00223",
         "Facility Name": "Mareeba Hospital",
@@ -75,10 +74,10 @@ export const data =
         "Phone Number": "(07) 4092 9333",
         "Fax Number": "(07) 4092 9160",
         "lat": "-16.9877051",
-        "lon": "145.4249702"
+        "lon": "145.4249702",
+        "Max Bed Capacity": 93
     },
     {
-        "_id": 8,
         "Hospital and Health Service": "Cairns and Hinterland",
         "Facility Idenitifier": "00224",
         "Facility Name": "Mossman Hospital",
@@ -86,10 +85,10 @@ export const data =
         "Phone Number": "(07) 4084 1200",
         "Fax Number": "(07) 4098 3069",
         "lat": "-16.4637732",
-        "lon": "145.3688353"
+        "lon": "145.3688353",
+        "Max Bed Capacity": 63
     },
     {
-        "_id": 9,
         "Hospital and Health Service": "Cairns and Hinterland",
         "Facility Idenitifier": "00227",
         "Facility Name": "Tully Hospital",
@@ -97,10 +96,10 @@ export const data =
         "Phone Number": "(07) 4068 4144",
         "Fax Number": "(07) 4068 2348",
         "lat": "-17.9274577",
-        "lon": "145.9249535"
+        "lon": "145.9249535",
+        "Max Bed Capacity": 30
     },
     {
-        "_id": 10,
         "Hospital and Health Service": "Central Queensland",
         "Facility Idenitifier": "00132",
         "Facility Name": "Baralaba Hospital",
@@ -108,10 +107,10 @@ export const data =
         "Phone Number": "(07) 4998 2800",
         "Fax Number": "(07) 4998 1178",
         "lat": "-24.1746229",
-        "lon": "149.8153746"
+        "lon": "149.8153746",
+        "Max Bed Capacity": 25
     },
     {
-        "_id": 12,
         "Hospital and Health Service": "Central Queensland",
         "Facility Idenitifier": "00134",
         "Facility Name": "Blackwater Hospital",
@@ -119,10 +118,10 @@ export const data =
         "Phone Number": "(07) 4980 1800",
         "Fax Number": "(07) 4980 1832",
         "lat": "-23.5783907",
-        "lon": "148.8786255"
+        "lon": "148.8786255",
+        "Max Bed Capacity": 14
     },
     {
-        "_id": 13,
         "Hospital and Health Service": "Central Queensland",
         "Facility Idenitifier": "00135",
         "Facility Name": "Emerald Hospital",
@@ -130,10 +129,10 @@ export const data =
         "Phone Number": "(07) 4987 9400",
         "Fax Number": "(07) 4982 3860",
         "lat": "-23.5241822",
-        "lon": "148.158207"
+        "lon": "148.158207",
+        "Max Bed Capacity": 124
     },
     {
-        "_id": 14,
         "Hospital and Health Service": "Central Queensland",
         "Facility Idenitifier": "00136",
         "Facility Name": "Gladstone Hospital",
@@ -141,10 +140,10 @@ export const data =
         "Phone Number": "(07) 4976 3200",
         "Fax Number": "(07) 4972 3776",
         "lat": "-23.8530959",
-        "lon": "151.2496967"
+        "lon": "151.2496967",
+        "Max Bed Capacity": 220
     },
     {
-        "_id": 15,
         "Hospital and Health Service": "Central Queensland",
         "Facility Idenitifier": "00139",
         "Facility Name": "Mount Morgan Hospital",
@@ -152,10 +151,10 @@ export const data =
         "Phone Number": "(07) 4912 5100",
         "Fax Number": "(07) 4938 1540",
         "lat": "-23.6476201",
-        "lon": "150.3919413"
+        "lon": "150.3919413",
+        "Max Bed Capacity": 30
     },
     {
-        "_id": 16,
         "Hospital and Health Service": "Central Queensland",
         "Facility Idenitifier": "00140",
         "Facility Name": "Moura Hospital",
@@ -163,10 +162,10 @@ export const data =
         "Phone Number": "(07) 4997 2900",
         "Fax Number": "(07) 4997 1475",
         "lat": "-24.5742836",
-        "lon": "149.9733409"
+        "lon": "149.9733409",
+        "Max Bed Capacity": 15
     },
     {
-        "_id": 17,
         "Hospital and Health Service": "Central Queensland",
         "Facility Idenitifier": "00141",
         "Facility Name": "Rockhampton Base Hospital",
@@ -174,10 +173,10 @@ export const data =
         "Phone Number": "(07) 4920 6211",
         "Fax Number": "(07) 4920 6335",
         "lat": "-23.3889747",
-        "lon": "150.5029128"
+        "lon": "150.5029128",
+        "Max Bed Capacity": 1241
     },
     {
-        "_id": 18,
         "Hospital and Health Service": "Central Queensland",
         "Facility Idenitifier": "00142",
         "Facility Name": "Springsure Hospital",
@@ -185,10 +184,10 @@ export const data =
         "Phone Number": "(07) 4984 1200",
         "Fax Number": "(07) 4984 1101",
         "lat": "-24.1199267",
-        "lon": "148.0859563"
+        "lon": "148.0859563",
+        "Max Bed Capacity": 23
     },
     {
-        "_id": 19,
         "Hospital and Health Service": "Central Queensland",
         "Facility Idenitifier": "00143",
         "Facility Name": "Theodore Hospital",
@@ -196,10 +195,10 @@ export const data =
         "Phone Number": "(07) 4990 3000",
         "Fax Number": "(07) 4993 1610",
         "lat": "-24.9414548",
-        "lon": "150.0766276"
+        "lon": "150.0766276",
+        "Max Bed Capacity": 22
     },
     {
-        "_id": 20,
         "Hospital and Health Service": "Central Queensland",
         "Facility Idenitifier": "00144",
         "Facility Name": "Capricorn Coast Hospital",
@@ -207,10 +206,10 @@ export const data =
         "Phone Number": "(07) 4913 3000",
         "Fax Number": "(07) 4939 3517",
         "lat": "-23.1426",
-        "lon": "150.7348508"
+        "lon": "150.7348508",
+        "Max Bed Capacity": 78
     },
     {
-        "_id": 22,
         "Hospital and Health Service": "Central West",
         "Facility Idenitifier": "00131",
         "Facility Name": "Alpha Hospital",
@@ -218,10 +217,10 @@ export const data =
         "Phone Number": "(07) 4809 7000",
         "Fax Number": "(07) 4809 7099",
         "lat": "-23.6487211",
-        "lon": "146.63302241958195"
+        "lon": "146.63302241958195",
+        "Max Bed Capacity": 4
     },
     {
-        "_id": 23,
         "Hospital and Health Service": "Central West",
         "Facility Idenitifier": "00152",
         "Facility Name": "Barcaldine Hospital",
@@ -229,10 +228,10 @@ export const data =
         "Phone Number": "(07) 4650 4000",
         "Fax Number": "(07) 4650 4099",
         "lat": "-23.5519724",
-        "lon": "145.2830414"
+        "lon": "145.2830414",
+        "Max Bed Capacity": 17
     },
     {
-        "_id": 24,
         "Hospital and Health Service": "Central West",
         "Facility Idenitifier": "00153",
         "Facility Name": "Blackall Hospital",
@@ -240,10 +239,10 @@ export const data =
         "Phone Number": "(07) 4650 7700",
         "Fax Number": "(07) 4650 7799",
         "lat": "-24.417803",
-        "lon": "145.4436185"
+        "lon": "145.4436185",
+        "Max Bed Capacity": 41
     },
     {
-        "_id": 25,
         "Hospital and Health Service": "Central West",
         "Facility Idenitifier": "00156",
         "Facility Name": "Longreach Hospital",
@@ -251,10 +250,10 @@ export const data =
         "Phone Number": "(07) 4658 4700",
         "Fax Number": "(07) 4658 1494",
         "lat": "-23.4319057",
-        "lon": "144.2624171"
+        "lon": "144.2624171",
+        "Max Bed Capacity": 74
     },
     {
-        "_id": 26,
         "Hospital and Health Service": "Central West",
         "Facility Idenitifier": "00159",
         "Facility Name": "Winton Hospital",
@@ -262,10 +261,10 @@ export const data =
         "Phone Number": "(07) 4657 2700",
         "Fax Number": "(07) 4657 2799",
         "lat": "-22.3830405",
-        "lon": "143.0424253"
+        "lon": "143.0424253",
+        "Max Bed Capacity": 20
     },
     {
-        "_id": 27,
         "Hospital and Health Service": "Childrens Health Queensland",
         "Facility Idenitifier": "00017",
         "Facility Name": "Ellen Barron Family Centre",
@@ -273,10 +272,10 @@ export const data =
         "Phone Number": "(07) 3139 6500",
         "Fax Number": "(07) 3139 6555",
         "lat": "-27.3847666",
-        "lon": "153.0228604"
+        "lon": "153.0228604",
+        "Max Bed Capacity": 191
     },
     {
-        "_id": 28,
         "Hospital and Health Service": "Childrens Health Queensland",
         "Facility Idenitifier": "00202",
         "Facility Name": "Queensland Children's Hospital",
@@ -284,10 +283,10 @@ export const data =
         "Phone Number": "(07) 3068 1111",
         "Fax Number": "(07) 3068 1119",
         "lat": "-27.48400365",
-        "lon": "153.02653867758764"
+        "lon": "153.02653867758764",
+        "Max Bed Capacity": 467
     },
     {
-        "_id": 29,
         "Hospital and Health Service": "Darling Downs",
         "Facility Idenitifier": "00063",
         "Facility Name": "Cherbourg Hospital",
@@ -295,10 +294,10 @@ export const data =
         "Phone Number": "(07) 4169 8800",
         "Fax Number": "(07) 4169 8801",
         "lat": "-26.2918838",
-        "lon": "151.9557637"
+        "lon": "151.9557637",
+        "Max Bed Capacity": 17
     },
     {
-        "_id": 30,
         "Hospital and Health Service": "Darling Downs",
         "Facility Idenitifier": "00070",
         "Facility Name": "Kingaroy Hospital",
@@ -306,10 +305,10 @@ export const data =
         "Phone Number": "(07) 4162 9200",
         "Fax Number": "(07) 4162 9283",
         "lat": "-26.5459904",
-        "lon": "151.8337763"
+        "lon": "151.8337763",
+        "Max Bed Capacity": 209
     },
     {
-        "_id": 31,
         "Hospital and Health Service": "Darling Downs",
         "Facility Idenitifier": "00075",
         "Facility Name": "Murgon Hospital",
@@ -317,10 +316,10 @@ export const data =
         "Phone Number": "(07) 4169 9600",
         "Fax Number": "(07) 4169 9601",
         "lat": "-26.2383563",
-        "lon": "151.9484476"
+        "lon": "151.9484476",
+        "Max Bed Capacity": 75
     },
     {
-        "_id": 32,
         "Hospital and Health Service": "Darling Downs",
         "Facility Idenitifier": "00076",
         "Facility Name": "Nanango Hospital",
@@ -328,10 +327,10 @@ export const data =
         "Phone Number": "(07) 4171 6700",
         "Fax Number": "(07) 4171 6701",
         "lat": "-26.6758983",
-        "lon": "152.0065325"
+        "lon": "152.0065325",
+        "Max Bed Capacity": 13
     },
     {
-        "_id": 33,
         "Hospital and Health Service": "Darling Downs",
         "Facility Idenitifier": "00077",
         "Facility Name": "Wondai Hospital",
@@ -339,10 +338,10 @@ export const data =
         "Phone Number": "(07) 4169 2600",
         "Fax Number": "(07) 4169 2601",
         "lat": "-26.3213359",
-        "lon": "151.8781756"
+        "lon": "151.8781756",
+        "Max Bed Capacity": 19
     },
     {
-        "_id": 34,
         "Hospital and Health Service": "Darling Downs",
         "Facility Idenitifier": "00091",
         "Facility Name": "Chinchilla Hospital",
@@ -350,10 +349,10 @@ export const data =
         "Phone Number": "(07) 4662 8888",
         "Fax Number": "(07) 4662 8816",
         "lat": "-26.7412761",
-        "lon": "150.6337357"
+        "lon": "150.6337357",
+        "Max Bed Capacity": 85
     },
     {
-        "_id": 35,
         "Hospital and Health Service": "Darling Downs",
         "Facility Idenitifier": "00092",
         "Facility Name": "Dalby Hospital",
@@ -361,10 +360,10 @@ export const data =
         "Phone Number": "(07) 4669 0555",
         "Fax Number": "(07) 4669 0793",
         "lat": "-27.174081",
-        "lon": "151.2721329"
+        "lon": "151.2721329",
+        "Max Bed Capacity": 142
     },
     {
-        "_id": 36,
         "Hospital and Health Service": "Darling Downs",
         "Facility Idenitifier": "00093",
         "Facility Name": "Goondiwindi Hospital",
@@ -372,10 +371,10 @@ export const data =
         "Phone Number": "(07) 4578 2400",
         "Fax Number": "(07) 4578 2500",
         "lat": "-28.5483003",
-        "lon": "150.3072945"
+        "lon": "150.3072945",
+        "Max Bed Capacity": 51
     },
     {
-        "_id": 37,
         "Hospital and Health Service": "Darling Downs",
         "Facility Idenitifier": "00094",
         "Facility Name": "Inglewood Hospital",
@@ -383,10 +382,10 @@ export const data =
         "Phone Number": "(07) 4652 0888",
         "Fax Number": "(07) 4652 0800",
         "lat": "-28.4198574",
-        "lon": "151.0632804"
+        "lon": "151.0632804",
+        "Max Bed Capacity": 14
     },
     {
-        "_id": 38,
         "Hospital and Health Service": "Darling Downs",
         "Facility Idenitifier": "00095",
         "Facility Name": "Jandowae Hospital",
@@ -394,10 +393,10 @@ export const data =
         "Phone Number": "(07) 4668 4555",
         "Fax Number": "(07) 4668 4576",
         "lat": "-26.7804242",
-        "lon": "151.1074658"
+        "lon": "151.1074658",
+        "Max Bed Capacity": 57
     },
     {
-        "_id": 39,
         "Hospital and Health Service": "Darling Downs",
         "Facility Idenitifier": "00097",
         "Facility Name": "Miles Hospital",
@@ -405,10 +404,10 @@ export const data =
         "Phone Number": "(07) 4628 5600",
         "Fax Number": "(07) 4627 1885",
         "lat": "-26.6542317",
-        "lon": "150.1925916"
+        "lon": "150.1925916",
+        "Max Bed Capacity": 23
     },
     {
-        "_id": 40,
         "Hospital and Health Service": "Darling Downs",
         "Facility Idenitifier": "00098",
         "Facility Name": "Millmerran Hospital",
@@ -416,10 +415,10 @@ export const data =
         "Phone Number": "(07) 4695 3111",
         "Fax Number": "(07) 4695 3100",
         "lat": "-27.87917575",
-        "lon": "151.26281101311758"
+        "lon": "151.26281101311758",
+        "Max Bed Capacity": 38
     },
     {
-        "_id": 42,
         "Hospital and Health Service": "Darling Downs",
         "Facility Idenitifier": "00100",
         "Facility Name": "Stanthorpe Hospital",
@@ -427,10 +426,10 @@ export const data =
         "Phone Number": "(07) 4683 3400",
         "Fax Number": "(07) 4683 3500",
         "lat": "-28.6620787",
-        "lon": "151.9297479"
+        "lon": "151.9297479",
+        "Max Bed Capacity": 141
     },
     {
-        "_id": 43,
         "Hospital and Health Service": "Darling Downs",
         "Facility Idenitifier": "00101",
         "Facility Name": "Tara Hospital",
@@ -438,10 +437,10 @@ export const data =
         "Phone Number": "(07) 4678 7900",
         "Fax Number": "(07) 4678 7933",
         "lat": "-27.2740476",
-        "lon": "150.4554467"
+        "lon": "150.4554467",
+        "Max Bed Capacity": 50
     },
     {
-        "_id": 44,
         "Hospital and Health Service": "Darling Downs",
         "Facility Idenitifier": "00102",
         "Facility Name": "Taroom Hospital",
@@ -449,10 +448,10 @@ export const data =
         "Phone Number": "(07) 4628 9900",
         "Fax Number": "(07) 4628 9939",
         "lat": "-25.639267",
-        "lon": "149.7980552"
+        "lon": "149.7980552",
+        "Max Bed Capacity": 63
     },
     {
-        "_id": 45,
         "Hospital and Health Service": "Darling Downs",
         "Facility Idenitifier": "00103",
         "Facility Name": "Texas Hospital",
@@ -460,10 +459,10 @@ export const data =
         "Phone Number": "(07) 4653 3200",
         "Fax Number": "(07) 4653 3280",
         "lat": "-28.8587485",
-        "lon": "151.1855177"
+        "lon": "151.1855177",
+        "Max Bed Capacity": 13
     },
     {
-        "_id": 46,
         "Hospital and Health Service": "Darling Downs",
         "Facility Idenitifier": "00104",
         "Facility Name": "Toowoomba Hospital",
@@ -471,10 +470,10 @@ export const data =
         "Phone Number": "(07) 4616 6000",
         "Fax Number": "(07) 4616 6170",
         "lat": "-27.5708214",
-        "lon": "151.9466798"
+        "lon": "151.9466798",
+        "Max Bed Capacity": 997
     },
     {
-        "_id": 47,
         "Hospital and Health Service": "Darling Downs",
         "Facility Idenitifier": "00105",
         "Facility Name": "Warwick Hospital",
@@ -482,10 +481,10 @@ export const data =
         "Phone Number": "(07) 4660 3900",
         "Fax Number": "(07) 4660 3908",
         "lat": "-28.22439875",
-        "lon": "152.01745018680478"
+        "lon": "152.01745018680478",
+        "Max Bed Capacity": 149
     },
     {
-        "_id": 48,
         "Hospital and Health Service": "Gold Coast",
         "Facility Idenitifier": "00934",
         "Facility Name": "Robina Hospital",
@@ -493,10 +492,10 @@ export const data =
         "Phone Number": "(07) 5668 6000",
         "Fax Number": "",
         "lat": "-28.07117005",
-        "lon": "153.37560985380742"
+        "lon": "153.37560985380742",
+        "Max Bed Capacity": 1501
     },
     {
-        "_id": 50,
         "Hospital and Health Service": "Mackay",
         "Facility Idenitifier": "00171",
         "Facility Name": "Clermont Hospital",
@@ -504,10 +503,10 @@ export const data =
         "Phone Number": "(07) 4983 4000",
         "Fax Number": "(07) 4983 4001",
         "lat": "-22.8321233",
-        "lon": "147.6324587"
+        "lon": "147.6324587",
+        "Max Bed Capacity": 23
     },
     {
-        "_id": 51,
         "Hospital and Health Service": "Mackay",
         "Facility Idenitifier": "00172",
         "Facility Name": "Mackay Base Hospital",
@@ -515,10 +514,10 @@ export const data =
         "Phone Number": "(07) 4885 6000",
         "Fax Number": "(07) 4885 6408",
         "lat": "-21.1539845",
-        "lon": "149.1664358"
+        "lon": "149.1664358",
+        "Max Bed Capacity": 512
     },
     {
-        "_id": 53,
         "Hospital and Health Service": "Mackay",
         "Facility Idenitifier": "00174",
         "Facility Name": "Proserpine Hospital",
@@ -526,10 +525,10 @@ export const data =
         "Phone Number": "(07) 4813 9400",
         "Fax Number": "(07) 4813 9480",
         "lat": "-20.3994001",
-        "lon": "148.5844708"
+        "lon": "148.5844708",
+        "Max Bed Capacity": 110
     },
     {
-        "_id": 54,
         "Hospital and Health Service": "Mackay",
         "Facility Idenitifier": "00175",
         "Facility Name": "Sarina Hospital",
@@ -537,10 +536,10 @@ export const data =
         "Phone Number": "(07) 4943 8777",
         "Fax Number": "(07) 4943 8739",
         "lat": "-21.4226322",
-        "lon": "149.2102997"
+        "lon": "149.2102997",
+        "Max Bed Capacity": 44
     },
     {
-        "_id": 55,
         "Hospital and Health Service": "Mackay",
         "Facility Idenitifier": "00176",
         "Facility Name": "Dysart Hospital",
@@ -548,10 +547,10 @@ export const data =
         "Phone Number": "(07) 4941 1911",
         "Fax Number": "(07) 4941 1931",
         "lat": "-22.5810851",
-        "lon": "148.3547141"
+        "lon": "148.3547141",
+        "Max Bed Capacity": 28
     },
     {
-        "_id": 56,
         "Hospital and Health Service": "Mackay",
         "Facility Idenitifier": "00192",
         "Facility Name": "Bowen Hospital",
@@ -559,10 +558,10 @@ export const data =
         "Phone Number": "(07) 4786 8222",
         "Fax Number": "(07) 4786 3188",
         "lat": "-20.0031456",
-        "lon": "148.2380678"
+        "lon": "148.2380678",
+        "Max Bed Capacity": 114
     },
     {
-        "_id": 57,
         "Hospital and Health Service": "Mackay",
         "Facility Idenitifier": "00194",
         "Facility Name": "Collinsville Hospital",
@@ -570,10 +569,10 @@ export const data =
         "Phone Number": "(07) 4785 4777",
         "Fax Number": "(07) 4785 4799",
         "lat": "-20.5443026",
-        "lon": "147.8354343"
+        "lon": "147.8354343",
+        "Max Bed Capacity": 11
     },
     {
-        "_id": 58,
         "Hospital and Health Service": "Mater Public Hospitals",
         "Facility Idenitifier": "00001",
         "Facility Name": "Mater Hospital Brisbane Public",
@@ -581,10 +580,10 @@ export const data =
         "Phone Number": "(07) 3163 8111",
         "Fax Number": "",
         "lat": "-27.4846459",
-        "lon": "153.0265638"
+        "lon": "153.0265638",
+        "Max Bed Capacity": 323
     },
     {
-        "_id": 59,
         "Hospital and Health Service": "Mater Public Hospitals",
         "Facility Idenitifier": "00003",
         "Facility Name": "Mater Mothers' Hospital Public",
@@ -592,10 +591,10 @@ export const data =
         "Phone Number": "(07) 3163 1918",
         "Fax Number": "",
         "lat": "-27.4846459",
-        "lon": "153.0265638"
+        "lon": "153.0265638",
+        "Max Bed Capacity": 390
     },
     {
-        "_id": 60,
         "Hospital and Health Service": "Metro North",
         "Facility Idenitifier": "00004",
         "Facility Name": "The Prince Charles Hospital",
@@ -603,10 +602,10 @@ export const data =
         "Phone Number": "(07) 3139 4000",
         "Fax Number": "",
         "lat": "-27.3924852",
-        "lon": "153.02406"
+        "lon": "153.02406",
+        "Max Bed Capacity": 1975
     },
     {
-        "_id": 61,
         "Hospital and Health Service": "Metro North",
         "Facility Idenitifier": "00016",
         "Facility Name": "Redcliffe Hospital",
@@ -614,10 +613,10 @@ export const data =
         "Phone Number": "(07) 3883 7777",
         "Fax Number": "(07) 3883 7528",
         "lat": "-27.2301302",
-        "lon": "153.1095559"
+        "lon": "153.1095559",
+        "Max Bed Capacity": 1301
     },
     {
-        "_id": 62,
         "Hospital and Health Service": "Metro North",
         "Facility Idenitifier": "00030",
         "Facility Name": "Caboolture Hospital",
@@ -625,10 +624,10 @@ export const data =
         "Phone Number": "(07) 5433 8888",
         "Fax Number": "(07) 5433 8700",
         "lat": "-27.0797338",
-        "lon": "152.9655346"
+        "lon": "152.9655346",
+        "Max Bed Capacity": 443
     },
     {
-        "_id": 63,
         "Hospital and Health Service": "Metro North",
         "Facility Idenitifier": "00033",
         "Facility Name": "Surgical Treatment and Rehabilitation Service",
@@ -636,10 +635,10 @@ export const data =
         "Phone Number": "(07) 3646 4445",
         "Fax Number": "",
         "lat": "-27.449577400000003",
-        "lon": "153.02742970905695"
+        "lon": "153.02742970905695",
+        "Max Bed Capacity": 371
     },
     {
-        "_id": 64,
         "Hospital and Health Service": "Metro North",
         "Facility Idenitifier": "00046",
         "Facility Name": "Kilcoy Hospital",
@@ -647,10 +646,10 @@ export const data =
         "Phone Number": "(07) 5422 4411",
         "Fax Number": "(07) 5422 4445",
         "lat": "-26.9375217",
-        "lon": "152.5618279"
+        "lon": "152.5618279",
+        "Max Bed Capacity": 47
     },
     {
-        "_id": 65,
         "Hospital and Health Service": "Metro North",
         "Facility Idenitifier": "00201",
         "Facility Name": "Royal Brisbane & Women's Hospital",
@@ -658,10 +657,10 @@ export const data =
         "Phone Number": "(07) 3646 8111",
         "Fax Number": "(07) 3636 4240",
         "lat": "-27.4459666",
-        "lon": "153.029736"
+        "lon": "153.029736",
+        "Max Bed Capacity": 3291
     },
     {
-        "_id": 66,
         "Hospital and Health Service": "Metro South",
         "Facility Idenitifier": "00011",
         "Facility Name": "Princess Alexandra Hospital",
@@ -669,10 +668,10 @@ export const data =
         "Phone Number": "(07) 3176 2111",
         "Fax Number": "(07) 3176 5657",
         "lat": "-27.49879175",
-        "lon": "153.03286942630075"
+        "lon": "153.03286942630075",
+        "Max Bed Capacity": 1277
     },
     {
-        "_id": 67,
         "Hospital and Health Service": "Metro South",
         "Facility Idenitifier": "00022",
         "Facility Name": "Queen Elizabeth Ii Jubilee Hospital",
@@ -680,10 +679,10 @@ export const data =
         "Phone Number": "(07) 3182 6111",
         "Fax Number": "(07) 3182 8807",
         "lat": "-27.556898",
-        "lon": "153.080282"
+        "lon": "153.080282",
+        "Max Bed Capacity": 943
     },
     {
-        "_id": 68,
         "Hospital and Health Service": "Metro South",
         "Facility Idenitifier": "00028",
         "Facility Name": "Redland Hospital",
@@ -691,10 +690,10 @@ export const data =
         "Phone Number": "(07) 3488 3111",
         "Fax Number": "(07) 3176 3588",
         "lat": "-27.541513",
-        "lon": "153.250922"
+        "lon": "153.250922",
+        "Max Bed Capacity": 834
     },
     {
-        "_id": 69,
         "Hospital and Health Service": "Metro South",
         "Facility Idenitifier": "00029",
         "Facility Name": "Logan Hospital",
@@ -702,10 +701,10 @@ export const data =
         "Phone Number": "(07) 3299 8899",
         "Fax Number": "(07) 3299 8888",
         "lat": "-27.6700260",
-        "lon": "153.1413419"
+        "lon": "153.1413419",
+        "Max Bed Capacity": 2188
     },
     {
-        "_id": 70,
         "Hospital and Health Service": "Metro South",
         "Facility Idenitifier": "00041",
         "Facility Name": "Beaudesert Hospital",
@@ -713,10 +712,10 @@ export const data =
         "Phone Number": "(07) 5541 9111",
         "Fax Number": "(07) 5541 9199",
         "lat": "-27.9850652",
-        "lon": "153.00243749520172"
+        "lon": "153.00243749520172",
+        "Max Bed Capacity": 101
     },
     {
-        "_id": 71,
         "Hospital and Health Service": "North West",
         "Facility Idenitifier": "00243",
         "Facility Name": "Cloncurry Hospital",
@@ -724,10 +723,10 @@ export const data =
         "Phone Number": "(07) 4742 4500",
         "Fax Number": "(07) 4742 1626",
         "lat": "-20.703223",
-        "lon": "140.5269589"
+        "lon": "140.5269589",
+        "Max Bed Capacity": 18
     },
     {
-        "_id": 72,
         "Hospital and Health Service": "North West",
         "Facility Idenitifier": "00245",
         "Facility Name": "Julia Creek Hospital",
@@ -735,10 +734,10 @@ export const data =
         "Phone Number": "(07) 4746 4000",
         "Fax Number": "(07) 4746 7508",
         "lat": "-20.6567919",
-        "lon": "141.751373"
+        "lon": "141.751373",
+        "Max Bed Capacity": 16
     },
     {
-        "_id": 73,
         "Hospital and Health Service": "North West",
         "Facility Idenitifier": "00246",
         "Facility Name": "Mount Isa Hospital",
@@ -746,10 +745,10 @@ export const data =
         "Phone Number": "(07) 4744 4444",
         "Fax Number": "(07) 4745 4575",
         "lat": "-20.73037905",
-        "lon": "139.49388575475396"
+        "lon": "139.49388575475396",
+        "Max Bed Capacity": 308
     },
     {
-        "_id": 74,
         "Hospital and Health Service": "North West",
         "Facility Idenitifier": "00247",
         "Facility Name": "Normanton Hospital",
@@ -757,10 +756,10 @@ export const data =
         "Phone Number": "(07) 4745 2100",
         "Fax Number": "(07) 4745 1244",
         "lat": "-17.6694505",
-        "lon": "141.0786372"
+        "lon": "141.0786372",
+        "Max Bed Capacity": 42
     },
     {
-        "_id": 75,
         "Hospital and Health Service": "North West",
         "Facility Idenitifier": "00249",
         "Facility Name": "Mornington Island Hospital",
@@ -768,10 +767,10 @@ export const data =
         "Phone Number": "(07) 4745 7209",
         "Fax Number": "(07) 4745 7288",
         "lat": "-16.6646467",
-        "lon": "139.1783304"
+        "lon": "139.1783304",
+        "Max Bed Capacity": 54
     },
     {
-        "_id": 76,
         "Hospital and Health Service": "North West",
         "Facility Idenitifier": "00252",
         "Facility Name": "Doomadgee Hospital",
@@ -779,10 +778,10 @@ export const data =
         "Phone Number": "(07) 4745 8800",
         "Fax Number": "(07) 4745 8144",
         "lat": "-17.9421225",
-        "lon": "138.8259628"
+        "lon": "138.8259628",
+        "Max Bed Capacity": 30
     },
     {
-        "_id": 77,
         "Hospital and Health Service": "South West",
         "Facility Idenitifier": "00111",
         "Facility Name": "Augathella Hospital",
@@ -790,10 +789,10 @@ export const data =
         "Phone Number": "(07) 4656 7100",
         "Fax Number": "(07) 4656 7102",
         "lat": "-25.7971251",
-        "lon": "146.5828669"
+        "lon": "146.5828669",
+        "Max Bed Capacity": 16
     },
     {
-        "_id": 78,
         "Hospital and Health Service": "South West",
         "Facility Idenitifier": "00112",
         "Facility Name": "Charleville Hospital",
@@ -801,10 +800,10 @@ export const data =
         "Phone Number": "(07) 4650 5000",
         "Fax Number": "(07) 4650 5272",
         "lat": "-26.4111762",
-        "lon": "146.23873179999998"
+        "lon": "146.23873179999998",
+        "Max Bed Capacity": 52
     },
     {
-        "_id": 79,
         "Hospital and Health Service": "South West",
         "Facility Idenitifier": "00113",
         "Facility Name": "Cunnamulla Hospital",
@@ -812,10 +811,10 @@ export const data =
         "Phone Number": "(07) 4655 8100",
         "Fax Number": "(07) 4655 8101",
         "lat": "-28.0695016",
-        "lon": "145.6885954"
+        "lon": "145.6885954",
+        "Max Bed Capacity": 28
     },
     {
-        "_id": 81,
         "Hospital and Health Service": "South West",
         "Facility Idenitifier": "00115",
         "Facility Name": "Injune Hospital",
@@ -823,10 +822,10 @@ export const data =
         "Phone Number": "(07) 4626 1188",
         "Fax Number": "(07) 4626 1414",
         "lat": "-25.8462822",
-        "lon": "148.562517"
+        "lon": "148.562517",
+        "Max Bed Capacity": 19
     },
     {
-        "_id": 82,
         "Hospital and Health Service": "South West",
         "Facility Idenitifier": "00116",
         "Facility Name": "Mitchell Hospital",
@@ -834,10 +833,10 @@ export const data =
         "Phone Number": "(07) 4623 1277",
         "Fax Number": "(07) 4623 1866",
         "lat": "-26.4900455",
-        "lon": "147.97218652475482"
+        "lon": "147.97218652475482",
+        "Max Bed Capacity": 39
     },
     {
-        "_id": 83,
         "Hospital and Health Service": "South West",
         "Facility Idenitifier": "00117",
         "Facility Name": "Mungindi Hospital",
@@ -845,10 +844,10 @@ export const data =
         "Phone Number": "(02) 6705 6100",
         "Fax Number": "(02) 6705 6190",
         "lat": "-28.9779769",
-        "lon": "148.9946675"
+        "lon": "148.9946675",
+        "Max Bed Capacity": 19
     },
     {
-        "_id": 84,
         "Hospital and Health Service": "South West",
         "Facility Idenitifier": "00118",
         "Facility Name": "Quilpie Hospital",
@@ -856,10 +855,10 @@ export const data =
         "Phone Number": "(07) 4656 0100",
         "Fax Number": "(07) 4656 0102",
         "lat": "-26.6153347",
-        "lon": "144.2737976"
+        "lon": "144.2737976",
+        "Max Bed Capacity": 8
     },
     {
-        "_id": 85,
         "Hospital and Health Service": "South West",
         "Facility Idenitifier": "00119",
         "Facility Name": "Roma Hospital",
@@ -867,10 +866,10 @@ export const data =
         "Phone Number": "(07) 4624 2700",
         "Fax Number": "(07) 4624 2711",
         "lat": "-26.568689499999998",
-        "lon": "148.77532612613447"
+        "lon": "148.77532612613447",
+        "Max Bed Capacity": 54
     },
     {
-        "_id": 86,
         "Hospital and Health Service": "South West",
         "Facility Idenitifier": "00120",
         "Facility Name": "St George Hospital",
@@ -878,10 +877,10 @@ export const data =
         "Phone Number": "(07) 4620 2222",
         "Fax Number": "(07) 4620 2200",
         "lat": "-28.0328572",
-        "lon": "148.5877687"
+        "lon": "148.5877687",
+        "Max Bed Capacity": 116
     },
     {
-        "_id": 87,
         "Hospital and Health Service": "South West",
         "Facility Idenitifier": "00121",
         "Facility Name": "Surat Hospital",
@@ -889,10 +888,10 @@ export const data =
         "Phone Number": "(07) 4626 5166",
         "Fax Number": "(07) 4626 5177",
         "lat": "-27.1555957",
-        "lon": "149.062564"
+        "lon": "149.062564",
+        "Max Bed Capacity": 7
     },
     {
-        "_id": 88,
         "Hospital and Health Service": "Sunshine Coast",
         "Facility Idenitifier": "00032",
         "Facility Name": "Sunshine Coast University Hospital",
@@ -900,10 +899,10 @@ export const data =
         "Phone Number": "(07) 5202 0000",
         "Fax Number": "",
         "lat": "-26.746826",
-        "lon": "153.1133191378683"
+        "lon": "153.1133191378683",
+        "Max Bed Capacity": 1858
     },
     {
-        "_id": 89,
         "Hospital and Health Service": "Sunshine Coast",
         "Facility Idenitifier": "00043",
         "Facility Name": "Caloundra Hospital",
@@ -911,10 +910,10 @@ export const data =
         "Phone Number": "(07) 5436 8500",
         "Fax Number": "(07) 5491 7540",
         "lat": "-26.803369",
-        "lon": "153.1201714"
+        "lon": "153.1201714",
+        "Max Bed Capacity": 144
     },
     {
-        "_id": 90,
         "Hospital and Health Service": "Sunshine Coast",
         "Facility Idenitifier": "00048",
         "Facility Name": "Maleny Hospital",
@@ -922,10 +921,10 @@ export const data =
         "Phone Number": "(07) 5420 5000",
         "Fax Number": "(07) 5420 5001",
         "lat": "-26.7545449",
-        "lon": "152.8459455"
+        "lon": "152.8459455",
+        "Max Bed Capacity": 105
     },
     {
-        "_id": 91,
         "Hospital and Health Service": "Sunshine Coast",
         "Facility Idenitifier": "00049",
         "Facility Name": "Nambour Hospital",
@@ -933,10 +932,10 @@ export const data =
         "Phone Number": "(07) 5470 6600",
         "Fax Number": "(07) 5441 6650",
         "lat": "-26.6219214",
-        "lon": "152.9530931"
+        "lon": "152.9530931",
+        "Max Bed Capacity": 314
     },
     {
-        "_id": 92,
         "Hospital and Health Service": "Sunshine Coast",
         "Facility Idenitifier": "00068",
         "Facility Name": "Gympie Hospital",
@@ -944,10 +943,10 @@ export const data =
         "Phone Number": "(07) 5489 8444",
         "Fax Number": "(07) 5489 8445",
         "lat": "-26.184975",
-        "lon": "152.6593639"
+        "lon": "152.6593639",
+        "Max Bed Capacity": 308
     },
     {
-        "_id": 93,
         "Hospital and Health Service": "Torres and Cape",
         "Facility Idenitifier": "00213",
         "Facility Name": "Bamaga Hospital",
@@ -955,10 +954,10 @@ export const data =
         "Phone Number": "(07) 4069 3166",
         "Fax Number": "(07) 4069 3314",
         "lat": "-10.8959604",
-        "lon": "142.3845252"
+        "lon": "142.3845252",
+        "Max Bed Capacity": 23
     },
     {
-        "_id": 94,
         "Hospital and Health Service": "Torres and Cape",
         "Facility Idenitifier": "00216",
         "Facility Name": "Cooktown Hospital",
@@ -966,10 +965,10 @@ export const data =
         "Phone Number": "(07) 4043 0100",
         "Fax Number": "(07) 4043 0108",
         "lat": "-15.4724079",
-        "lon": "145.250595"
+        "lon": "145.250595",
+        "Max Bed Capacity": 98
     },
     {
-        "_id": 95,
         "Hospital and Health Service": "Torres and Cape",
         "Facility Idenitifier": "00226",
         "Facility Name": "Thursday Island Hospital",
@@ -977,10 +976,10 @@ export const data =
         "Phone Number": "(07) 4069 0200",
         "Fax Number": "(07) 4069 0665",
         "lat": "-10.587917449999999",
-        "lon": "142.21117937799912"
+        "lon": "142.21117937799912",
+        "Max Bed Capacity": 184
     },
     {
-        "_id": 97,
         "Hospital and Health Service": "Townsville",
         "Facility Idenitifier": "00191",
         "Facility Name": "Ayr Hospital",
@@ -988,10 +987,10 @@ export const data =
         "Phone Number": "(07) 4783 0855",
         "Fax Number": "(07) 4783 0896",
         "lat": "-19.5658078",
-        "lon": "147.40959"
+        "lon": "147.40959",
+        "Max Bed Capacity": 51
     },
     {
-        "_id": 98,
         "Hospital and Health Service": "Townsville",
         "Facility Idenitifier": "00193",
         "Facility Name": "Charters Towers Hospital",
@@ -999,10 +998,10 @@ export const data =
         "Phone Number": "(07) 4787 0333",
         "Fax Number": "(07) 4787 3255",
         "lat": "-20.0759957",
-        "lon": "146.2576644"
+        "lon": "146.2576644",
+        "Max Bed Capacity": 113
     },
     {
-        "_id": 99,
         "Hospital and Health Service": "Townsville",
         "Facility Idenitifier": "00195",
         "Facility Name": "Home Hill Hospital",
@@ -1010,10 +1009,10 @@ export const data =
         "Phone Number": "(07) 4790 5700",
         "Fax Number": "(07) 4790 5799",
         "lat": "-19.6626256",
-        "lon": "147.4165231"
+        "lon": "147.4165231",
+        "Max Bed Capacity": 21
     },
     {
-        "_id": 100,
         "Hospital and Health Service": "Townsville",
         "Facility Idenitifier": "00196",
         "Facility Name": "Ingham Hospital",
@@ -1021,10 +1020,10 @@ export const data =
         "Phone Number": "(07) 4720 3000",
         "Fax Number": "(07) 4720 3001",
         "lat": "-18.65229",
-        "lon": "146.1566898"
+        "lon": "146.1566898",
+        "Max Bed Capacity": 102
     },
     {
-        "_id": 101,
         "Hospital and Health Service": "Townsville",
         "Facility Idenitifier": "00197",
         "Facility Name": "Joyce Palmer Health Service",
@@ -1032,10 +1031,10 @@ export const data =
         "Phone Number": "(07) 4752 5100",
         "Fax Number": "(07) 4752 5151",
         "lat": "-18.7318782",
-        "lon": "146.578103"
+        "lon": "146.578103",
+        "Max Bed Capacity": 50
     },
     {
-        "_id": 102,
         "Hospital and Health Service": "Townsville",
         "Facility Idenitifier": "00200",
         "Facility Name": "Townsville University Hospital",
@@ -1043,10 +1042,10 @@ export const data =
         "Phone Number": "(07) 4433 1111",
         "Fax Number": "(07) 4433 1197",
         "lat": "-19.3134897",
-        "lon": "146.7625989"
+        "lon": "146.7625989",
+        "Max Bed Capacity": 397
     },
     {
-        "_id": 103,
         "Hospital and Health Service": "Townsville",
         "Facility Idenitifier": "00244",
         "Facility Name": "Hughenden Hospital",
@@ -1054,10 +1053,10 @@ export const data =
         "Phone Number": "(07) 4741 2800",
         "Fax Number": "(07) 4741 1617",
         "lat": "-20.8429417",
-        "lon": "144.1946063"
+        "lon": "144.1946063",
+        "Max Bed Capacity": 30
     },
     {
-        "_id": 105,
         "Hospital and Health Service": "West Moreton",
         "Facility Idenitifier": "00015",
         "Facility Name": "Ipswich Hospital",
@@ -1065,10 +1064,10 @@ export const data =
         "Phone Number": "(07) 3810 1111",
         "Fax Number": "",
         "lat": "-27.6188969",
-        "lon": "152.7555226"
+        "lon": "152.7555226",
+        "Max Bed Capacity": 1721
     },
     {
-        "_id": 106,
         "Hospital and Health Service": "West Moreton",
         "Facility Idenitifier": "00042",
         "Facility Name": "Boonah Hospital",
@@ -1076,10 +1075,10 @@ export const data =
         "Phone Number": "(07) 5463 3300",
         "Fax Number": "",
         "lat": "-27.999112750000002",
-        "lon": "152.67884047740253"
+        "lon": "152.67884047740253",
+        "Max Bed Capacity": 76
     },
     {
-        "_id": 107,
         "Hospital and Health Service": "West Moreton",
         "Facility Idenitifier": "00044",
         "Facility Name": "Esk Hospital",
@@ -1087,10 +1086,10 @@ export const data =
         "Phone Number": "(07) 5424 4600",
         "Fax Number": "",
         "lat": "-27.2386642",
-        "lon": "152.4117633"
+        "lon": "152.4117633",
+        "Max Bed Capacity": 79
     },
     {
-        "_id": 108,
         "Hospital and Health Service": "West Moreton",
         "Facility Idenitifier": "00045",
         "Facility Name": "Gatton Hospital",
@@ -1098,10 +1097,10 @@ export const data =
         "Phone Number": "(07) 5468 4188",
         "Fax Number": "",
         "lat": "-27.5661191",
-        "lon": "152.2769897"
+        "lon": "152.2769897",
+        "Max Bed Capacity": 52
     },
     {
-        "_id": 109,
         "Hospital and Health Service": "West Moreton",
         "Facility Idenitifier": "00047",
         "Facility Name": "Laidley Hospital",
@@ -1109,10 +1108,10 @@ export const data =
         "Phone Number": "(07) 5466 8100",
         "Fax Number": "",
         "lat": "-27.6321304",
-        "lon": "152.3982971"
+        "lon": "152.3982971",
+        "Max Bed Capacity": 21
     },
     {
-        "_id": 110,
         "Hospital and Health Service": "Wide Bay",
         "Facility Idenitifier": "00061",
         "Facility Name": "Biggenden Hospital",
@@ -1120,10 +1119,10 @@ export const data =
         "Phone Number": "(07) 4127 6400",
         "Fax Number": "(07) 4127 6401",
         "lat": "-25.5001735",
-        "lon": "152.0509334"
+        "lon": "152.0509334",
+        "Max Bed Capacity": 14
     },
     {
-        "_id": 111,
         "Hospital and Health Service": "Wide Bay",
         "Facility Idenitifier": "00062",
         "Facility Name": "Bundaberg Hospital",
@@ -1131,10 +1130,10 @@ export const data =
         "Phone Number": "(07) 4150 2222",
         "Fax Number": "(07) 4150 2159",
         "lat": "-24.863826",
-        "lon": "152.357151"
+        "lon": "152.357151",
+        "Max Bed Capacity": 1310
     },
     {
-        "_id": 112,
         "Hospital and Health Service": "Wide Bay",
         "Facility Idenitifier": "00064",
         "Facility Name": "Childers Hospital",
@@ -1142,10 +1141,10 @@ export const data =
         "Phone Number": "(07) 4192 1133",
         "Fax Number": "(07) 4192 1100",
         "lat": "-25.239469399999997",
-        "lon": "152.27318075146047"
+        "lon": "152.27318075146047",
+        "Max Bed Capacity": 37
     },
     {
-        "_id": 113,
         "Hospital and Health Service": "Wide Bay",
         "Facility Idenitifier": "00065",
         "Facility Name": "Eidsvold Hospital",
@@ -1153,10 +1152,10 @@ export const data =
         "Phone Number": "(07) 4165 7100",
         "Fax Number": "(07) 4165 7101",
         "lat": "-25.2955128",
-        "lon": "150.3026083"
+        "lon": "150.3026083",
+        "Max Bed Capacity": 7
     },
     {
-        "_id": 114,
         "Hospital and Health Service": "Wide Bay",
         "Facility Idenitifier": "00066",
         "Facility Name": "Gayndah Hospital",
@@ -1164,10 +1163,10 @@ export const data =
         "Phone Number": "(07) 4161 3500",
         "Fax Number": "(07) 4161 3599",
         "lat": "-25.6251804",
-        "lon": "151.6077256"
+        "lon": "151.6077256",
+        "Max Bed Capacity": 13
     },
     {
-        "_id": 115,
         "Hospital and Health Service": "Wide Bay",
         "Facility Idenitifier": "00067",
         "Facility Name": "Gin Gin Hospital",
@@ -1175,10 +1174,10 @@ export const data =
         "Phone Number": "(07) 4157 2222",
         "Fax Number": "(07) 4157 2689",
         "lat": "-24.9869751",
-        "lon": "151.9530025"
+        "lon": "151.9530025",
+        "Max Bed Capacity": 15
     },
     {
-        "_id": 116,
         "Hospital and Health Service": "Wide Bay",
         "Facility Idenitifier": "00069",
         "Facility Name": "Hervey Bay Hospital",
@@ -1186,10 +1185,10 @@ export const data =
         "Phone Number": "(07) 4325 6666",
         "Fax Number": "(07) 4325 6794",
         "lat": "-25.3004180",
-        "lon": "152.8221968"
+        "lon": "152.8221968",
+        "Max Bed Capacity": 532
     },
     {
-        "_id": 117,
         "Hospital and Health Service": "Wide Bay",
         "Facility Idenitifier": "00071",
         "Facility Name": "Maryborough Hospital",
@@ -1197,10 +1196,10 @@ export const data =
         "Phone Number": "(07) 4122 8222",
         "Fax Number": "(07) 4123 4154",
         "lat": "-25.5319764",
-        "lon": "152.7015225"
+        "lon": "152.7015225",
+        "Max Bed Capacity": 143
     },
     {
-        "_id": 118,
         "Hospital and Health Service": "Wide Bay",
         "Facility Idenitifier": "00072",
         "Facility Name": "Monto Hospital",
@@ -1208,10 +1207,10 @@ export const data =
         "Phone Number": "(07) 4166 9300",
         "Fax Number": "(07) 4166 9302",
         "lat": "-24.8662992",
-        "lon": "151.1198314"
+        "lon": "151.1198314",
+        "Max Bed Capacity": 35
     },
     {
-        "_id": 119,
         "Hospital and Health Service": "Wide Bay",
         "Facility Idenitifier": "00074",
         "Facility Name": "Mundubbera Hospital",
@@ -1219,10 +1218,10 @@ export const data =
         "Phone Number": "(07) 4165 5200",
         "Fax Number": "(07) 4165 5251",
         "lat": "-25.5873281",
-        "lon": "151.295851"
+        "lon": "151.295851",
+        "Max Bed Capacity": 11
     },
     {
-        "_id": 126,
         "Hospital and Health Service": "Cairns and Hinterland",
         "Facility Idenitifier": "00217",
         "Facility Name": "Croydon Hospital (PHC)",
@@ -1230,10 +1229,10 @@ export const data =
         "Phone Number": "(07) 4748 7000",
         "Fax Number": "(07) 4745 6162",
         "lat": "-18.2021295",
-        "lon": "142.2435711"
+        "lon": "142.2435711",
+        "Max Bed Capacity": 296
     },
     {
-        "_id": 127,
         "Hospital and Health Service": "Cairns and Hinterland",
         "Facility Idenitifier": "00908",
         "Facility Name": "Dimbulah Outpatients Clinic (PHC)",
@@ -1241,10 +1240,10 @@ export const data =
         "Phone Number": "(07) 4093 5333",
         "Fax Number": "(07) 4093 5127",
         "lat": "-17.14774",
-        "lon": "145.1077051"
+        "lon": "145.1077051",
+        "Max Bed Capacity": 379
     },
     {
-        "_id": 128,
         "Hospital and Health Service": "Cairns and Hinterland",
         "Facility Idenitifier": "00218",
         "Facility Name": "Forsayth Hospital (PHC)",
@@ -1252,10 +1251,10 @@ export const data =
         "Phone Number": "(07) 4062 5372",
         "Fax Number": "(07) 4062 5412",
         "lat": "-18.5864184",
-        "lon": "143.6037726"
+        "lon": "143.6037726",
+        "Max Bed Capacity": 214
     },
     {
-        "_id": 129,
         "Hospital and Health Service": "Cairns and Hinterland",
         "Facility Idenitifier": "00219",
         "Facility Name": "Georgetown Hospital (PHC)",
@@ -1263,10 +1262,10 @@ export const data =
         "Phone Number": "(07) 4062 1266",
         "Fax Number": "(07) 4062 1226",
         "lat": "-18.2917404",
-        "lon": "143.5476224"
+        "lon": "143.5476224",
+        "Max Bed Capacity": 243
     },
     {
-        "_id": 130,
         "Hospital and Health Service": "Cairns and Hinterland",
         "Facility Idenitifier": "00917",
         "Facility Name": "Malanda Outpatients Clinic (PHC)",
@@ -1274,10 +1273,10 @@ export const data =
         "Phone Number": "(07) 4096 5339",
         "Fax Number": "(07) 4096 6481",
         "lat": "-17.3534356",
-        "lon": "145.5936581"
+        "lon": "145.5936581",
+        "Max Bed Capacity": 304
     },
     {
-        "_id": 131,
         "Hospital and Health Service": "Cairns and Hinterland",
         "Facility Idenitifier": "00920",
         "Facility Name": "Millaa Millaa Outpatients Clinic (PHC)",
@@ -1285,10 +1284,10 @@ export const data =
         "Phone Number": "(07) 4097 2223",
         "Fax Number": "(07) 4097 2541",
         "lat": "-17.5120363",
-        "lon": "145.6120656"
+        "lon": "145.6120656",
+        "Max Bed Capacity": 447
     },
     {
-        "_id": 132,
         "Hospital and Health Service": "Cairns and Hinterland",
         "Facility Idenitifier": "00225",
         "Facility Name": "Mount Garnet Outpatients Clinic (PHC)",
@@ -1296,10 +1295,10 @@ export const data =
         "Phone Number": "(07) 4097 9101",
         "Fax Number": "(07) 4097 9309",
         "lat": "-17.6786353",
-        "lon": "145.1144353"
+        "lon": "145.1144353",
+        "Max Bed Capacity": 305
     },
     {
-        "_id": 133,
         "Hospital and Health Service": "Cairns and Hinterland",
         "Facility Idenitifier": "00924",
         "Facility Name": "Ravenshoe Outpatients Clinic (PHC)",
@@ -1307,10 +1306,10 @@ export const data =
         "Phone Number": "(07) 4097 6223",
         "Fax Number": "(07) 4097 7095",
         "lat": "-17.6075084",
-        "lon": "145.4823524"
+        "lon": "145.4823524",
+        "Max Bed Capacity": 312
     },
     {
-        "_id": 134,
         "Hospital and Health Service": "Cairns and Hinterland",
         "Facility Idenitifier": "00229",
         "Facility Name": "Yarrabah Emergency Service (PHC)",
@@ -1318,10 +1317,10 @@ export const data =
         "Phone Number": "(07) 4226 4100",
         "Fax Number": "(07) 4056 9360",
         "lat": "-16.9257122",
-        "lon": "145.9024411"
+        "lon": "145.9024411",
+        "Max Bed Capacity": 139
     },
     {
-        "_id": 135,
         "Hospital and Health Service": "Central Queensland",
         "Facility Idenitifier": "00905",
         "Facility Name": "Capella Outpatients Clinic (PHC)",
@@ -1329,10 +1328,10 @@ export const data =
         "Phone Number": "(07) 4984 9634",
         "Fax Number": "(07) 4984 9268",
         "lat": "-23.0800086",
-        "lon": "148.0235631"
+        "lon": "148.0235631",
+        "Max Bed Capacity": 398
     },
     {
-        "_id": 136,
         "Hospital and Health Service": "Central Queensland",
         "Facility Idenitifier": "00910",
         "Facility Name": "Duaringa Outpatients Clinic (PHC)",
@@ -1340,10 +1339,10 @@ export const data =
         "Phone Number": "(07) 4935 7991",
         "Fax Number": "",
         "lat": "-23.71738737118558",
-        "lon": "149.67172169688774"
+        "lon": "149.67172169688774",
+        "Max Bed Capacity": 138
     },
     {
-        "_id": 137,
         "Hospital and Health Service": "Central Queensland",
         "Facility Idenitifier": "00940",
         "Facility Name": "Gemfields Outpatients Clinic (PHC)",
@@ -1351,10 +1350,10 @@ export const data =
         "Phone Number": "(07) 4985 4547",
         "Fax Number": "(07) 4985 4693",
         "lat": "-23.443718",
-        "lon": "147.7279739"
+        "lon": "147.7279739",
+        "Max Bed Capacity": 170
     },
     {
-        "_id": 138,
         "Hospital and Health Service": "Central West",
         "Facility Idenitifier": "00151",
         "Facility Name": "Aramac Primary Healthcare Centre (PHC)",
@@ -1362,10 +1361,10 @@ export const data =
         "Phone Number": "(07) 4652 9000",
         "Fax Number": "(07) 4652 9099",
         "lat": "-22.9659109",
-        "lon": "145.243531"
+        "lon": "145.243531",
+        "Max Bed Capacity": 326
     },
     {
-        "_id": 139,
         "Hospital and Health Service": "Central West",
         "Facility Idenitifier": "00938",
         "Facility Name": "Bedourie Primary Health Centre (PHC)",
@@ -1373,10 +1372,10 @@ export const data =
         "Phone Number": "(07) 4746 1226",
         "Fax Number": "(07) 4746 1020",
         "lat": "-24.3569458",
-        "lon": "139.4698473"
+        "lon": "139.4698473",
+        "Max Bed Capacity": 372
     },
     {
-        "_id": 140,
         "Hospital and Health Service": "Central West",
         "Facility Idenitifier": "00913",
         "Facility Name": "Birdsville Primary Health Centre (PHC)",
@@ -1384,10 +1383,10 @@ export const data =
         "Phone Number": "(07) 4656 3245",
         "Fax Number": "(07) 4656 4999",
         "lat": "-25.8970915",
-        "lon": "139.3555017"
+        "lon": "139.3555017",
+        "Max Bed Capacity": 118
     },
     {
-        "_id": 141,
         "Hospital and Health Service": "Central West",
         "Facility Idenitifier": "00154",
         "Facility Name": "Boulia Primary Health Centre (PHC)",
@@ -1395,10 +1394,10 @@ export const data =
         "Phone Number": "(07) 4746 2333",
         "Fax Number": "(07) 4746 3306",
         "lat": "-22.9112885",
-        "lon": "139.9095583"
+        "lon": "139.9095583",
+        "Max Bed Capacity": 376
     },
     {
-        "_id": 142,
         "Hospital and Health Service": "Central West",
         "Facility Idenitifier": "00160",
         "Facility Name": "Isisford Primary Health Centre (PHC)",
@@ -1406,10 +1405,10 @@ export const data =
         "Phone Number": "(07) 4658 8500",
         "Fax Number": "(07) 4658 8599",
         "lat": "-24.2609763",
-        "lon": "144.4402082"
+        "lon": "144.4402082",
+        "Max Bed Capacity": 494
     },
     {
-        "_id": 143,
         "Hospital and Health Service": "Central West",
         "Facility Idenitifier": "00155",
         "Facility Name": "Jundah Primary Health Centre (PHC)",
@@ -1417,10 +1416,10 @@ export const data =
         "Phone Number": "(07) 4658 6188",
         "Fax Number": "(07) 4658 6160",
         "lat": "-24.8208759",
-        "lon": "143.069032"
+        "lon": "143.069032",
+        "Max Bed Capacity": 265
     },
     {
-        "_id": 144,
         "Hospital and Health Service": "Central West",
         "Facility Idenitifier": "00157",
         "Facility Name": "Muttaburra Primary Health Centre (PHC)",
@@ -1428,10 +1427,10 @@ export const data =
         "Phone Number": "(07) 4658 7500",
         "Fax Number": "(07) 4658 7599",
         "lat": "-22.5917263",
-        "lon": "144.5471675"
+        "lon": "144.5471675",
+        "Max Bed Capacity": 205
     },
     {
-        "_id": 145,
         "Hospital and Health Service": "Central West",
         "Facility Idenitifier": "00158",
         "Facility Name": "Tambo Primary Health Care Centre (PHC)",
@@ -1439,10 +1438,10 @@ export const data =
         "Phone Number": "(07) 4621 7100",
         "Fax Number": "(07) 4621 7199",
         "lat": "-24.8837709",
-        "lon": "146.2513328"
+        "lon": "146.2513328",
+        "Max Bed Capacity": 297
     },
     {
-        "_id": 146,
         "Hospital and Health Service": "Central West",
         "Facility Idenitifier": "00162",
         "Facility Name": "Windorah Clinic (PHC)",
@@ -1450,10 +1449,10 @@ export const data =
         "Phone Number": "(07) 4656 6100",
         "Fax Number": "(07) 4656 6199",
         "lat": "-25.42163",
-        "lon": "142.6565559"
+        "lon": "142.6565559",
+        "Max Bed Capacity": 302
     },
     {
-        "_id": 147,
         "Hospital and Health Service": "Central West",
         "Facility Idenitifier": "00161",
         "Facility Name": "Yaraka Clinic (PHC)",
@@ -1461,10 +1460,10 @@ export const data =
         "Phone Number": "(07) 4657 5564",
         "Fax Number": "",
         "lat": "-24.8832764",
-        "lon": "144.07732272092545"
+        "lon": "144.07732272092545",
+        "Max Bed Capacity": 269
     },
     {
-        "_id": 149,
         "Hospital and Health Service": "Darling Downs",
         "Facility Idenitifier": "00919",
         "Facility Name": "Meandarra Outpatients Clinic (PHC)",
@@ -1472,10 +1471,10 @@ export const data =
         "Phone Number": "(07) 4665 6244",
         "Fax Number": "",
         "lat": "-27.326607",
-        "lon": "149.8807795"
+        "lon": "149.8807795",
+        "Max Bed Capacity": 464
     },
     {
-        "_id": 150,
         "Hospital and Health Service": "Darling Downs",
         "Facility Idenitifier": "00935",
         "Facility Name": "Moonie Outpatients Clinic (PHC)",
@@ -1483,10 +1482,10 @@ export const data =
         "Phone Number": "(07) 4665 0231",
         "Fax Number": "",
         "lat": "-27.9232042",
-        "lon": "149.8892678"
+        "lon": "149.8892678",
+        "Max Bed Capacity": 482
     },
     {
-        "_id": 151,
         "Hospital and Health Service": "Darling Downs",
         "Facility Idenitifier": "00106",
         "Facility Name": "Wandoan Hospital (PHC)",
@@ -1494,10 +1493,10 @@ export const data =
         "Phone Number": "(07) 4627 4444",
         "Fax Number": "(07) 4627 4444",
         "lat": "-26.1194962",
-        "lon": "149.9572315"
+        "lon": "149.9572315",
+        "Max Bed Capacity": 497
     },
     {
-        "_id": 152,
         "Hospital and Health Service": "Metro South",
         "Facility Idenitifier": "00025",
         "Facility Name": "Marie Rose Centre (PHC)",
@@ -1505,10 +1504,10 @@ export const data =
         "Phone Number": "(07) 3409 9059",
         "Fax Number": "(07) 3409 9598",
         "lat": "-27.4971904",
-        "lon": "153.3999682"
+        "lon": "153.3999682",
+        "Max Bed Capacity": 490
     },
     {
-        "_id": 154,
         "Hospital and Health Service": "North West",
         "Facility Idenitifier": "00242",
         "Facility Name": "Camooweal Health Clinic (PHC)",
@@ -1516,10 +1515,10 @@ export const data =
         "Phone Number": "(07) 4748 2159",
         "Fax Number": "(07) 4748 2169",
         "lat": "-19.9225726",
-        "lon": "138.119959"
+        "lon": "138.119959",
+        "Max Bed Capacity": 221
     },
     {
-        "_id": 155,
         "Hospital and Health Service": "North West",
         "Facility Idenitifier": "00251",
         "Facility Name": "Dajarra Health Clinic (PHC)",
@@ -1527,10 +1526,10 @@ export const data =
         "Phone Number": "(07) 4748 4880",
         "Fax Number": "(07) 4748 4841",
         "lat": "-21.6948732",
-        "lon": "139.5115488"
+        "lon": "139.5115488",
+        "Max Bed Capacity": 372
     },
     {
-        "_id": 156,
         "Hospital and Health Service": "North West",
         "Facility Idenitifier": "00250",
         "Facility Name": "Karumba Health Clinic (PHC)",
@@ -1538,10 +1537,10 @@ export const data =
         "Phone Number": "(07) 4747 6400",
         "Fax Number": "(07) 4745 9295",
         "lat": "-17.4854041",
-        "lon": "140.8417905"
+        "lon": "140.8417905",
+        "Max Bed Capacity": 270
     },
     {
-        "_id": 157,
         "Hospital and Health Service": "South West",
         "Facility Idenitifier": "00901",
         "Facility Name": "Bollon Community Clinic (PHC)",
@@ -1549,10 +1548,10 @@ export const data =
         "Phone Number": "(07) 4625 6105",
         "Fax Number": "(07) 4625 6180",
         "lat": "-28.0307876",
-        "lon": "147.4716846"
+        "lon": "147.4716846",
+        "Max Bed Capacity": 388
     },
     {
-        "_id": 158,
         "Hospital and Health Service": "South West",
         "Facility Idenitifier": "00921",
         "Facility Name": "Morven Outpatients Clinic (PHC)",
@@ -1560,10 +1559,10 @@ export const data =
         "Phone Number": "(07) 4654 8288",
         "Fax Number": "(07) 4654 8239",
         "lat": "-26.4167855",
-        "lon": "147.0096257"
+        "lon": "147.0096257",
+        "Max Bed Capacity": 380
     },
     {
-        "_id": 159,
         "Hospital and Health Service": "South West",
         "Facility Idenitifier": "00122",
         "Facility Name": "Thargomindah Hospital (PHC)",
@@ -1571,10 +1570,10 @@ export const data =
         "Phone Number": "(07) 4655 3361",
         "Fax Number": "(07) 4655 3260",
         "lat": "-27.9949677",
-        "lon": "143.8271323"
+        "lon": "143.8271323",
+        "Max Bed Capacity": 366
     },
     {
-        "_id": 161,
         "Hospital and Health Service": "Torres and Cape",
         "Facility Idenitifier": "00230",
         "Facility Name": "Aurukun Primary Health Care Centre (PHC)",
@@ -1582,10 +1581,10 @@ export const data =
         "Phone Number": "(07) 4060 6700",
         "Fax Number": "(07) 4060 6163",
         "lat": "-13.3550297",
-        "lon": "141.7282833"
+        "lon": "141.7282833",
+        "Max Bed Capacity": 401
     },
     {
-        "_id": 162,
         "Hospital and Health Service": "Torres and Cape",
         "Facility Idenitifier": "00942",
         "Facility Name": "Badu Island Primary Health Care Centre (PHC)",
@@ -1593,10 +1592,10 @@ export const data =
         "Phone Number": "(07) 4069 4127",
         "Fax Number": "(07) 4069 4986",
         "lat": "-10.1643513",
-        "lon": "142.1663742"
+        "lon": "142.1663742",
+        "Max Bed Capacity": 491
     },
     {
-        "_id": 163,
         "Hospital and Health Service": "Torres and Cape",
         "Facility Idenitifier": "00967",
         "Facility Name": "Bamaga Primary Health Care Centre (PHC)",
@@ -1604,10 +1603,10 @@ export const data =
         "Phone Number": "(07) 4069 3200",
         "Fax Number": "(07) 4069 3332",
         "lat": "-10.8926444",
-        "lon": "142.3870225"
+        "lon": "142.3870225",
+        "Max Bed Capacity": 402
     },
     {
-        "_id": 165,
         "Hospital and Health Service": "Torres and Cape",
         "Facility Idenitifier": "00946",
         "Facility Name": "Coconut Island Primary Health Care Centre (PHC)",
@@ -1615,10 +1614,10 @@ export const data =
         "Phone Number": "(07) 4069 4288",
         "Fax Number": "(07) 4069 4367",
         "lat": "-10.0498423",
-        "lon": "143.067192"
+        "lon": "143.067192",
+        "Max Bed Capacity": 209
     },
     {
-        "_id": 166,
         "Hospital and Health Service": "Torres and Cape",
         "Facility Idenitifier": "00255",
         "Facility Name": "Coen Primary Health Care Centre (PHC)",
@@ -1626,10 +1625,10 @@ export const data =
         "Phone Number": "(07) 4083 5900",
         "Fax Number": "(07) 4060 1151",
         "lat": "-13.9453485",
-        "lon": "143.2009583"
+        "lon": "143.2009583",
+        "Max Bed Capacity": 223
     },
     {
-        "_id": 169,
         "Hospital and Health Service": "Torres and Cape",
         "Facility Idenitifier": "00231",
         "Facility Name": "Hope Vale Primary Health Care Centre (PHC)",
@@ -1637,10 +1636,10 @@ export const data =
         "Phone Number": "(07) 4083 8100",
         "Fax Number": "(07) 4083 8173",
         "lat": "-15.2928736",
-        "lon": "145.1029651"
+        "lon": "145.1029651",
+        "Max Bed Capacity": 283
     },
     {
-        "_id": 171,
         "Hospital and Health Service": "Torres and Cape",
         "Facility Idenitifier": "00957",
         "Facility Name": "Injinoo Primary Health Care Centre (PHC)",
@@ -1648,10 +1647,10 @@ export const data =
         "Phone Number": "(07) 4069 3465",
         "Fax Number": "(07) 4069 3221",
         "lat": "-10.9066833",
-        "lon": "142.3267009"
+        "lon": "142.3267009",
+        "Max Bed Capacity": 121
     },
     {
-        "_id": 172,
         "Hospital and Health Service": "Torres and Cape",
         "Facility Idenitifier": "00253",
         "Facility Name": "Kowanyama Primary Health Care Centre (PHC)",
@@ -1659,10 +1658,10 @@ export const data =
         "Phone Number": "(07) 4060 5133",
         "Fax Number": "(07) 4060 5140",
         "lat": "-15.4760102",
-        "lon": "141.7464395"
+        "lon": "141.7464395",
+        "Max Bed Capacity": 406
     },
     {
-        "_id": 174,
         "Hospital and Health Service": "Torres and Cape",
         "Facility Idenitifier": "00915",
         "Facility Name": "Laura Primary Health Care Centre (PHC)",
@@ -1670,10 +1669,10 @@ export const data =
         "Phone Number": "(07) 4060 3320",
         "Fax Number": "(07) 4060 3335",
         "lat": "-15.5590029",
-        "lon": "144.4461199"
+        "lon": "144.4461199",
+        "Max Bed Capacity": 131
     },
     {
-        "_id": 177,
         "Hospital and Health Service": "Torres and Cape",
         "Facility Idenitifier": "00928",
         "Facility Name": "Malakoola Primary Health Care Centre (PHC)",
@@ -1681,10 +1680,10 @@ export const data =
         "Phone Number": "(07) 4082 3500",
         "Fax Number": "(07) 4082 3555",
         "lat": "-12.683656",
-        "lon": "141.8878978"
+        "lon": "141.8878978",
+        "Max Bed Capacity": 194
     },
     {
-        "_id": 178,
         "Hospital and Health Service": "Torres and Cape",
         "Facility Idenitifier": "00965",
         "Facility Name": "Mapoon Primary Health Care Centre (PHC)",
@@ -1692,10 +1691,10 @@ export const data =
         "Phone Number": "(07) 4082 9400",
         "Fax Number": "(07) 4080 9456",
         "lat": "-12.0195998",
-        "lon": "141.904812"
+        "lon": "141.904812",
+        "Max Bed Capacity": 202
     },
     {
-        "_id": 179,
         "Hospital and Health Service": "Torres and Cape",
         "Facility Idenitifier": "00948",
         "Facility Name": "Murray Island Primary Health Centre (PHC)",
@@ -1703,10 +1702,10 @@ export const data =
         "Phone Number": "(07) 4069 4089",
         "Fax Number": "(07) 4069 4369",
         "lat": "-9.918574108168519",
-        "lon": "144.04954998985585"
+        "lon": "144.04954998985585",
+        "Max Bed Capacity": 420
     },
     {
-        "_id": 180,
         "Hospital and Health Service": "Torres and Cape",
         "Facility Idenitifier": "00958",
         "Facility Name": "New Mapoon Health Centre (PHC)",
@@ -1714,10 +1713,10 @@ export const data =
         "Phone Number": "(07) 4069 3454",
         "Fax Number": "(07) 4069 3308",
         "lat": "-10.8721503",
-        "lon": "142.3880749"
+        "lon": "142.3880749",
+        "Max Bed Capacity": 309
     },
     {
-        "_id": 181,
         "Hospital and Health Service": "Torres and Cape",
         "Facility Idenitifier": "00254",
         "Facility Name": "Pormpuraaw Primary Health Care Centre (PHC)",
@@ -1725,10 +1724,10 @@ export const data =
         "Phone Number": "(07) 4060 4233",
         "Fax Number": "(07) 4060 4239",
         "lat": "-14.8996386",
-        "lon": "141.6219893"
+        "lon": "141.6219893",
+        "Max Bed Capacity": 293
     },
     {
-        "_id": 182,
         "Hospital and Health Service": "Torres and Cape",
         "Facility Idenitifier": "00949",
         "Facility Name": "Saibai Island Primary Health Care Centre (PHC)",
@@ -1736,10 +1735,10 @@ export const data =
         "Phone Number": "(07) 4069 4252",
         "Fax Number": "(07) 4069 4366",
         "lat": "-9.396702999999999",
-        "lon": "142.68139870072463"
+        "lon": "142.68139870072463",
+        "Max Bed Capacity": 346
     },
     {
-        "_id": 183,
         "Hospital and Health Service": "Torres and Cape",
         "Facility Idenitifier": "00960",
         "Facility Name": "Seisia Primary Health Care Centre (PHC)",
@@ -1747,10 +1746,10 @@ export const data =
         "Phone Number": "(07) 4069 3271",
         "Fax Number": "(07) 4069 3347",
         "lat": "-10.8464492",
-        "lon": "142.3676416"
+        "lon": "142.3676416",
+        "Max Bed Capacity": 153
     },
     {
-        "_id": 186,
         "Hospital and Health Service": "Torres and Cape",
         "Facility Idenitifier": "00966",
         "Facility Name": "Thursday Island Primary Health Care Centre (PHC)",
@@ -1758,10 +1757,10 @@ export const data =
         "Phone Number": "(07) 4069 0400",
         "Fax Number": "(07) 4069 2045",
         "lat": "-10.5837164",
-        "lon": "142.218102"
+        "lon": "142.218102",
+        "Max Bed Capacity": 353
     },
     {
-        "_id": 187,
         "Hospital and Health Service": "Torres and Cape",
         "Facility Idenitifier": "00962",
         "Facility Name": "Umagico Primary Health Care Centre (PHC)",
@@ -1769,10 +1768,10 @@ export const data =
         "Phone Number": "(07) 4069 3306",
         "Fax Number": "(07) 4069 3427",
         "lat": "-10.8925805",
-        "lon": "142.3514112"
+        "lon": "142.3514112",
+        "Max Bed Capacity": 458
     },
     {
-        "_id": 189,
         "Hospital and Health Service": "Torres and Cape",
         "Facility Idenitifier": "00232",
         "Facility Name": "Wujal Wujal Primary Health Care Centre (PHC)",
@@ -1780,10 +1779,10 @@ export const data =
         "Phone Number": "(07) 4083 9000",
         "Fax Number": "(07) 4060 8118",
         "lat": "-15.9441068",
-        "lon": "145.3176464"
+        "lon": "145.3176464",
+        "Max Bed Capacity": 477
     },
     {
-        "_id": 191,
         "Hospital and Health Service": "Torres and Cape",
         "Facility Idenitifier": "00954",
         "Facility Name": "Yorke Island Primary Health Care Centre (PHC)",
@@ -1791,10 +1790,10 @@ export const data =
         "Phone Number": "(07) 4069 4296",
         "Fax Number": "(07) 4069 4372",
         "lat": "-9.7519646",
-        "lon": "143.4150693"
+        "lon": "143.4150693",
+        "Max Bed Capacity": 138
     },
     {
-        "_id": 192,
         "Hospital and Health Service": "Townsville",
         "Facility Idenitifier": "00916",
         "Facility Name": "Magnetic Island Health Service Centre (PHC)",
@@ -1802,10 +1801,10 @@ export const data =
         "Phone Number": "(07) 4778 5107",
         "Fax Number": "(07) 4758 1974",
         "lat": "-19.1627913",
-        "lon": "146.8468414"
+        "lon": "146.8468414",
+        "Max Bed Capacity": 321
     },
     {
-        "_id": 200,
         "Hospital and Health Service": "North West",
         "Facility Idenitifier": "00969",
         "Facility Name": "McKinlay Primary Health Clinic",
@@ -1813,10 +1812,10 @@ export const data =
         "Phone Number": "(07) 4725 8868",
         "Fax Number": "",
         "lat": "-21.2722611",
-        "lon": "141.2907072"
+        "lon": "141.2907072",
+        "Max Bed Capacity": 264
     },
     {
-        "_id": 201,
         "Hospital and Health Service": "Townsville",
         "Facility Idenitifier": "90034",
         "Facility Name": "Palm Island Primary Health Care Clinic",
@@ -1824,6 +1823,7 @@ export const data =
         "Phone Number": "(07) 4752 5900",
         "Fax Number": "",
         "lat": "-18.7344839",
-        "lon": "146.5788253"
+        "lon": "146.5788253",
+        "Max Bed Capacity": 470
     }
 ]
