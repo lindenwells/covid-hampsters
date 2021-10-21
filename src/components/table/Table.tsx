@@ -61,14 +61,15 @@ function createData(
 
 // TODO: replace this with hospitalData
 // i.e. set rows to the rows of hospitals in a certain area
-const rows = [
-  createData('Hospital 1', 100, 200, 200),
-  createData('Hospital 2', 200, 300, 300),
-  createData('Hospital 3', 300, 400, 400),
-  createData('Hospital 4', 400, 500, 500),
-  createData('Hospital 5', 500, 600, 600),
-  createData('Hospital 6', 600, 700, 700),
-  createData('Hospital 7', 700, 800, 800),
+var rows = [
+  createData('Hospital x', 0, 0, 0),
+  // createData('Hospital 1', 100, 200, 200),
+  // createData('Hospital 2', 200, 300, 300),
+  // createData('Hospital 3', 300, 400, 400),
+  // createData('Hospital 4', 400, 500, 500),
+  // createData('Hospital 5', 500, 600, 600),
+  // createData('Hospital 6', 600, 700, 700),
+  // createData('Hospital 7', 700, 800, 800),
 ];
 
 function descendingComparator<T>(a: T, b: T, orderBy: keyof T) {
@@ -251,20 +252,32 @@ const BlueCheckbox = withStyles({
 })(Checkbox);
 
 interface detailProps {
-  clickHandle: (hospitalName: string) => void; 
+  clickHandle: (hospitalName: string) => void,
+  area: string
 }
 
 export default function EnhancedTable(props: detailProps) {
+  console.log("props: " + props.area);
+  // TODO: use this props.area
   const { clickHandle } = props;
+
+  // Setup rows data
+  rows = [
+
+    createData('Hospital 1', 100, 200, 200),
+    createData('Hospital 2', 200, 300, 300),
+    createData('Hospital 3', 300, 400, 400),
+    createData('Hospital 4', 400, 500, 500),
+    createData('Hospital 5', 500, 600, 600),
+    createData('Hospital 6', 600, 700, 700),
+    createData('Hospital 7', 700, 800, 800),
+  ];
 
   function test(region: string) {
     hospitalData.forEach(function (hospital, index) {
-      // if (areas[hospital["Hospital and Health Service"]])
-      //   area = areas[hospital["Hospital and Health Service"]]
-
       //TODO: somehow get hospitalName here in props or something
       if (hospital["Hospital and Health Service"] == region) {
-        console.log(hospital["Facility Name"]);
+        console.log("   Facility name: " + hospital["Facility Name"]);
       }
     });
   }
@@ -293,11 +306,9 @@ export default function EnhancedTable(props: detailProps) {
   };
 
   const handleClick = (event: React.MouseEvent<unknown>, name: string) => {
-    console.log("testing: " + name);
+    console.log("Hospital Name: " + name);
     test(name); // TODO: function called here
-
-
-    clickHandle(name)
+    clickHandle(name);
 
     const selectedIndex = selected.indexOf(name);
     let newSelected: string[] = [];
