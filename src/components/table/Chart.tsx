@@ -9,7 +9,7 @@
 
 import { AreaChart, Area, ReferenceLine, Brush, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import regression from 'regression';
-import {checkAuth} from '../../firebase';
+import { checkAuth } from '../../firebase';
 import { useHistory } from "react-router-dom";
 //import { AreaChart, Area, ReferenceLine, Brush, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
