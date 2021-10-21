@@ -371,9 +371,11 @@ function MapGeoJSONHook(props: MapInterface) {
     const emailExp1 = /^\w+([-+.]\w+)*@uqconnect.edu.au$/;
     const emailExp2 = /^\w+([-+.]\w+)*@student.uq.edu.au$/;
     const emailExp3 = /^\w+([-+.]\w+)*@uq.net.edu.au$/;
+    const emailExp4 = /^\w+([-+.]\w+)*@qld.gov.au$/;
+    const emailExp5 = /^\w+([-+.]\w+)*@www.qld.gov.au$/;
     let valid = null;
     if (email) {
-      valid = emailExp1.test(email) || emailExp2.test(email) || emailExp3.test(email);
+      valid = emailExp1.test(email) || emailExp2.test(email) || emailExp3.test(email) || emailExp4.test(email) || emailExp5.test(email);
     }
     if (valid) {
       polygons = false;
