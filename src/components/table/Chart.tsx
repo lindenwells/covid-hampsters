@@ -9,9 +9,10 @@
 
 import { AreaChart, Area, ReferenceLine, Brush, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import regression from 'regression';
-import { checkAuth } from '../../firebase';
+import { checkAuth, db } from '../../firebase';
 import { useHistory } from "react-router-dom";
-//import { AreaChart, Area, ReferenceLine, Brush, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import { mapQuery } from "../../assets/databaseMap"
+import { QuerySnapshot } from '@firebase/firestore';
 
 // "Area" Chart
 export function AreaBedChart() {
@@ -150,7 +151,6 @@ let twoDim =
     (date) => [date.x, date.patients]
   );
 
-  console.log(twoDim);
 
 const linearRegression = regression.polynomial(twoDim, {order : 3});
 
@@ -224,6 +224,28 @@ type HospitalDataPoint = {
   bedsAvailablePredicted ?: number
 }
 // example data
+
+// This function assumes start day stop day belong to the same month. Kinda scuffed.
+function get_dates(start : number, stop : number) : [string] {
+  let dates : [string] = [`2021-10-${start}`]
+  for (let day = start + 1; day <= stop; day++) {
+    dates.push(`2021-10-${day}`)
+  }
+  return dates
+}
+
+const dates = get_dates(17, 27)
+console.log(dates)
+const bed_data = dates.map((date) => {
+  db.collection("occupancy_data")
+  .doc(date)
+  .get()
+  .then((querySnapshot) => {querySnapshot.data()})
+  .catch((error) => {
+    console.log('Error getting documents for the chart: ', error)
+  })
+})
+console.log(bed_data)
 
 var hospitalBedData : HospitalDataPoint[] = [
   {
