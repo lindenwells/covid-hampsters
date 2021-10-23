@@ -19,6 +19,8 @@ import BarChartIcon from '@material-ui/icons/BarChart';
 import TrendingUpIcon from '@material-ui/icons/TrendingUp';
 import { AreaBedChart, HospitalBedChart } from "./Chart";
 import Table from "./Table";
+import {checkAuth} from '../../firebase';
+import { useHistory } from "react-router-dom";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -114,6 +116,11 @@ function Show(props: ShowInterface) {
 }
 
 export default function DataGrid() {
+  const history = useHistory();
+  if (!checkAuth()) {
+    window.alert("please login to view data");
+    history.push("/");
+  } 
   const classes = useStyles();
   const { area } = useParams(); // PATH: /detail/:area
   const [show, setShow] = React.useState<ThingToShow>(ThingToShow.data);

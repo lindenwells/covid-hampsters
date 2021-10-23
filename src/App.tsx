@@ -178,7 +178,9 @@ const App = () => {
                 onChange={handleChange}
                 aria-label="tabs"
               >
-                <img src={icon} className={classes.icon} alt="bedlam" />
+                <Link to="/" onClick={() => {setSelectedTab(0)}}>
+                  <img src={icon} className={classes.icon} alt="bedlam" />
+                </Link>
                 <Tab
                   value={0}
                   label="Home"

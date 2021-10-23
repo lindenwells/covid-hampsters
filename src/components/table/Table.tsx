@@ -29,6 +29,8 @@ import Tooltip from '@material-ui/core/Tooltip';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch';
 import { blue } from '@material-ui/core/colors';
+import {checkAuth} from '../../firebase';
+import { useHistory } from "react-router-dom";
 /*
 import DeleteIcon from '@material-ui/icons/Delete';
 import FilterListIcon from '@material-ui/icons/FilterList';
@@ -248,8 +250,12 @@ interface detailProps {
 }
 
 export default function EnhancedTable(props: detailProps) {
+  const history = useHistory();
+  if (!checkAuth()) {
+    window.alert("please login to view data");
+    history.push("/");
+  } 
   const { clickHandle } = props;
-
   const classes = useStyles();
   const [order, setOrder] = React.useState<Order>('desc');
   const [orderBy, setOrderBy] = React.useState<keyof Data>('totalBeds');

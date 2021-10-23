@@ -9,10 +9,17 @@
 
 import { AreaChart, Area, ReferenceLine, Brush, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import regression from 'regression';
+import { checkAuth } from '../../firebase';
+import { useHistory } from "react-router-dom";
 //import { AreaChart, Area, ReferenceLine, Brush, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
 // "Area" Chart
 export function AreaBedChart() {
+  const history = useHistory();
+  if (!checkAuth()) {
+    window.alert("please login to view data");
+    history.push("/");
+  } 
   return(
     <ResponsiveContainer width="100%" height="100%" minHeight="400px">
       <AreaChart
