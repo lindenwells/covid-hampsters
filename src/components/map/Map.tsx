@@ -135,7 +135,7 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 /* Describes the geoJSON data on the map */
-interface area {
+export interface area {
   points: Feature<Point>[];
   polygons: any[]; // Feature<Polygon> | null
   layers: Layer[]; // on map
@@ -306,7 +306,7 @@ function FilterSelect(props: FilterInterface) {
 /*
  * Calculate convex hull using turf.js and latitudes/longitudes.
  */
-function polygonsCalc(): area[] {
+export function polygonsCalc(): area[] {
   let areas = {} as Record<string, area>;
   let area = {} as area;
 

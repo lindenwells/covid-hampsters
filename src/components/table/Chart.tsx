@@ -13,6 +13,8 @@ import { checkAuth, db } from '../../firebase';
 import { useHistory } from "react-router-dom";
 import { mapQuery } from "../../assets/databaseMap"
 import { QuerySnapshot } from '@firebase/firestore';
+import firebase from "../../firebase"
+import { area, polygonsCalc } from "../map/Map"
 
 // "Area" Chart
 export function AreaBedChart() {
@@ -226,6 +228,7 @@ type HospitalDataPoint = {
 // example data
 
 // This function assumes start day stop day belong to the same month. Kinda scuffed.
+// Call get_dates(17, 27) ok? thanks
 function get_dates(start : number, stop : number) : [string] {
   let dates : [string] = [`2021-10-${start}`]
   for (let day = start + 1; day <= stop; day++) {
@@ -233,19 +236,6 @@ function get_dates(start : number, stop : number) : [string] {
   }
   return dates
 }
-
-const dates = get_dates(17, 27)
-console.log(dates)
-const bed_data = dates.map((date) => {
-  db.collection("occupancy_data")
-  .doc(date)
-  .get()
-  .then((querySnapshot) => {querySnapshot.data()})
-  .catch((error) => {
-    console.log('Error getting documents for the chart: ', error)
-  })
-})
-console.log(bed_data)
 
 var hospitalBedData : HospitalDataPoint[] = [
   {
