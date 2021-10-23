@@ -187,19 +187,11 @@ export function HospitalBedChart() {
         <YAxis />
         <Tooltip />
         <Legend />
-        <Line type="monotone" name="Beds [Severe]" dataKey="bedsAvailableSevere" stroke="#ff6200" activeDot={{ r: 6 }}
+        <Line type="monotone" name="Beds" dataKey="bedsAvailable" stroke="#ff9800" activeDot={{ r: 6 }}
           strokeWidth="2"
           dot={{ r: 4 }}
         />
-        <Line type="monotone" name="Beds [Severe] (Predicted)" dataKey="bedsAvailableSeverePredicted" stroke="#424ef5" activeDot={{ r: 6 }}
-          strokeWidth="2"
-          dot={{ r: 4 }}
-        />
-        <Line type="monotone" name="Beds [Mild]" dataKey="bedsAvailableMild" stroke="#ff9800" activeDot={{ r: 6 }}
-          strokeWidth="2"
-          dot={{ r: 4 }}
-        />
-        <Line type="monotone" name="Beds [Mild] (Predicted)" dataKey="bedsAvailableMildPredicted" stroke="#42a5f5" activeDot={{ r: 6 }}
+        <Line type="monotone" name="Beds (Predicted)" dataKey="bedsAvailablePredicted" stroke="#42a5f5" activeDot={{ r: 6 }}
           strokeWidth="2"
           dot={{ r: 4 }}
         />
@@ -209,10 +201,8 @@ export function HospitalBedChart() {
           <LineChart>
             <CartesianGrid fill="#1E1D2B" />
             <YAxis hide domain={['auto', 'auto']} />
-            <Line type="monotone" dataKey="bedsAvailableSevere" stroke="#ff9800" dot={false} />
-            <Line type="monotone" dataKey="bedsAvailableSeverePredicted" stroke="#42a5f5" dot={false} />
-            <Line type="monotone" dataKey="bedsAvailableMild" stroke="#ff9800" dot={false} />
-            <Line type="monotone" dataKey="bedsAvailableMildPredicted" stroke="#42a5f5" dot={false} />
+            <Line type="monotone" dataKey="bedsAvailable" stroke="#ff9800" dot={false} />
+            <Line type="monotone" dataKey="bedsAvailablePredicted" stroke="#42a5f5" dot={false} />
           </LineChart>
         </Brush>
       </LineChart>
@@ -223,10 +213,8 @@ export function HospitalBedChart() {
 type HospitalDataPoint = {
   x : number,
   name : string,
-  bedsAvailableMild ?: number
-  bedsAvailableMildPredicted ?: number
-  bedsAvailableSevere ?: number  
-  bedsAvailableSeverePredicted ?: number
+  bedsAvailable ?: number
+  bedsAvailablePredicted ?: number
 }
 // example data
 
@@ -234,76 +222,62 @@ var hospitalBedData : HospitalDataPoint[] = [
   {
     x: 1,
     name: '1/09/2021',
-    bedsAvailableMild: 4100,
-    bedsAvailableSevere: 1000,
+    bedsAvailable: 1000,
   },
   {
     x: 2,
     name: '2/09/2021',
-    bedsAvailableMild: 3200,
-    bedsAvailableSevere: 2000,
+    bedsAvailable: 2000,
   },
   {
     x: 3,
     name: '3/09/2021',
-    bedsAvailableMild: 1900,
-    bedsAvailableSevere: 2750,
+    bedsAvailable: 2750,
   },
   {
     x: 4,
     name: '4/09/2021',
-    bedsAvailableMild: 2800,
-    bedsAvailableSevere: 4000,
+    bedsAvailable: 4000,
   },
   {
     x: 5,
     name: '5/09/2021',
-    bedsAvailableMild: 1903,
-    bedsAvailableSevere: 3000,
+    bedsAvailable: 3000,
   },
   {
     x: 6,
     name: '6/09/2021',
-    bedsAvailableMild: 2306,
-    bedsAvailableSevere: 1550,
+    bedsAvailable: 1550,
   },
   {
     x: 7,
     name: '7/09/2021',
-    bedsAvailableMild: 3500,
-    bedsAvailableSevere: 1200,
+    bedsAvailable: 1200,
   },
   {
     x: 8,
     name: '8/09/2021',
-    bedsAvailableMild: 4000,
-    bedsAvailableSevere: 900,
+    bedsAvailable: 900,
   },
   {
     x: 9,
     name: '9/09/2021',
-    bedsAvailableMild: 5444,
-    bedsAvailableSevere: 1000,
+    bedsAvailable: 1000,
   },
   {
     x: 10,
     name: '10/09/2021',
-    bedsAvailableMild: 6000,
-    bedsAvailableSevere: 1150,
+    bedsAvailable: 1150,
   },
   {
     x: 11,
     name: '11/09/2021',
-    bedsAvailableMild: 7444,
-    bedsAvailableSevere: 1400,
+    bedsAvailable: 1400,
   },
   {
     x: 12,
     name: '12/09/2021',
-    bedsAvailableMild: 8000,
-    bedsAvailableMildPredicted: 8000,
-    bedsAvailableSevere: 1600,
-    bedsAvailableSeverePredicted: 1600,
+    bedsAvailable: 8000,
   },
 ];
 
@@ -311,19 +285,16 @@ hospitalBedData = hospitalBedData.concat(
   {
     x: 13,
     name:  '13/09/2021', 
-    bedsAvailableMildPredicted: 7500,
-    bedsAvailableSeverePredicted: 1800,
+    bedsAvailablePredicted: 7500,
   },
   {
     x: 14,
     name:  '14/09/2021', 
-    bedsAvailableMildPredicted: 6200,
-    bedsAvailableSeverePredicted: 1450,
+    bedsAvailablePredicted: 6200,
   },
   {
     x: 15,
     name:  '15/09/2021', 
-    bedsAvailableMildPredicted: 7000,
-    bedsAvailableSeverePredicted: 1550,
+    bedsAvailablePredicted: 7000,
   }
 );
