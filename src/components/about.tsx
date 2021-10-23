@@ -1,8 +1,6 @@
-import React from "react";
-import { Grid, Paper, Avatar, Button } from "@material-ui/core";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import { makeStyles, createStyles, Theme, ThemeProvider, createTheme } from "@material-ui/core/styles";
-import { auth, db } from "../firebase";
+import { Grid, Paper, Avatar } from "@material-ui/core";
+import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
+import { auth } from "../firebase";
 import avatar1 from "./avatar/12.png";
 import avatar2 from "./avatar/10.png";
 import avatar3 from "./avatar/36.png";
@@ -51,25 +49,6 @@ const useStyles = makeStyles((theme: Theme) =>
         }
     }),
 );
-
-{/*
-const userType = async () => {
-    const authed = await db.collection("authedUser").where("uid", "==", auth.currentUser?.uid).get();
-    if (authed) {
-        return (
-            <>
-                You are authed.
-            </>
-        )
-    } else {
-        return (
-            <>
-                Nothing here
-            </>
-        )
-    }
-}*/}
-
 
 export default function About() {
     //const authed = Promise.resolve(db.collection("authedUser").where("uid", "==", auth.currentUser?.uid).get());

@@ -1,9 +1,8 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import firebase, { registerWithEmailAndPassword, sendPasswordResetEmail, signInWithEmailAndPassword, signInWithGoogle } from "../firebase";
-import { Avatar, Button, Grid, TextField, InputAdornment, Typography, Input, Link } from "@material-ui/core";
+import { Avatar, Button, Grid, TextField, InputAdornment, Typography, Link } from "@material-ui/core";
 import { AccountCircleOutlined, LockOutlined, EmailOutlined } from "@material-ui/icons";
 import { makeStyles, createStyles, Theme, ThemeProvider, createTheme } from "@material-ui/core/styles";
-import { palette } from "@mui/system";
 // import Register from "./register";
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -171,9 +170,10 @@ const IsRegister = () => {
               variant="contained"
               type="submit"
               // replace onClick func with email/pass firebase stuff
-              onClick={(e) =>
-              (e.preventDefault,
-                signInWithEmailAndPassword(email, password))}
+              onClick={(e) => {
+                e.preventDefault();
+                signInWithEmailAndPassword(email, password);
+              }}
               className={classes.loginBtns}
 
             >

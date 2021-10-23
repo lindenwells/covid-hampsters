@@ -22,15 +22,15 @@ import React, { Fragment } from "react";
 import ReactDOM from "react-dom";
 import ReactDOMServer from "react-dom/server";
 import { useHistory } from "react-router-dom";
-import { makeStyles, createStyles, Theme, withStyles } from "@material-ui/core/styles";
+import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
 import Paper from "@material-ui/core/Paper";
 import Button from "@material-ui/core/Button";
-import { FormControl, InputLabel, MenuItem } from "@material-ui/core";
+import { FormControl, InputLabel } from "@material-ui/core";
 import Select from "@material-ui/core/Select";
-import { MapContainer, TileLayer, useMap, useMapEvent, Circle, Tooltip } from 'react-leaflet';
-import { LatLngExpression, geoJSON, GeoJSON, popup, Layer, Map as LeafletMap } from 'leaflet';
+import { MapContainer, TileLayer, useMap, useMapEvent } from 'react-leaflet';
+import { LatLngExpression, geoJSON, popup, Layer, Map as LeafletMap } from 'leaflet';
 import "leaflet/dist/leaflet.css";
 // import "./Map.css"
 import firebase from "../../firebase";
@@ -352,7 +352,7 @@ function polygonsCalc(): area[] {
 /*
  * Insert polygons created by polygonsCalc(), and handle clicks.
  */
-var polygons: boolean = false; // Have the polygons already been put onto the map?
+// let polygons: boolean = false; // Have the polygons already been put onto the map?
 function MapGeoJSONHook(props: MapInterface) {
   const classes = useStyles();
   let map = useMap();
@@ -378,7 +378,7 @@ function MapGeoJSONHook(props: MapInterface) {
       valid = emailExp1.test(email) || emailExp2.test(email) || emailExp3.test(email) || emailExp4.test(email) || emailExp5.test(email);
     }
     if (valid) {
-      polygons = false;
+      // polygons = false;
       // return () => history.push('/detail/' + area)
       return (history.push('/detail/' + area));
     } else {

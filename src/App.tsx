@@ -1,37 +1,26 @@
 import "./App.css";
 import firebase from "./firebase";
-import React, { SetStateAction, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
-  AppBar,
   Button,
   Tab,
   Tabs,
-  Toolbar,
-  IconButton,
-  Grid,
   Typography,
   Popover,
-  Box,
 } from "@material-ui/core";
 import Login from "./components/login";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import { RouteComponentProps } from "react-router-dom";
 import DataGrid from "./components/table/DataGrid";
 import Map from "./components/map/Map";
-import Home from "./components/home";
 import About from "./components/about";
-import MenuIcon from "@material-ui/icons/Menu";
 // import { Populator } from "./assets/database_populater_script";
 // import { db } from "./firebase";
 import {
   makeStyles,
   createStyles,
   Theme,
-  createTheme,
 } from "@material-ui/core/styles";
-import { StyledFirebaseAuth } from "react-firebaseui";
 import icon from "./COVID-19_Hampsters_2.png";
-import { dark } from "@material-ui/core/styles/createPalette";
 
 /*
  * Describes our general app structure.
