@@ -209,22 +209,22 @@ export function HospitalBedChart(props: chartHelper) {
 
   hospitalBedData.push(
       {
-        x: 1,
+        x: 0,
         name: '1/09/2021',
         bedsAvailable: 1000
       },
       {
-        x: 2,
+        x: 1,
         name: '2/09/2021',
         bedsAvailable: 1500
       },
       {
-        x: 3,
+        x: 2,
         name: '3/09/2021',
         bedsAvailable: 3000
       },
       {
-        x: 4,
+        x: 3,
         name: '4/09/2021',
         bedsAvailable: 7500
       }
@@ -234,39 +234,49 @@ export function HospitalBedChart(props: chartHelper) {
     hospitalBedData.map(
       (date) => [date.x, date.bedsAvailable]
     );
-
     const linearRegression = regression.polynomial(twoDim, {order : 3});
 
     const [,pred1] = linearRegression.predict(5);
     const [,pred2] = linearRegression.predict(6);
     const [,pred3] = linearRegression.predict(7);
 
-    var predictedData : HospitalDataPoint[] = [];// = new Array(hospitalBedData.length);
+    var predictedData : HospitalDataPoint[] = [];
 
+    // Push first value from previous to fill gap
+    predictedData.push(
+      hospitalBedData.slice(-1)[0]
+   );
+
+    // Push predictions
     predictedData.push(
       {
-        x: 5,
-        name:  '5/09/2021', 
+        x: 4,
+        name:  "5/09/2021", 
         bedsAvailable: pred1
       },
       {
-        x: 6,
+        x: 5,
         name:  '6/09/2021', 
         bedsAvailable: pred2
       },
       {
-        x: 7,
+        x: 6,
         name:  '7/09/2021', 
         bedsAvailable: pred3
       }
     );
 
+    var combined : HospitalDataPoint[] = [];
+    combined = combined.concat(hospitalBedData);
+    combined = combined.concat(predictedData);
     console.log(hospitalBedData);
     console.log(predictedData);
+    console.log(combined);
 
   return(
     <ResponsiveContainer width="100%" height="100%" minHeight="400px">
       <LineChart
+        data={hospitalBedData}
         margin={{
           top: 5,
           right: 45,
@@ -275,8 +285,11 @@ export function HospitalBedChart(props: chartHelper) {
         }}
       >
         <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="name" 
-        // domain={[hospitalBedData.slice(1)[0].x, predictedData.slice(-1)[0].x]}
+        <XAxis 
+          dataKey="x" 
+          type="number" 
+          domain={[hospitalBedData[0].x, predictedData.slice(-1)[0].x]}
+          // ticks={[10, 20, 30, 40, 50, 60, 70, 80, 90, 100]}
         />
         <YAxis />
         <Tooltip />
@@ -289,7 +302,8 @@ export function HospitalBedChart(props: chartHelper) {
           strokeWidth="2"
           dot={{ r: 4 }}
         />
-        {/* <ReferenceLine x='12/09/2021' stroke="#42a5f5" label={{ value: "Today", fill: "#ffffff" }} />
+        {/* TODO: fix referenceline below, Max Beds, get from firebase etc. */}
+        <ReferenceLine x='12/09/2021' stroke="#42a5f5" label={{ value: "Today", fill: "#ffffff" }} />
         <ReferenceLine y='7000' stroke="#ff1900" label={{ value: "Max Beds", fill: "#ffffff" }} />
         <Brush dataKey="name" height={50} stroke="#8884d8" >
           <LineChart>
@@ -298,7 +312,7 @@ export function HospitalBedChart(props: chartHelper) {
             <Line type="monotone" dataKey="bedsAvailable" stroke="#ff9800" dot={false} />
             <Line type="monotone" dataKey="bedsAvailablePredicted" stroke="#42a5f5" dot={false} />
           </LineChart>
-        </Brush> */}
+        </Brush>
       </LineChart>
     </ResponsiveContainer>
   );
