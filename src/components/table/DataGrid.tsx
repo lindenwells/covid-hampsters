@@ -82,7 +82,8 @@ enum ThingToShow {
 interface ShowInterface {
   thingToShow: ThingToShow;
   clickHandle: (hospitalName: string) => void,
-  area: string
+  area: string,
+  hosName: string
 }
 
 /* Decides what to show based on current state of DataGrid */
@@ -104,7 +105,7 @@ function Show(props: ShowInterface) {
     case ThingToShow.specific: {
       return (
         <Box className={classes.center} display="flex">
-          <HospitalBedChart />
+          <HospitalBedChart hospitalName={props.hosName}/>
         </Box>
       );
     }
@@ -201,7 +202,7 @@ export default function DataGrid() {
         </Grid>
         <Grid item className={classes.padding} xs={12}>
           <Box>
-            <Show thingToShow={show} clickHandle={clickHandle} area={area} />
+            <Show thingToShow={show} clickHandle={clickHandle} area={area} hosName={hospitalName} />
           </Box>
         </Grid>
       </Grid>

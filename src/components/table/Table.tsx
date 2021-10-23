@@ -36,41 +36,18 @@ import FilterListIcon from '@material-ui/icons/FilterList';
 */
 
 interface Data {
-  // bedsMild: number;
-  // bedsMildTotal: number;
-  // bedsSevere: number;
-  // bedsSevereTotal: number;
   beds: number;
-  // bedsTotal: number;
   hospitalName: string;
   totalBeds: number;
 }
-// TODO: clean up commented code here
+
 function createData(
   hospitalName: string,
   beds: number,
-  // bedsTotal: number,
-  // bedsSevere: number,
-  // bedsSevereTotal: number,
-  // bedsMild: number,
-  // bedsMildTotal: number,
   totalBeds: number,
 ): Data {
-  return { hospitalName, beds, totalBeds };//bedsSevere, bedsSevereTotal, bedsMild, bedsMildTotal, totalBeds };
+  return { hospitalName, beds, totalBeds };
 }
-
-// TODO: replace this with hospitalData <-- in progress, remove this section once complete
-// i.e. set rows to the rows of hospitals in a certain area
-// var rows = [
-  // createData('Hospital x', 0, 0, 0),
-  // createData('Hospital 1', 100, 200, 200),
-  // createData('Hospital 2', 200, 300, 300),
-  // createData('Hospital 3', 300, 400, 400),
-  // createData('Hospital 4', 400, 500, 500),
-  // createData('Hospital 5', 500, 600, 600),
-  // createData('Hospital 6', 600, 700, 700),
-  // createData('Hospital 7', 700, 800, 800),
-// ];
 
 function descendingComparator<T>(a: T, b: T, orderBy: keyof T) {
   if (b[orderBy] < a[orderBy]) {
@@ -113,7 +90,6 @@ interface HeadCell {
 const headCells: HeadCell[] = [
   { id: 'hospitalName', numeric: false, disablePadding: true, label: 'Hospital Name' },
   { id: 'beds', numeric: true, disablePadding: false, label: 'Available beds for patients' },
-  // { id: 'bedsMild', numeric: true, disablePadding: false, label: 'Available beds for mild patients' },
   { id: 'totalBeds', numeric: true, disablePadding: false, label: 'Total number of beds' },
 ];
 
@@ -257,24 +233,10 @@ interface detailProps {
 }
 
 export default function EnhancedTable(props: detailProps) {
-  console.log("Region: " + props.area);
-  console.log("Hospitals: ");
-  // TODO: use this props.area
   const { clickHandle } = props;
 
   // Setup rows data
   const rows = getHospitals(props.area);
-  console.log(rows);
-  // [
-
-  //   createData('Hospital 1', 100, 200, 200),
-  //   createData('Hospital 2', 200, 300, 300),
-  //   createData('Hospital 3', 300, 400, 400),
-  //   createData('Hospital 4', 400, 500, 500),
-  //   createData('Hospital 5', 500, 600, 600),
-  //   createData('Hospital 6', 600, 700, 700),
-  //   createData('Hospital 7', 700, 800, 800),
-  // ];
 
   function getHospitals(area: string): Data[] {
     var rows: Data[];
@@ -282,7 +244,6 @@ export default function EnhancedTable(props: detailProps) {
     hospitalData.forEach(function (hospital, index) {
       if (hospital["Hospital and Health Service"] == area) {
         var facilityName = hospital["Facility Name"];
-        console.log("   Facility name: " + facilityName);
         // TODO: get current beds (from firebase) and replace the 0 below with that
         rows.push(createData(facilityName, 0, hospital["Max Bed Capacity"]));
       }
@@ -399,7 +360,6 @@ export default function EnhancedTable(props: detailProps) {
                         {row.hospitalName}
                       </TableCell>
                       <TableCell className={classes.cell} align="right">{row.beds} / {row.totalBeds}</TableCell>
-                      {/* <TableCell className={classes.cell} align="right">{row.bedsMild} / {row.bedsMildTotal}</TableCell> */}
                       <TableCell className={classes.cell} align="right">{row.totalBeds}</TableCell>
                     </ColoredTableRow>
                   );
