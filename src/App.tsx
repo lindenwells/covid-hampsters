@@ -1,13 +1,7 @@
 import "./App.css";
 import firebase from "./firebase";
 import React, { useEffect, useState } from "react";
-import {
-  Button,
-  Tab,
-  Tabs,
-  Typography,
-  Popover,
-} from "@material-ui/core";
+import { Button, Tab, Tabs, Typography, Popover } from "@material-ui/core";
 import Login from "./components/login";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import DataGrid from "./components/table/DataGrid";
@@ -15,11 +9,7 @@ import Map from "./components/map/Map";
 import About from "./components/about";
 // import { Populator } from "./assets/database_populater_script";
 // import { db } from "./firebase";
-import {
-  makeStyles,
-  createStyles,
-  Theme,
-} from "@material-ui/core/styles";
+import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 import icon from "./COVID-19_Hampsters_2.png";
 
 /*
@@ -167,7 +157,12 @@ const App = () => {
                 onChange={handleChange}
                 aria-label="tabs"
               >
-                <Link to="/" onClick={() => {setSelectedTab(0)}}>
+                <Link
+                  to="/"
+                  onClick={() => {
+                    setSelectedTab(0);
+                  }}
+                >
                   <img src={icon} className={classes.icon} alt="bedlam" />
                 </Link>
                 <Tab
@@ -203,7 +198,7 @@ const App = () => {
               </Route>
             </Switch>
           </div>
-          <div className="footer">Team '); DROP_TABLE</div>
+          <div className="footer">Team '); DROP_TABLE Students</div>
         </Router>
       </div>
     );
