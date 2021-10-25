@@ -11,6 +11,7 @@ import { AreaChart, Area, ReferenceLine, Brush, LineChart, Line, XAxis, YAxis, C
 import regression from 'regression';
 import { graphQuery, mapQuery } from "../../assets/databaseMap";
 import firebase from "../../firebase";
+import moment from 'moment';
 //import { AreaChart, Area, ReferenceLine, Brush, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
 // "Area" Chart
@@ -192,43 +193,53 @@ function createData(
 }
 
 // "Hospital" Chart
-export function HospitalBedChart(props: chartHelper) {
+export function HospitalBedChart(props: chartHelper): JSX.Element {
   console.log("starting data usage");
   var hospitalBedData : HospitalDataPoint[] = [];
 
-  // graphQuery().then(function (query: void | firebase.firestore.DocumentData) {
-  //   if (query instanceof Object) {
-  //     query.forEach((doc: firebase.firestore.DocumentData, index: number) => {
-  //       console.log("hospital: " + props.hospitalName + ", Occupancy for " + doc.id + ": " + doc.get(props.hospitalName));
-  //       var newData: HospitalDataPoint = createData(index, props.hospitalName, doc.get(props.hospitalName));
-  //       hospitalBedData.push(newData);
-  //     });
-  //     hospitalBedData = hospitalBedData.slice(-10);
-  //   }
-  // });
+  graphQuery().then(function (query: void | firebase.firestore.DocumentData) {
+    console.log("query: " + query);
+    console.log(query);
+    if (query instanceof Object) {
+      console.log("starting query, getting hospitals");
+      query.forEach((doc: firebase.firestore.DocumentData, index: number) => {
+        console.log("hospital: " + props.hospitalName + ", Occupancy for " + doc.id + ": " + doc.get(props.hospitalName));
+        var newData: HospitalDataPoint = createData(index, props.hospitalName, doc.get(props.hospitalName));
+        hospitalBedData.push(newData);
+      });
+      hospitalBedData = hospitalBedData.slice(-10);
+    //} else {
+    //   console.log("error with query");
+    }
+    console.log("inside query data: " + hospitalBedData);
+    console.log(hospitalBedData);
+  });
+  console.log("real hos bed data: " + hospitalBedData);
+  console.log(hospitalBedData);
 
-  hospitalBedData.push(
-      {
-        x: 0,
-        name: '1/09/2021',
-        bedsAvailable: 1000
-      },
-      {
-        x: 1,
-        name: '2/09/2021',
-        bedsAvailable: 1500
-      },
-      {
-        x: 2,
-        name: '3/09/2021',
-        bedsAvailable: 3000
-      },
-      {
-        x: 3,
-        name: '4/09/2021',
-        bedsAvailable: 7500
-      }
-    );
+  // hospitalBedData = [];
+  // hospitalBedData.push(
+  //     {
+  //       x: 0,
+  //       name: '1/09/2021',
+  //       bedsAvailable: 1000
+  //     },
+  //     {
+  //       x: 1,
+  //       name: '2/09/2021',
+  //       bedsAvailable: 1500
+  //     },
+  //     {
+  //       x: 2,
+  //       name: '3/09/2021',
+  //       bedsAvailable: 3000
+  //     },
+  //     {
+  //       x: 3,
+  //       name: '4/09/2021',
+  //       bedsAvailable: 7500
+  //     }
+  //   );
     // Make regression model predictions
     let twoDim = 
     hospitalBedData.map(
@@ -236,9 +247,10 @@ export function HospitalBedChart(props: chartHelper) {
     );
     const linearRegression = regression.polynomial(twoDim, {order : 3});
 
-    const [,pred1] = linearRegression.predict(5);
-    const [,pred2] = linearRegression.predict(6);
-    const [,pred3] = linearRegression.predict(7);
+    var xVal = hospitalBedData.slice(-1)[0].x;
+    const [,pred1] = linearRegression.predict(xVal+1);
+    const [,pred2] = linearRegression.predict(xVal+2);
+    const [,pred3] = linearRegression.predict(xVal+3);
 
     var predictedData : HospitalDataPoint[] = [];
 
@@ -250,29 +262,39 @@ export function HospitalBedChart(props: chartHelper) {
     // Push predictions
     predictedData.push(
       {
-        x: 4,
+        x: xVal+1,
         name:  "5/09/2021", 
         bedsAvailable: pred1
       },
       {
-        x: 5,
+        x: xVal+2,
         name:  '6/09/2021', 
         bedsAvailable: pred2
       },
       {
-        x: 6,
+        x: xVal+3,
         name:  '7/09/2021', 
         bedsAvailable: pred3
       }
     );
 
-    var combined : HospitalDataPoint[] = [];
-    combined = combined.concat(hospitalBedData);
-    combined = combined.concat(predictedData);
-    console.log(hospitalBedData);
-    console.log(predictedData);
-    console.log(combined);
-
+    // var combined : HospitalDataPoint[] = [];
+    // combined = combined.concat(hospitalBedData);
+    // combined = combined.concat(predictedData);
+    // console.log(hospitalBedData);
+    // console.log(predictedData);
+    // console.log(combined);
+    var testDate = "2020-06-09";
+    function formatXAxisFromEpoch(tickItem: number) {
+      return moment(tickItem).format('YYYY-MM-DD')
+    }
+    function formatXAxisToEpoch(tickItem: string) {
+      return moment(tickItem, 'YYYY-MM-DD').valueOf()
+    }
+    console.log(testDate);
+    var epoch = formatXAxisToEpoch(testDate);
+    console.log(epoch);
+    console.log(formatXAxisFromEpoch(epoch));
   return(
     <ResponsiveContainer width="100%" height="100%" minHeight="400px">
       <LineChart
@@ -288,7 +310,8 @@ export function HospitalBedChart(props: chartHelper) {
         <XAxis 
           dataKey="x" 
           type="number" 
-          domain={[hospitalBedData[0].x, predictedData.slice(-1)[0].x]}
+          // tickFormatter={formatXAxisFromEpoch}
+          // domain={[hospitalBedData[0].x, predictedData.slice(-1)[0].x]}
           // ticks={[10, 20, 30, 40, 50, 60, 70, 80, 90, 100]}
         />
         <YAxis />
@@ -314,6 +337,7 @@ export function HospitalBedChart(props: chartHelper) {
           </LineChart>
         </Brush>
       </LineChart>
+      
     </ResponsiveContainer>
   );
 }
