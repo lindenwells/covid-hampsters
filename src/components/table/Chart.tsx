@@ -204,13 +204,14 @@ function createData(
 // "Hospital" Chart
 export function HospitalBedChart(props: chartHelper): JSX.Element {
   const [hospitalBedData, setHosBedData] = useState<HospitalDataPoint[]>([]);
+  const [bedData, setBedData] = useState<Array<any>>([]);
   useEffect(() => {
     graphQuery().then((query: firebase.firestore.DocumentData) => {
       // TODO: get at current date
       // console.log("starting query, getting hospitals");
       const result = query.map((doc: firebase.firestore.DocumentData, index: number) => {
         console.log("hospital: " + props.hospitalName + ", Occupancy for " + doc.id + ": " + doc.get(props.hospitalName));
-        var newData: HospitalDataPoint = createData(index, doc.id, doc.get(props.hospitalName));
+        var newData: object = {x:index, name:doc.id, bedsAvailable:doc.get(props.hospitalName)};
         return newData
       });
       // console.log("inside query data: " + result);
@@ -222,7 +223,7 @@ export function HospitalBedChart(props: chartHelper): JSX.Element {
       }
       console.log("fin res: " + finalResult);
       console.log(finalResult);
-      setHosBedData(finalResult); // Set to last 10 days
+      setBedData(finalResult); // Set to last 10 days
     })
       .catch((error) => {
         console.log("Error getting documents chart: ", error);
@@ -230,18 +231,18 @@ export function HospitalBedChart(props: chartHelper): JSX.Element {
   }, [props.hospitalName])
 
   // Make regression model predictions
-  if (hospitalBedData.length === 0) {
+  if (bedData.length === 0) {
     return <></>
   }
 
   let twoDim =
-    hospitalBedData.map(
+    bedData.map(
       (date) => [date.x, date.bedsAvailable]
     );
   const linearRegression = regression.polynomial(twoDim, { order: 3 });
 
-  console.log("top 10 moments before disaster: " + hospitalBedData);
-  console.log(hospitalBedData);
+  console.log("top 10 moments before disaster: " + bedData);
+  console.log(bedData);
 
   function addDays(tickItem: string, days: number) {
     return moment(tickItem, 'YYYY-MM-DD').add(days, 'day').format('YYYY-MM-DD')
@@ -261,8 +262,8 @@ export function HospitalBedChart(props: chartHelper): JSX.Element {
   // console.log(formatXAxisFromEpoch(epoch));
   // console.log("TIME TESTING END: ");
 
-  var xVal = hospitalBedData.slice(-1)[0].x;
-  var date = hospitalBedData.slice(-1)[0].name;
+  var xVal = bedData.slice(-1)[0].x;
+  var date = bedData.slice(-1)[0].name;
   var [, pred1] = linearRegression.predict(xVal + 1);
   var [, pred2] = linearRegression.predict(xVal + 2);
   var [, pred3] = linearRegression.predict(xVal + 3);
@@ -279,12 +280,17 @@ export function HospitalBedChart(props: chartHelper): JSX.Element {
     pred3 = 0;
   }
 
-  var predictedData: HospitalDataPoint[] = [];
+  var predictedData: Array<any> = [];
 
   // Push first value from previous to fill gap
-  predictedData.push(
-    hospitalBedData.slice(-1)[0]
-  );
+  bedData[bedData.length - 1] = 
+    {
+      x: xVal,
+      name: bedData.slice(-1)[0].name,
+      // name: moment(date).,
+      bedsAvailable: bedData.slice(-1)[0].bedsAvailable,
+      bedsAvailablePrediction: bedData.slice(-1)[0].bedsAvailable,
+    };
 
   // Push predictions
   predictedData.push(
@@ -292,23 +298,23 @@ export function HospitalBedChart(props: chartHelper): JSX.Element {
       x: xVal + 1,
       name: addDays(date, 1),
       // name: moment(date).,
-      bedsAvailable: pred1
+      bedsAvailablePrediction: pred1
     },
     {
       x: xVal + 2,
       name: addDays(date, 2),
-      bedsAvailable: pred2
+      bedsAvailablePrediction: pred2
     },
     {
       x: xVal + 3,
       name: addDays(date, 3),
-      bedsAvailable: pred3
+      bedsAvailablePrediction: pred3
     }
   );
 
     console.log("total data: ");
-    var totalData = hospitalBedData.concat(predictedData);
-    console.log(totalData);
+    var totalData = bedData.concat(predictedData);
+    console.log(JSON.stringify(totalData));
 
     function formatXAxis(x: number) {
       var date = totalData[x].name;
@@ -327,7 +333,7 @@ export function HospitalBedChart(props: chartHelper): JSX.Element {
   return (
     <ResponsiveContainer width="100%" height="100%" minHeight="400px">
       <LineChart
-        data={hospitalBedData}
+        data={totalData}
         margin={{
           top: 5,
           right: 45,
@@ -337,31 +343,29 @@ export function HospitalBedChart(props: chartHelper): JSX.Element {
       >
         <CartesianGrid strokeDasharray="3 3" />
         <XAxis
-          dataKey="x"
-          type="number"
-          tickFormatter={formatXAxis}
+          dataKey="name"
         // domain={[hospitalBedData[0].x, predictedData.slice(-1)[0].x]}
         // ticks={[10, 20, 30, 40, 50, 60, 70, 80, 90, 100]}
         />
         <YAxis domain={[0, 'auto']}/>
         <Tooltip />
         <Legend />
-        <Line type="monotone" data={hospitalBedData} name="Beds" dataKey="bedsAvailable" stroke="#ff6200" activeDot={{ r: 6 }}
+        <Line type="monotone" name="Beds" dataKey="bedsAvailable" stroke="#ff6200" activeDot={{ r: 6 }}
           strokeWidth="2"
           dot={{ r: 4 }}
         />
-        <Line type="monotone" data={predictedData} name="Beds (Predicted)" dataKey="bedsAvailable" stroke="#424ef5" activeDot={{ r: 6 }}
+        <Line type="monotone" name="Beds (Predicted)" dataKey="bedsAvailablePrediction" stroke="#424ef5" activeDot={{ r: 6 }}
           strokeWidth="2"
           dot={{ r: 4 }}
         />
-        <ReferenceLine x={hospitalBedData.slice(-1)[0].x} stroke="#42a5f5" label={{ value: "Today", fill: "#ffffff" }} />
+        <ReferenceLine x={bedData[bedData.length - 1].name} stroke="#42a5f5" label={{ value: "Today", fill: "#ffffff" }} />
         <ReferenceLine y={maxBedCapacity} stroke="#ff1900" label={{ value: "Max Beds", fill: "#ffffff" }} />
         <Brush dataKey="name" height={50} stroke="#8884d8" >
           <LineChart>
             <CartesianGrid fill="#1E1D2B" />
             <YAxis hide domain={['auto', 'auto']} />
             <Line type="monotone" dataKey="bedsAvailable" stroke="#ff9800" dot={false} />
-            <Line type="monotone" dataKey="bedsAvailablePredicted" stroke="#42a5f5" dot={false} />
+            <Line type="monotone" dataKey="bedsAvailablePrediction" stroke="#42a5f5" dot={false} />
           </LineChart>
         </Brush>
       </LineChart>
