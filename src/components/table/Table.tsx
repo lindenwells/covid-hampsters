@@ -27,6 +27,9 @@ import { blue } from '@material-ui/core/colors';
 import { data as hospitalData } from "../../assets/hospitals";
 import {checkAuth} from '../../firebase';
 import { useHistory } from "react-router-dom";
+import { useEffect, useState } from 'react';
+import { tableQuery } from "../../assets/databaseMap";
+import firebase from "../../firebase";
 /*
 import DeleteIcon from '@material-ui/icons/Delete';
 import FilterListIcon from '@material-ui/icons/FilterList';
@@ -229,6 +232,12 @@ interface detailProps {
   area: string
 }
 
+type HospitalDataPoint = {
+  x: number,
+  name: string,
+  bedsAvailable: number
+}
+
 export default function EnhancedTable(props: detailProps) {
   const history = useHistory();
   if (!checkAuth()) {
@@ -238,9 +247,10 @@ export default function EnhancedTable(props: detailProps) {
   const { clickHandle } = props;
 
   // Setup rows data
-  const rows = getHospitals(props.area);
+  const [rows, setRows] = React.useState(getHospitals(props.area));
 
   function getHospitals(area: string): Data[] {
+    
     var rows: Data[];
     rows = [];
     hospitalData.forEach(function (hospital, index) {
@@ -252,6 +262,23 @@ export default function EnhancedTable(props: detailProps) {
     });
     return rows;
   }
+
+  useEffect(() => {
+    tableQuery().then(function (query: void | firebase.firestore.DocumentData) {
+      if (!(query instanceof Object)) {
+        return;
+      }
+      var rows: Data[];
+      rows = [];
+      hospitalData.forEach(function (hospital, index) {
+        if (hospital["Hospital and Health Service"] == props.area) {
+          var facilityName = hospital["Facility Name"];
+          rows.push(createData(facilityName, query[facilityName], hospital["Max Bed Capacity"]));
+        }
+      });
+      setRows(rows);
+    });
+  }, [props.area])
 
   const classes = useStyles();
   const [order, setOrder] = React.useState<Order>('desc');
@@ -362,7 +389,7 @@ export default function EnhancedTable(props: detailProps) {
                         {row.hospitalName}
                       </TableCell>
                       <TableCell className={classes.cell} align="right">{row.beds} / {row.totalBeds}</TableCell>
-                      <TableCell className={classes.cell} align="right">{row.totalBeds}</TableCell>
+                      <TableCell className={classes.cell} align="right">{row.totalBeds - row.beds}</TableCell>
                     </ColoredTableRow>
                   );
                 })}

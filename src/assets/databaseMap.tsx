@@ -36,3 +36,15 @@ export async function graphQuery(): Promise<firebase.firestore.DocumentData>
     //   console.log("Error getting documents: ", error);
     //   throw new Error()
 };
+
+
+export async function tableQuery(): Promise<firebase.firestore.DocumentData> 
+{
+
+  return await db.collection("occupancy_data")
+    .orderBy(firebase.firestore.FieldPath.documentId())
+    .get()
+    .then((querySnapshot) => {
+      return querySnapshot.docs[querySnapshot.docs.length - 1].data();
+    });
+};
