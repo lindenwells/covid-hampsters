@@ -173,7 +173,7 @@ export default function DataGrid() {
                   <Typography variant="subtitle1">
                     {show === ThingToShow.data && "Hospital Stats"}
                     {show === ThingToShow.trend && "Patients in Need of Beds"}
-                    {show === ThingToShow.specific && hospitalName + " Available Beds"}
+                    {show === ThingToShow.specific && hospitalName + " Bed Usage"}
                   </Typography>
                 </Paper>
               </Grid>
