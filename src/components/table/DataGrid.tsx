@@ -100,7 +100,7 @@ function Show(props: ShowInterface) {
     case ThingToShow.trend: {
       return (
         <Box className={classes.center} display="flex">
-          <AreaBedChart />
+          <AreaBedChart area={props.area}/>
         </Box>
       );
     }
