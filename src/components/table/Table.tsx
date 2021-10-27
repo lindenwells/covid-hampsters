@@ -24,6 +24,7 @@ import Checkbox from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch';
 import { blue } from '@material-ui/core/colors';
+import { data as hospitalData } from "../../assets/hospitals";
 import {checkAuth} from '../../firebase';
 import { useHistory } from "react-router-dom";
 /*
@@ -32,34 +33,18 @@ import FilterListIcon from '@material-ui/icons/FilterList';
 */
 
 interface Data {
-  bedsMild: number;
-  bedsMildTotal: number;
-  bedsSevere: number;
-  bedsSevereTotal: number;
+  beds: number;
   hospitalName: string;
   totalBeds: number;
 }
 
 function createData(
   hospitalName: string,
-  bedsSevere: number,
-  bedsSevereTotal: number,
-  bedsMild: number,
-  bedsMildTotal: number,
+  beds: number,
   totalBeds: number,
 ): Data {
-  return { hospitalName, bedsSevere, bedsSevereTotal, bedsMild, bedsMildTotal, totalBeds };
+  return { hospitalName, beds, totalBeds };
 }
-
-const rows = [
-  createData('Hospital 1', 100, 200, 100, 200, 200),
-  createData('Hospital 2', 200, 300, 100, 200, 300),
-  createData('Hospital 3', 300, 400, 100, 200, 400),
-  createData('Hospital 4', 400, 500, 100, 200, 500),
-  createData('Hospital 5', 500, 600, 100, 200, 600),
-  createData('Hospital 6', 600, 700, 100, 200, 700),
-  createData('Hospital 7', 700, 800, 100, 200, 800),
-];
 
 function descendingComparator<T>(a: T, b: T, orderBy: keyof T) {
   if (b[orderBy] < a[orderBy]) {
@@ -101,8 +86,7 @@ interface HeadCell {
 
 const headCells: HeadCell[] = [
   { id: 'hospitalName', numeric: false, disablePadding: true, label: 'Hospital Name' },
-  { id: 'bedsSevere', numeric: true, disablePadding: false, label: 'Available beds for severe patients' },
-  { id: 'bedsMild', numeric: true, disablePadding: false, label: 'Available beds for mild patients' },
+  { id: 'beds', numeric: true, disablePadding: false, label: 'Available beds for patients' },
   { id: 'totalBeds', numeric: true, disablePadding: false, label: 'Total number of beds' },
 ];
 
@@ -241,7 +225,8 @@ const BlueCheckbox = withStyles({
 })(Checkbox);
 
 interface detailProps {
-  clickHandle: (hospitalName: string) => void; 
+  clickHandle: (hospitalName: string) => void,
+  area: string
 }
 
 export default function EnhancedTable(props: detailProps) {
@@ -251,6 +236,23 @@ export default function EnhancedTable(props: detailProps) {
     history.push("/");
   } 
   const { clickHandle } = props;
+
+  // Setup rows data
+  const rows = getHospitals(props.area);
+
+  function getHospitals(area: string): Data[] {
+    var rows: Data[];
+    rows = [];
+    hospitalData.forEach(function (hospital, index) {
+      if (hospital["Hospital and Health Service"] == area) {
+        var facilityName = hospital["Facility Name"];
+        // TODO: get current beds (from firebase) and replace the 0 below with that
+        rows.push(createData(facilityName, 0, hospital["Max Bed Capacity"]));
+      }
+    });
+    return rows;
+  }
+
   const classes = useStyles();
   const [order, setOrder] = React.useState<Order>('desc');
   const [orderBy, setOrderBy] = React.useState<keyof Data>('totalBeds');
@@ -275,7 +277,7 @@ export default function EnhancedTable(props: detailProps) {
   };
 
   const handleClick = (event: React.MouseEvent<unknown>, name: string) => {
-    clickHandle(name)
+    clickHandle(name);
 
     const selectedIndex = selected.indexOf(name);
     let newSelected: string[] = [];
@@ -359,8 +361,7 @@ export default function EnhancedTable(props: detailProps) {
                       <TableCell className={classes.cell} component="th" id={labelId} scope="row" padding="none">
                         {row.hospitalName}
                       </TableCell>
-                      <TableCell className={classes.cell} align="right">{row.bedsSevere} / {row.bedsSevereTotal}</TableCell>
-                      <TableCell className={classes.cell} align="right">{row.bedsMild} / {row.bedsMildTotal}</TableCell>
+                      <TableCell className={classes.cell} align="right">{row.beds} / {row.totalBeds}</TableCell>
                       <TableCell className={classes.cell} align="right">{row.totalBeds}</TableCell>
                     </ColoredTableRow>
                   );

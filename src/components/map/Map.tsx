@@ -440,8 +440,10 @@ function MapGeoJSONHook(props: MapInterface) {
           area.occupancy = 0;
           area.maxBeds = 0;
           for (const hospitalId in area.hospitals) {
-            if (query[area.hospitals[hospitalId]["Facility Name"]])
-              area.occupancy += query[area.hospitals[hospitalId]["Facility Name"]];
+            var hospital = area.hospitals[hospitalId]["Facility Name"];
+            var hospitalQuery = query[hospital];
+            if (hospitalQuery)
+              area.occupancy += hospitalQuery;
             area.maxBeds += area.hospitals[hospitalId]["Max Bed Capacity"];
           }
 
