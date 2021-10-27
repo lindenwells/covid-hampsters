@@ -21,6 +21,100 @@ import { data as hospitalData } from "../../assets/hospitals";
 // TODO: use real data for area chart as well
 // "Area" Chart
 export function AreaBedChart() {
+  // example data
+  var data: DataPoint[] = [
+    {
+      x: 1,
+      name: '1/09/2021',
+      patients: 4100,
+    },
+    {
+      x: 2,
+      name: '2/09/2021',
+      patients: 3200,
+    },
+    {
+      x: 3,
+      name: '3/09/2021',
+      patients: 1900,
+    },
+    {
+      x: 4,
+      name: '4/09/2021',
+      patients: 2800,
+    },
+    {
+      x: 5,
+      name: '5/09/2021',
+      patients: 1903,
+    },
+    {
+      x: 6,
+      name: '6/09/2021',
+      patients: 2306,
+    },
+    {
+      x: 7,
+      name: '7/09/2021',
+      patients: 3500,
+    },
+    {
+      x: 8,
+      name: '8/09/2021',
+      patients: 4000,
+    },
+    {
+      x: 9,
+      name: '9/09/2021',
+      patients: 5444,
+    },
+    {
+      x: 10,
+      name: '10/09/2021',
+      patients: 6000,
+    },
+    {
+      x: 11,
+      name: '11/09/2021',
+      patients: 7444,
+    },
+    {
+      x: 12,
+      name: '12/09/2021',
+      patients: 8000,
+      predicted: 8000,
+    },
+  ];
+
+  let twoDim =
+    data.map(
+      (date) => [date.x, date.patients]
+    );
+
+  const linearRegression = regression.polynomial(twoDim, { order: 3 });
+
+  const [, dataPrediction1] = linearRegression.predict(12);
+  const [, dataPrediction2] = linearRegression.predict(13);
+  const [, dataPrediction3] = linearRegression.predict(14);
+
+  data = data.concat(
+  {
+    x: 13,
+    name: '13/09/2021',
+    predicted: dataPrediction1
+  },
+  {
+    x: 14,
+    name: '14/09/2021',
+    predicted: dataPrediction2
+  },
+  {
+    x: 15,
+    name: '15/09/2021',
+    predicted: dataPrediction3
+  }
+  );
+  
   const history = useHistory();
   if (!checkAuth()) {
     window.alert("please login to view data");
@@ -85,102 +179,6 @@ type DataPoint = {
   patients?: number
   predicted?: number
 }
-// example data
-
-var data: DataPoint[] = [
-  {
-    x: 1,
-    name: '1/09/2021',
-    patients: 4100,
-  },
-  {
-    x: 2,
-    name: '2/09/2021',
-    patients: 3200,
-  },
-  {
-    x: 3,
-    name: '3/09/2021',
-    patients: 1900,
-  },
-  {
-    x: 4,
-    name: '4/09/2021',
-    patients: 2800,
-  },
-  {
-    x: 5,
-    name: '5/09/2021',
-    patients: 1903,
-  },
-  {
-    x: 6,
-    name: '6/09/2021',
-    patients: 2306,
-  },
-  {
-    x: 7,
-    name: '7/09/2021',
-    patients: 3500,
-  },
-  {
-    x: 8,
-    name: '8/09/2021',
-    patients: 4000,
-  },
-  {
-    x: 9,
-    name: '9/09/2021',
-    patients: 5444,
-  },
-  {
-    x: 10,
-    name: '10/09/2021',
-    patients: 6000,
-  },
-  {
-    x: 11,
-    name: '11/09/2021',
-    patients: 7444,
-  },
-  {
-    x: 12,
-    name: '12/09/2021',
-    patients: 8000,
-    predicted: 8000,
-  },
-];
-
-let twoDim =
-  data.map(
-    (date) => [date.x, date.patients]
-  );
-
-// console.log(twoDim);
-
-const linearRegression = regression.polynomial(twoDim, { order: 3 });
-
-const [, dataPrediction1] = linearRegression.predict(12);
-const [, dataPrediction2] = linearRegression.predict(13);
-const [, dataPrediction3] = linearRegression.predict(14);
-
-data = data.concat(
-  {
-    x: 13,
-    name: '13/09/2021',
-    predicted: dataPrediction1
-  },
-  {
-    x: 14,
-    name: '14/09/2021',
-    predicted: dataPrediction2
-  },
-  {
-    x: 15,
-    name: '15/09/2021',
-    predicted: dataPrediction3
-  }
-);
 
 interface chartHelper {
   hospitalName: string
@@ -352,6 +350,7 @@ export function HospitalBedChart(props: chartHelper): JSX.Element {
         />
         <ReferenceLine x={hospitalBedData.slice(-1)[0].x} stroke="#42a5f5" label={{ value: "Today", fill: "#ffffff" }} />
         <ReferenceLine y={maxBedCapacity} stroke="#ff1900" label={{ value: "Max Beds", fill: "#ffffff" }} />
+        {/* TODO: Fix mini graph */}
         <Brush data={hospitalBedData} dataKey="x" type="number" tickFormatter={formatXAxis} height={50} stroke="#8884d8" >
           <LineChart>
             <CartesianGrid fill="#1E1D2B" />
