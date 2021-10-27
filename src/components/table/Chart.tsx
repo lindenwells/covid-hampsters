@@ -314,7 +314,6 @@ export function HospitalBedChart(props: chartHelper): JSX.Element {
       var date = totalData[x].name;
       return date//moment(date, 'YYYY-MM-DD').format('YYYY-MM-DD')
     }
-  // TODO: fix YAxis range going below 0
 
   // Get max bed capacity
   var maxBedCapacity : number = 0;

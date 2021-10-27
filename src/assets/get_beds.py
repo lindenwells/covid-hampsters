@@ -60,7 +60,6 @@ def main():
         result[hospital["Hospital name"]] = hospital["Number of available beds"]
     
     doc_ref.set(result)
-    # TODO save result in firebase with the document ID as the current day
     # print(json.dumps(result, indent=4))
 
 if __name__ == "__main__":

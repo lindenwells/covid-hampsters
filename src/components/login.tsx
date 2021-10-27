@@ -3,12 +3,10 @@ import firebase, { registerWithEmailAndPassword, sendPasswordResetEmail, signInW
 import { Avatar, Button, Grid, TextField, InputAdornment, Typography, Link } from "@material-ui/core";
 import { AccountCircleOutlined, LockOutlined, EmailOutlined } from "@material-ui/icons";
 import { makeStyles, createStyles, Theme, ThemeProvider, createTheme } from "@material-ui/core/styles";
-// import Register from "./register";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     loginBtns: {
-      // TODO: Feel free to play around with the login buttons styling
       margin: theme.spacing(2),
       minWidth: 250
     },
@@ -136,7 +134,6 @@ const IsRegister = () => {
         <ThemeProvider theme={customTheme}>
           <form onSubmit={(e) => { e.preventDefault() }}> {/* This form allows form submission on enter */}
             <div> {/* This div keeps things in one column */}
-              {/* TODO: This div makes login too wide, not sure how to fix */}
               <Typography component="h1" variant="h5">
                 Sign in
               </Typography>
@@ -169,7 +166,6 @@ const IsRegister = () => {
             <Button
               variant="contained"
               type="submit"
-              // replace onClick func with email/pass firebase stuff
               onClick={(e) => {
                 e.preventDefault();
                 signInWithEmailAndPassword(email, password);
@@ -205,14 +201,12 @@ const Login = (props: loginProps) => {
     return (
       <Grid>
         <div className="App">
-          {/* <header className="App-header"> */}
           <p>
             {" "}
             Welcome {firebase.auth()?.currentUser?.displayName}! You are now
             signed-in!
           </p>
           <Button onClick={() => firebase?.auth()?.signOut()}>Sign-out</Button>
-          {/* </header> */}
         </div>
       </Grid>
     );

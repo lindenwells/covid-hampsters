@@ -7,8 +7,6 @@ import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import DataGrid from "./components/table/DataGrid";
 import Map from "./components/map/Map";
 import About from "./components/about";
-// import { Populator } from "./assets/database_populater_script";
-// import { db } from "./firebase";
 import { makeStyles, createStyles, Theme } from "@material-ui/core/styles";
 import icon from "./COVID-19_Hampsters_2.png";
 
@@ -59,7 +57,6 @@ const useStyles = makeStyles((theme: Theme) =>
       boxShadow: "inset 0 -2px 0 0 #252736",
     },
     login: {
-      // TODO: Feel free to play around with the login button styling
       padding: theme.spacing(2),
       minWidth: "200px",
       backgroundColor: "#252736",

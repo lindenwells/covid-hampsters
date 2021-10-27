@@ -105,7 +105,6 @@ function Show(props: ShowInterface) {
       );
     }
     case ThingToShow.specific: {
-      // TODO: try call graphQuery here
       return (
         <Box className={classes.center} display="flex">
           <HospitalBedChart hospitalName={props.hosName}/>
