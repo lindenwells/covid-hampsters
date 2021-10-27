@@ -265,9 +265,21 @@ export function HospitalBedChart(props: chartHelper): JSX.Element {
 
   var xVal = hospitalBedData.slice(-1)[0].x;
   var date = hospitalBedData.slice(-1)[0].name;
-  const [, pred1] = linearRegression.predict(xVal + 1);
-  const [, pred2] = linearRegression.predict(xVal + 2);
-  const [, pred3] = linearRegression.predict(xVal + 3);
+  var [, pred1] = linearRegression.predict(xVal + 1);
+  var [, pred2] = linearRegression.predict(xVal + 2);
+  var [, pred3] = linearRegression.predict(xVal + 3);
+
+  if (pred1 < 0) {
+    pred1 = 0;
+  }
+
+  if (pred2 < 0) {
+    pred2 = 0;
+  }
+
+  if (pred3 < 0) {
+    pred3 = 0;
+  }
 
   var predictedData: HospitalDataPoint[] = [];
 
