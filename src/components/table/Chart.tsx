@@ -9,7 +9,7 @@
 
 import { AreaChart, Area, ReferenceLine, Brush, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import regression from 'regression';
-import { graphQuery, mapQuery } from "../../assets/databaseMap";
+import { graphQuery } from "../../assets/databaseMap";
 import firebase from "../../firebase";
 import moment from 'moment';
 import { useEffect, useState } from 'react';
@@ -229,7 +229,7 @@ export function HospitalBedChart(props: chartHelper): JSX.Element {
       .catch((error) => {
         console.log("Error getting documents chart: ", error);
       });
-  }, [])
+  }, [props.hospitalName])
 
   // Make regression model predictions
   if (hospitalBedData.length === 0) {
@@ -309,7 +309,7 @@ export function HospitalBedChart(props: chartHelper): JSX.Element {
   // Get max bed capacity
   var maxBedCapacity : number = 0;
   hospitalData.forEach((hospital) => {
-    if (hospital["Facility Name"] == props.hospitalName) {
+    if (hospital["Facility Name"] === props.hospitalName) {
       maxBedCapacity = hospital["Max Bed Capacity"];
     }
   });
