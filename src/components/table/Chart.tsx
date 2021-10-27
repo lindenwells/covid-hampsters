@@ -20,7 +20,6 @@ interface areaChartHelper {
   area: string
 }
 
-// TODO: use real data for area chart as well
 // "Area" Chart
 export function AreaBedChart(props: areaChartHelper) {
   const [hospitalAreaBedData, setHosAreaBedData] = useState<HospitalDataPoint[]>([]);

@@ -266,8 +266,7 @@ export default function EnhancedTable(props: detailProps) {
     hospitalData.forEach(function (hospital, index) {
       if (hospital["Hospital and Health Service"] === area) {
         var facilityName = hospital["Facility Name"];
-        // TODO: get current beds (from firebase) and replace the 0 below with that
-        // TODO: ^^ after above, use current date capacity in map as well (for area capacity)
+        // TODO: use current date for total area capacity in map as well
         rows.push(createData(facilityName, 0, hospital["Max Bed Capacity"]));
       }
     });
