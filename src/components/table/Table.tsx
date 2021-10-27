@@ -20,14 +20,13 @@ import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 import TableSortLabel from '@material-ui/core/TableSortLabel';
 import Paper from '@material-ui/core/Paper';
-import Checkbox from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch';
 import { blue } from '@material-ui/core/colors';
 import { data as hospitalData } from "../../assets/hospitals";
 import {checkAuth} from '../../firebase';
 import { useHistory } from "react-router-dom";
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { tableQuery } from "../../assets/databaseMap";
 import firebase from "../../firebase";
 import Button from "@material-ui/core/Button";
@@ -244,25 +243,9 @@ const CustomTableSortLabel = withStyles({
   },
 })(TableSortLabel);
 
-const BlueCheckbox = withStyles({
-  root: {
-    color: blue[600],
-    '&$checked': {
-      color: blue[700],
-    },
-  },
-  checked: {},
-})(Checkbox);
-
 interface detailProps {
   clickHandle: (hospitalName: string) => void,
   area: string
-}
-
-type HospitalDataPoint = {
-  x: number,
-  name: string,
-  bedsAvailable: number
 }
 
 export default function EnhancedTable(props: detailProps) {
@@ -298,7 +281,7 @@ export default function EnhancedTable(props: detailProps) {
       var rows: Data[];
       rows = [];
       hospitalData.forEach(function (hospital, index) {
-        if (hospital["Hospital and Health Service"] == props.area) {
+        if (hospital["Hospital and Health Service"] === props.area) {
           var facilityName = hospital["Facility Name"];
           rows.push(createData(facilityName, query[facilityName], hospital["Max Bed Capacity"]));
         }
