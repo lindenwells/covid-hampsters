@@ -20,13 +20,17 @@ import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 import TableSortLabel from '@material-ui/core/TableSortLabel';
 import Paper from '@material-ui/core/Paper';
-import Checkbox from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Switch from '@material-ui/core/Switch';
 import { blue } from '@material-ui/core/colors';
 import { data as hospitalData } from "../../assets/hospitals";
 import {checkAuth} from '../../firebase';
 import { useHistory } from "react-router-dom";
+import { useEffect } from 'react';
+import { tableQuery } from "../../assets/databaseMap";
+import firebase from "../../firebase";
+import Button from "@material-ui/core/Button";
+import TrendingUpIcon from '@material-ui/icons/TrendingUp';
 /*
 import DeleteIcon from '@material-ui/icons/Delete';
 import FilterListIcon from '@material-ui/icons/FilterList';
@@ -155,6 +159,11 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     cell: {
       color: "#FFFFFF",
+      textAlign: "center",
+    },
+    celltwo: {
+      color: "#FFFFFF",
+      textAlign: "left",
     },
     visuallyHidden: {
       border: 0,
@@ -172,7 +181,27 @@ const useStyles = makeStyles((theme: Theme) =>
         // !important is bad practice, search better way later
         backgroundColor: blue[500] + "!important",
       }
-    }
+    },
+    buttonDense: {
+      backgroundColor: "#4254B2",
+      '&:hover': {
+        backgroundColor: "#32385c",
+      },
+      minWidth: "55px"
+    },
+    button: {
+      backgroundColor: "#4254B2",
+      '&:hover': {
+        backgroundColor: "#32385c",
+      },
+      minWidth: "55px",
+      marginRight: "10px",
+      marginLeft: "10px",
+    },
+    icon: {
+      fontSize: 25,
+      color: "#FFFFFF",
+    },
   }),
 );
 
@@ -214,16 +243,6 @@ const CustomTableSortLabel = withStyles({
   },
 })(TableSortLabel);
 
-const BlueCheckbox = withStyles({
-  root: {
-    color: blue[600],
-    '&$checked': {
-      color: blue[700],
-    },
-  },
-  checked: {},
-})(Checkbox);
-
 interface detailProps {
   clickHandle: (hospitalName: string) => void,
   area: string
@@ -238,9 +257,10 @@ export default function EnhancedTable(props: detailProps) {
   const { clickHandle } = props;
 
   // Setup rows data
-  const rows = getHospitals(props.area);
+  const [rows, setRows] = React.useState(getHospitals(props.area));
 
   function getHospitals(area: string): Data[] {
+    
     var rows: Data[];
     rows = [];
     hospitalData.forEach(function (hospital, index) {
@@ -254,9 +274,26 @@ export default function EnhancedTable(props: detailProps) {
     return rows;
   }
 
+  useEffect(() => {
+    tableQuery().then(function (query: void | firebase.firestore.DocumentData) {
+      if (!(query instanceof Object)) {
+        return;
+      }
+      var rows: Data[];
+      rows = [];
+      hospitalData.forEach(function (hospital, index) {
+        if (hospital["Hospital and Health Service"] === props.area) {
+          var facilityName = hospital["Facility Name"];
+          rows.push(createData(facilityName, query[facilityName], hospital["Max Bed Capacity"]));
+        }
+      });
+      setRows(rows);
+    });
+  }, [props.area])
+
   const classes = useStyles();
   const [order, setOrder] = React.useState<Order>('desc');
-  const [orderBy, setOrderBy] = React.useState<keyof Data>('totalBeds');
+  const [orderBy, setOrderBy] = React.useState<keyof Data>('beds');
   const [selected, setSelected] = React.useState<string[]>([]);
   const [page, setPage] = React.useState(0);
   const [dense, setDense] = React.useState(true);
@@ -354,12 +391,9 @@ export default function EnhancedTable(props: detailProps) {
                       className={classes.tableRow}
                     >
                       <TableCell className={classes.cell} padding="checkbox">
-                        <BlueCheckbox
-                          checked={isItemSelected}
-                          inputProps={{ 'aria-labelledby': labelId }}
-                        />
+                        <Button className={dense ? classes.buttonDense : classes.button}><TrendingUpIcon classes={{root: classes.icon}} /></Button>
                       </TableCell>
-                      <TableCell className={classes.cell} component="th" id={labelId} scope="row" padding="none">
+                      <TableCell className={classes.celltwo} component="th" id={labelId} scope="row" padding="none">
                         {row.hospitalName}
                       </TableCell>
                       <TableCell className={classes.cell} align="right">{row.beds} / {row.totalBeds}</TableCell>
