@@ -352,17 +352,16 @@ export function HospitalBedChart(props: chartHelper): JSX.Element {
         />
         <ReferenceLine x={hospitalBedData.slice(-1)[0].x} stroke="#42a5f5" label={{ value: "Today", fill: "#ffffff" }} />
         <ReferenceLine y={maxBedCapacity} stroke="#ff1900" label={{ value: "Max Beds", fill: "#ffffff" }} />
-        <Brush dataKey="name" height={50} stroke="#8884d8" >
+        <Brush data={hospitalBedData} dataKey="x" type="number" tickFormatter={formatXAxis} height={50} stroke="#8884d8" >
           <LineChart>
             <CartesianGrid fill="#1E1D2B" />
             <YAxis hide domain={['auto', 'auto']} />
-            <Line type="monotone" dataKey="bedsAvailable" stroke="#ff9800" dot={false} />
-            <Line type="monotone" dataKey="bedsAvailablePredicted" stroke="#42a5f5" dot={false} />
+            <Line type="monotone" data={hospitalBedData} dataKey="bedsAvailable" stroke="#ff9800" dot={false} />
+            <Line type="monotone" data={predictedData} dataKey="bedsAvailable" stroke="#42a5f5" dot={false} />
           </LineChart>
         </Brush>
-        <Legend margin={{ top: 5, right: 5, left: 5, bottom: 5 }}/>
+        <Legend height={5}/>
       </LineChart>
-
     </ResponsiveContainer>
   );
 }
