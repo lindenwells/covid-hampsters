@@ -49,5 +49,8 @@
     "@types/regression": "^2.0.2",
     "firebase": "^8.10.0",
     "firebaseui": "^5.0.0"
+  },
+  "optionalDependencies": {
+    "fsevents": "^2.3.2"
   }
 }

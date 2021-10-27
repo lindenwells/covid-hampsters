@@ -13,11 +13,18 @@ import { graphQuery, mapQuery } from "../../assets/databaseMap";
 import firebase from "../../firebase";
 import moment from 'moment';
 import { useEffect, useState } from 'react';
+import { checkAuth } from '../../firebase';
+import { useHistory } from "react-router-dom";
 //import { AreaChart, Area, ReferenceLine, Brush, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
 // "Area" Chart
 export function AreaBedChart() {
-  return (
+  const history = useHistory();
+  if (!checkAuth()) {
+    window.alert("please login to view data");
+    history.push("/");
+  } 
+  return(
     <ResponsiveContainer width="100%" height="100%" minHeight="400px">
       <AreaChart
         data={data}
