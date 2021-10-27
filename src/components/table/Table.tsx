@@ -281,7 +281,7 @@ export default function EnhancedTable(props: detailProps) {
     var rows: Data[];
     rows = [];
     hospitalData.forEach(function (hospital, index) {
-      if (hospital["Hospital and Health Service"] == area) {
+      if (hospital["Hospital and Health Service"] === area) {
         var facilityName = hospital["Facility Name"];
         // TODO: get current beds (from firebase) and replace the 0 below with that
         rows.push(createData(facilityName, 0, hospital["Max Bed Capacity"]));

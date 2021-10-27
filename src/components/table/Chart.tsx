@@ -9,7 +9,7 @@
 
 import { AreaChart, Area, ReferenceLine, Brush, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import regression from 'regression';
-import { graphQuery, mapQuery } from "../../assets/databaseMap";
+import { graphQuery } from "../../assets/databaseMap";
 import firebase from "../../firebase";
 import moment from 'moment';
 import { useEffect, useState } from 'react';
@@ -87,8 +87,6 @@ type DataPoint = {
 }
 // example data
 
-// TODO: call mapQuery() (import from databaseMap.tsx), for real data
-
 var data: DataPoint[] = [
   {
     x: 1,
@@ -158,7 +156,7 @@ let twoDim =
     (date) => [date.x, date.patients]
   );
 
-console.log(twoDim);
+// console.log(twoDim);
 
 const linearRegression = regression.polynomial(twoDim, { order: 3 });
 
@@ -229,7 +227,7 @@ export function HospitalBedChart(props: chartHelper): JSX.Element {
       .catch((error) => {
         console.log("Error getting documents chart: ", error);
       });
-  }, [])
+  }, [props.hospitalName])
 
   // Make regression model predictions
   if (hospitalBedData.length === 0) {
@@ -321,7 +319,7 @@ export function HospitalBedChart(props: chartHelper): JSX.Element {
   // Get max bed capacity
   var maxBedCapacity : number = 0;
   hospitalData.forEach((hospital) => {
-    if (hospital["Facility Name"] == props.hospitalName) {
+    if (hospital["Facility Name"] === props.hospitalName) {
       maxBedCapacity = hospital["Max Bed Capacity"];
     }
   });
@@ -345,7 +343,7 @@ export function HospitalBedChart(props: chartHelper): JSX.Element {
         // domain={[hospitalBedData[0].x, predictedData.slice(-1)[0].x]}
         // ticks={[10, 20, 30, 40, 50, 60, 70, 80, 90, 100]}
         />
-        <YAxis domain={[-20, 'auto']}/>
+        <YAxis domain={[0, 'auto']}/>
         <Tooltip />
         <Legend />
         <Line type="monotone" data={hospitalBedData} name="Beds" dataKey="bedsAvailable" stroke="#ff6200" activeDot={{ r: 6 }}
@@ -356,7 +354,6 @@ export function HospitalBedChart(props: chartHelper): JSX.Element {
           strokeWidth="2"
           dot={{ r: 4 }}
         />
-        {/* TODO: fix referenceline below, Max Beds, get from firebase etc. */}
         <ReferenceLine x={hospitalBedData.slice(-1)[0].x} stroke="#42a5f5" label={{ value: "Today", fill: "#ffffff" }} />
         <ReferenceLine y={maxBedCapacity} stroke="#ff1900" label={{ value: "Max Beds", fill: "#ffffff" }} />
         <Brush dataKey="name" height={50} stroke="#8884d8" >
