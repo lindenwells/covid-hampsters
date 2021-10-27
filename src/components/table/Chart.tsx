@@ -158,7 +158,7 @@ let twoDim =
     (date) => [date.x, date.patients]
   );
 
-console.log(twoDim);
+// console.log(twoDim);
 
 const linearRegression = regression.polynomial(twoDim, { order: 3 });
 
