@@ -30,6 +30,8 @@ import { useHistory } from "react-router-dom";
 import { useEffect, useState } from 'react';
 import { tableQuery } from "../../assets/databaseMap";
 import firebase from "../../firebase";
+import Button from "@material-ui/core/Button";
+import TrendingUpIcon from '@material-ui/icons/TrendingUp';
 /*
 import DeleteIcon from '@material-ui/icons/Delete';
 import FilterListIcon from '@material-ui/icons/FilterList';
@@ -158,6 +160,11 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     cell: {
       color: "#FFFFFF",
+      textAlign: "center",
+    },
+    celltwo: {
+      color: "#FFFFFF",
+      textAlign: "left",
     },
     visuallyHidden: {
       border: 0,
@@ -175,7 +182,27 @@ const useStyles = makeStyles((theme: Theme) =>
         // !important is bad practice, search better way later
         backgroundColor: blue[500] + "!important",
       }
-    }
+    },
+    buttonDense: {
+      backgroundColor: "#4254B2",
+      '&:hover': {
+        backgroundColor: "#32385c",
+      },
+      minWidth: "55px"
+    },
+    button: {
+      backgroundColor: "#4254B2",
+      '&:hover': {
+        backgroundColor: "#32385c",
+      },
+      minWidth: "55px",
+      marginRight: "10px",
+      marginLeft: "10px",
+    },
+    icon: {
+      fontSize: 25,
+      color: "#FFFFFF",
+    },
   }),
 );
 
@@ -282,7 +309,7 @@ export default function EnhancedTable(props: detailProps) {
 
   const classes = useStyles();
   const [order, setOrder] = React.useState<Order>('desc');
-  const [orderBy, setOrderBy] = React.useState<keyof Data>('totalBeds');
+  const [orderBy, setOrderBy] = React.useState<keyof Data>('beds');
   const [selected, setSelected] = React.useState<string[]>([]);
   const [page, setPage] = React.useState(0);
   const [dense, setDense] = React.useState(true);
@@ -380,16 +407,13 @@ export default function EnhancedTable(props: detailProps) {
                       className={classes.tableRow}
                     >
                       <TableCell className={classes.cell} padding="checkbox">
-                        <BlueCheckbox
-                          checked={isItemSelected}
-                          inputProps={{ 'aria-labelledby': labelId }}
-                        />
+                        <Button className={dense ? classes.buttonDense : classes.button}><TrendingUpIcon classes={{root: classes.icon}} /></Button>
                       </TableCell>
-                      <TableCell className={classes.cell} component="th" id={labelId} scope="row" padding="none">
+                      <TableCell className={classes.celltwo} component="th" id={labelId} scope="row" padding="none">
                         {row.hospitalName}
                       </TableCell>
                       <TableCell className={classes.cell} align="right">{row.beds} / {row.totalBeds}</TableCell>
-                      <TableCell className={classes.cell} align="right">{row.totalBeds - row.beds}</TableCell>
+                      <TableCell className={classes.cell} align="right">{row.totalBeds}</TableCell>
                     </ColoredTableRow>
                   );
                 })}
