@@ -32,7 +32,6 @@ import Select from "@material-ui/core/Select";
 import { MapContainer, TileLayer, useMap, useMapEvent } from 'react-leaflet';
 import { LatLngExpression, geoJSON, popup, Layer, Map as LeafletMap } from 'leaflet';
 import "leaflet/dist/leaflet.css";
-// import "./Map.css"
 import firebase from "../../firebase";
 import { data } from "../../assets/hospitals";
 import { mapQuery } from "../../assets/databaseMap";
@@ -183,14 +182,6 @@ export default function Map() {
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
               />
               <MapGeoJSONHook layersMapHandle={layersMapHandle} areas={areas} rendered={rendered} />
-              {/*data.map((element, index) => {
-                    // Hospitals
-                    return (
-                      <Circle center={[parseFloat(element.lat), parseFloat(element.lon)]} pathOptions={red} radius={250}>
-                        <Tooltip>{element["Facility Name"]}</Tooltip>
-                      </Circle>
-                    );
-                })*/}
             </MapContainer>
           </Box>
         </Grid>

@@ -16,20 +16,146 @@ import { useEffect, useState } from 'react';
 import { checkAuth } from '../../firebase';
 import { useHistory } from "react-router-dom";
 import { data as hospitalData } from "../../assets/hospitals";
-//import { AreaChart, Area, ReferenceLine, Brush, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+interface areaChartHelper {
+  area: string
+}
 
-// TODO: use real data for area chart as well
 // "Area" Chart
-export function AreaBedChart() {
+export function AreaBedChart(props: areaChartHelper) {
+  const [hospitalAreaBedData, setHosAreaBedData] = useState<HospitalDataPoint[]>([]);
+  var maxBeds: number = 0;
+  var hospitals: string[] = [];
+
   const history = useHistory();
   if (!checkAuth()) {
     window.alert("please login to view data");
     history.push("/");
-  } 
+  }
+
+  hospitalData.forEach((hospital) => {
+    if (hospital["Hospital and Health Service"] === props.area) {
+      maxBeds += hospital["Max Bed Capacity"];
+      hospitals.push(hospital["Facility Name"]);
+    }
+  });
+  console.log("max beds " + props.area + ": " + maxBeds);
+  console.log("hospitals: " + hospitals);
+
+  //use effect start
+  useEffect(() => {
+    graphQuery().then((query: firebase.firestore.DocumentData) => {
+      // TODO: get at current date (currently gets last 10 days from data)
+      const result = query.slice(-10).map((doc: firebase.firestore.DocumentData, index: number) => {
+        var totalBeds = 0;
+        hospitals.forEach((hos) => {
+          totalBeds += doc.get(hos);
+        }
+        );
+        var newData: HospitalDataPoint = createData(index, doc.id, totalBeds);
+        return newData
+      });
+      var finalResult = result;
+      for (let i=0; i < finalResult.length; i++) {
+        var newElem = finalResult[i];
+        newElem.x = i;
+        finalResult[i] = newElem;
+      }
+      setHosAreaBedData(finalResult); // Set to last 10 days
+    })
+    .catch((error) => {
+      console.log("Error getting documents chart: ", error);
+    });
+  })//[props.hospitalName])
+  //use effect end
+
+  if (hospitalAreaBedData.length === 0) {
+    return <></>
+  }
+
+  let twoDim =
+    hospitalAreaBedData.map(
+      (date) => [date.x, date.bedsAvailable]
+    );
+
+  const linearRegression = regression.polynomial(twoDim, { order: 3 });
+
+  function addDays(tickItem: string, days: number) {
+    return moment(tickItem, 'YYYY-MM-DD').add(days, 'day').format('YYYY-MM-DD')
+  }
+
+  var xVal = hospitalAreaBedData.slice(-1)[0].x;
+  var date = hospitalAreaBedData.slice(-1)[0].name;
+  var [, pred1] = linearRegression.predict(xVal + 1);
+  var [, pred2] = linearRegression.predict(xVal + 2);
+  var [, pred3] = linearRegression.predict(xVal + 3);
+
+  if (pred1 < 0) {
+    pred1 = 0;
+  }
+
+  if (pred2 < 0) {
+    pred2 = 0;
+  }
+
+  if (pred3 < 0) {
+    pred3 = 0;
+  }
+
+  var predictedAreaData: HospitalDataPoint[] = [];
+
+  // Push first value from previous to fill gap
+  predictedAreaData.push(
+    hospitalAreaBedData.slice(-1)[0]
+  );
+
+  // Push predictions
+  predictedAreaData.push(
+    {
+      x: xVal + 1,
+      name: addDays(date, 1),
+      bedsAvailable: pred1
+    },
+    {
+      x: xVal + 2,
+      name: addDays(date, 2),
+      bedsAvailable: pred2
+    },
+    {
+      x: xVal + 3,
+      name: addDays(date, 3),
+      bedsAvailable: pred3
+    }
+  );
+
+  console.log("total data: ");
+  var totalData = hospitalAreaBedData.concat(predictedAreaData);
+  console.log(totalData);
+
+  // function formatXAxis(x: number) {
+  //   var date = totalData[x].name;
+  //   return date
+  // }
+
+  var totalAreaData = hospitalAreaBedData.concat(predictedAreaData);
+
+  // let twoDimData =
+  //   hospitalAreaBedData.map(
+  //     (date) => [date.x, date.bedsAvailable]
+  //   );
+
+  // var data1: string[] = [];
+  // hospitalAreaBedData.forEach((d) => {
+  //   data1.push(d.name);
+  // });
+  // var data2: number[] = [];
+  // hospitalAreaBedData.forEach((d) => {
+  //   data2.push(d.x);
+  // });
+
   return(
     <ResponsiveContainer width="100%" height="100%" minHeight="400px">
       <AreaChart
-        data={data}
+        data={totalAreaData}
         margin={{
           top: 5,
           right: 45,
@@ -49,138 +175,35 @@ export function AreaBedChart() {
         </defs>
         <CartesianGrid strokeDasharray="3 3" />
         <XAxis dataKey="name" />
-        <YAxis />
+        <YAxis domain={[0,maxBeds]}/>
         <Tooltip />
-        <Legend />
-        <Area type="monotone" name="Patients" dataKey="patients" stroke="#ff9800" activeDot={{ r: 6 }}
+        <Legend height={5}/>
+        <Area type="monotone" name="Patients" dataKey="bedsAvailable" stroke="#ff9800" activeDot={{ r: 6 }}
           strokeWidth="2"
           fillOpacity="1"
           fill="url(#OrangeGradient)"
           dot={{ r: 4 }}
         />
-        <Area type="monotone" name="Patients (Predicted)" dataKey="predicted" stroke="#42a5f5" activeDot={{ r: 6 }}
+        {/* <Area type="monotone" name="Patients (Predicted)" dataKey="bedsAvailable" stroke="#42a5f5" activeDot={{ r: 6 }}
           strokeWidth="2"
           fillOpacity="1"
           fill="url(#BlueGradient)"
           dot={{ r: 4 }}
-        />
-        <ReferenceLine x='12/09/2021' stroke="#42a5f5" label={{ value: "Today", fill: "#ffffff" }} />
-        <ReferenceLine y='8500' stroke="#ff1900" label={{ value: "Max Beds", fill: "#ffffff" }} />
+        /> */}
+        <ReferenceLine x={hospitalAreaBedData.slice(-1)[0].x} stroke="#42a5f5" label={{ value: "Today", fill: "#ffffff" }} />
+        <ReferenceLine y={maxBeds} stroke="#ff1900" label={{ value: "Max Beds", fill: "#ffffff" }} />
         <Brush dataKey="name" height={50} stroke="#8884d8" >
           <AreaChart>
             <CartesianGrid fill="#1E1D2B" />
             <YAxis hide domain={['auto', 'auto']} />
-            <Area type="monotone" dataKey="patients" stroke="#ff9800" fill="#ff9800" dot={false} />
-            <Area type="monotone" dataKey="predicted" stroke="#42a5f5" fill="#42a5f5" dot={false} />
+            {/* <Area type="monotone" dataKey="bedsAvailable" stroke="#ff9800" fill="#ff9800" dot={false} /> */}
+            <Area type="monotone" dataKey="bedsAvailable" stroke="#42a5f5" fill="#42a5f5" dot={false} />
           </AreaChart>
         </Brush>
       </AreaChart>
     </ResponsiveContainer>
   );
 }
-
-type DataPoint = {
-  x: number,
-  name: string,
-  patients?: number
-  predicted?: number
-}
-// example data
-
-var data: DataPoint[] = [
-  {
-    x: 1,
-    name: '1/09/2021',
-    patients: 4100,
-  },
-  {
-    x: 2,
-    name: '2/09/2021',
-    patients: 3200,
-  },
-  {
-    x: 3,
-    name: '3/09/2021',
-    patients: 1900,
-  },
-  {
-    x: 4,
-    name: '4/09/2021',
-    patients: 2800,
-  },
-  {
-    x: 5,
-    name: '5/09/2021',
-    patients: 1903,
-  },
-  {
-    x: 6,
-    name: '6/09/2021',
-    patients: 2306,
-  },
-  {
-    x: 7,
-    name: '7/09/2021',
-    patients: 3500,
-  },
-  {
-    x: 8,
-    name: '8/09/2021',
-    patients: 4000,
-  },
-  {
-    x: 9,
-    name: '9/09/2021',
-    patients: 5444,
-  },
-  {
-    x: 10,
-    name: '10/09/2021',
-    patients: 6000,
-  },
-  {
-    x: 11,
-    name: '11/09/2021',
-    patients: 7444,
-  },
-  {
-    x: 12,
-    name: '12/09/2021',
-    patients: 8000,
-    predicted: 8000,
-  },
-];
-
-let twoDim =
-  data.map(
-    (date) => [date.x, date.patients]
-  );
-
-// console.log(twoDim);
-
-const linearRegression = regression.polynomial(twoDim, { order: 3 });
-
-const [, dataPrediction1] = linearRegression.predict(12);
-const [, dataPrediction2] = linearRegression.predict(13);
-const [, dataPrediction3] = linearRegression.predict(14);
-
-data = data.concat(
-  {
-    x: 13,
-    name: '13/09/2021',
-    predicted: dataPrediction1
-  },
-  {
-    x: 14,
-    name: '14/09/2021',
-    predicted: dataPrediction2
-  },
-  {
-    x: 15,
-    name: '15/09/2021',
-    predicted: dataPrediction3
-  }
-);
 
 interface chartHelper {
   hospitalName: string
@@ -200,10 +223,8 @@ function createData(
   return { x, name, bedsAvailable };
 }
 
-
 // "Hospital" Chart
 export function HospitalBedChart(props: chartHelper): JSX.Element {
-  const [hospitalBedData, setHosBedData] = useState<HospitalDataPoint[]>([]);
   const [bedData, setBedData] = useState<Array<any>>([]);
   useEffect(() => {
     graphQuery().then((query: firebase.firestore.DocumentData) => {
@@ -316,11 +337,10 @@ export function HospitalBedChart(props: chartHelper): JSX.Element {
     var totalData = bedData.concat(predictedData);
     console.log(JSON.stringify(totalData));
 
-    function formatXAxis(x: number) {
-      var date = totalData[x].name;
-      return date//moment(date, 'YYYY-MM-DD').format('YYYY-MM-DD')
-    }
-  // TODO: fix YAxis range going below 0
+  function formatXAxis(x: number) {
+    var date = totalData[x].name;
+    return date
+  }
 
   // Get max bed capacity
   var maxBedCapacity : number = 0;
@@ -360,7 +380,8 @@ export function HospitalBedChart(props: chartHelper): JSX.Element {
         />
         <ReferenceLine x={bedData[bedData.length - 1].name} stroke="#42a5f5" label={{ value: "Today", fill: "#ffffff" }} />
         <ReferenceLine y={maxBedCapacity} stroke="#ff1900" label={{ value: "Max Beds", fill: "#ffffff" }} />
-        <Brush dataKey="name" height={50} stroke="#8884d8" >
+        {/* TODO: Fix mini graph */}
+        <Brush data={hospitalBedData} dataKey="x" type="number" tickFormatter={formatXAxis} height={50} stroke="#8884d8" >
           <LineChart>
             <CartesianGrid fill="#1E1D2B" />
             <YAxis hide domain={['auto', 'auto']} />
@@ -368,109 +389,8 @@ export function HospitalBedChart(props: chartHelper): JSX.Element {
             <Line type="monotone" dataKey="bedsAvailablePrediction" stroke="#42a5f5" dot={false} />
           </LineChart>
         </Brush>
+        <Legend height={5}/>
       </LineChart>
-
     </ResponsiveContainer>
   );
 }
-
-// example data
-
-// var hospitalBedData : HospitalDataPoint[] = 
-// [
-//   {
-//     x: 1,
-//     name: '1/09/2021',
-//     bedsAvailableMild: 4100,
-//     bedsAvailableSevere: 1000,
-//   },
-//   {
-//     x: 2,
-//     name: '2/09/2021',
-//     bedsAvailableMild: 3200,
-//     bedsAvailableSevere: 2000,
-//   },
-//   {
-//     x: 3,
-//     name: '3/09/2021',
-//     bedsAvailableMild: 1900,
-//     bedsAvailableSevere: 2750,
-//   },
-//   {
-//     x: 4,
-//     name: '4/09/2021',
-//     bedsAvailableMild: 2800,
-//     bedsAvailableSevere: 4000,
-//   },
-//   {
-//     x: 5,
-//     name: '5/09/2021',
-//     bedsAvailableMild: 1903,
-//     bedsAvailableSevere: 3000,
-//   },
-//   {
-//     x: 6,
-//     name: '6/09/2021',
-//     bedsAvailableMild: 2306,
-//     bedsAvailableSevere: 1550,
-//   },
-//   {
-//     x: 7,
-//     name: '7/09/2021',
-//     bedsAvailableMild: 3500,
-//     bedsAvailableSevere: 1200,
-//   },
-//   {
-//     x: 8,
-//     name: '8/09/2021',
-//     bedsAvailableMild: 4000,
-//     bedsAvailableSevere: 900,
-//   },
-//   {
-//     x: 9,
-//     name: '9/09/2021',
-//     bedsAvailableMild: 5444,
-//     bedsAvailableSevere: 1000,
-//   },
-//   {
-//     x: 10,
-//     name: '10/09/2021',
-//     bedsAvailableMild: 6000,
-//     bedsAvailableSevere: 1150,
-//   },
-//   {
-//     x: 11,
-//     name: '11/09/2021',
-//     bedsAvailableMild: 7444,
-//     bedsAvailableSevere: 1400,
-//   },
-//   {
-//     x: 12,
-//     name: '12/09/2021',
-//     bedsAvailableMild: 8000,
-//     bedsAvailableMildPredicted: 8000,
-//     bedsAvailableSevere: 1600,
-//     bedsAvailableSeverePredicted: 1600,
-//   },
-// ];
-
-// hospitalBedData = hospitalBedData.concat(
-//   {
-//     x: 13,
-//     name:  '13/09/2021', 
-//     bedsAvailableMildPredicted: 7500,
-//     bedsAvailableSeverePredicted: 1800,
-//   },
-//   {
-//     x: 14,
-//     name:  '14/09/2021', 
-//     bedsAvailableMildPredicted: 6200,
-//     bedsAvailableSeverePredicted: 1450,
-//   },
-//   {
-//     x: 15,
-//     name:  '15/09/2021', 
-//     bedsAvailableMildPredicted: 7000,
-//     bedsAvailableSeverePredicted: 1550,
-//   }
-// );

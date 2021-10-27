@@ -100,12 +100,11 @@ function Show(props: ShowInterface) {
     case ThingToShow.trend: {
       return (
         <Box className={classes.center} display="flex">
-          <AreaBedChart />
+          <AreaBedChart area={props.area}/>
         </Box>
       );
     }
     case ThingToShow.specific: {
-      // TODO: try call graphQuery here
       return (
         <Box className={classes.center} display="flex">
           <HospitalBedChart hospitalName={props.hosName}/>
