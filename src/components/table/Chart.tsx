@@ -15,8 +15,10 @@ import moment from 'moment';
 import { useEffect, useState } from 'react';
 import { checkAuth } from '../../firebase';
 import { useHistory } from "react-router-dom";
+import { data as hospitalData } from "../../assets/hospitals";
 //import { AreaChart, Area, ReferenceLine, Brush, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
+// TODO: use real data for area chart as well
 // "Area" Chart
 export function AreaBedChart() {
   const history = useHistory();
@@ -204,9 +206,9 @@ function createData(
 // "Hospital" Chart
 export function HospitalBedChart(props: chartHelper): JSX.Element {
   const [hospitalBedData, setHosBedData] = useState<HospitalDataPoint[]>([]);
-  // TODO: fix YAxis range going below 0
   useEffect(() => {
     graphQuery().then((query: firebase.firestore.DocumentData) => {
+      // TODO: get at current date
       // console.log("starting query, getting hospitals");
       const result = query.map((doc: firebase.firestore.DocumentData, index: number) => {
         console.log("hospital: " + props.hospitalName + ", Occupancy for " + doc.id + ": " + doc.get(props.hospitalName));
@@ -302,6 +304,15 @@ export function HospitalBedChart(props: chartHelper): JSX.Element {
       var date = totalData[x].name;
       return date//moment(date, 'YYYY-MM-DD').format('YYYY-MM-DD')
     }
+  // TODO: fix YAxis range going below 0
+
+  // Get max bed capacity
+  var maxBedCapacity : number = 0;
+  hospitalData.forEach((hospital) => {
+    if (hospital["Facility Name"] == props.hospitalName) {
+      maxBedCapacity = hospital["Max Bed Capacity"];
+    }
+  });
 
   return (
     <ResponsiveContainer width="100%" height="100%" minHeight="400px">
@@ -334,8 +345,8 @@ export function HospitalBedChart(props: chartHelper): JSX.Element {
           dot={{ r: 4 }}
         />
         {/* TODO: fix referenceline below, Max Beds, get from firebase etc. */}
-        <ReferenceLine x='12/09/2021' stroke="#42a5f5" label={{ value: "Today", fill: "#ffffff" }} />
-        <ReferenceLine y='7000' stroke="#ff1900" label={{ value: "Max Beds", fill: "#ffffff" }} />
+        <ReferenceLine x={hospitalBedData.slice(-1)[0].x} stroke="#42a5f5" label={{ value: "Today", fill: "#ffffff" }} />
+        <ReferenceLine y={maxBedCapacity} stroke="#ff1900" label={{ value: "Max Beds", fill: "#ffffff" }} />
         <Brush dataKey="name" height={50} stroke="#8884d8" >
           <LineChart>
             <CartesianGrid fill="#1E1D2B" />
