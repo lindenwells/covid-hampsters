@@ -312,7 +312,7 @@ export function HospitalBedChart(props: chartHelper): JSX.Element {
 
     function formatXAxis(x: number) {
       var date = totalData[x].name;
-      return date//moment(date, 'YYYY-MM-DD').format('YYYY-MM-DD')
+      return date
     }
 
   // Get max bed capacity
@@ -339,12 +339,9 @@ export function HospitalBedChart(props: chartHelper): JSX.Element {
           dataKey="x"
           type="number"
           tickFormatter={formatXAxis}
-        // domain={[hospitalBedData[0].x, predictedData.slice(-1)[0].x]}
-        // ticks={[10, 20, 30, 40, 50, 60, 70, 80, 90, 100]}
         />
         <YAxis domain={[0, 'auto']}/>
         <Tooltip />
-        <Legend />
         <Line type="monotone" data={hospitalBedData} name="Beds" dataKey="bedsAvailable" stroke="#ff6200" activeDot={{ r: 6 }}
           strokeWidth="2"
           dot={{ r: 4 }}
@@ -363,109 +360,9 @@ export function HospitalBedChart(props: chartHelper): JSX.Element {
             <Line type="monotone" dataKey="bedsAvailablePredicted" stroke="#42a5f5" dot={false} />
           </LineChart>
         </Brush>
+        <Legend margin={{ top: 5, right: 5, left: 5, bottom: 5 }}/>
       </LineChart>
 
     </ResponsiveContainer>
   );
 }
-
-// example data
-
-// var hospitalBedData : HospitalDataPoint[] = 
-// [
-//   {
-//     x: 1,
-//     name: '1/09/2021',
-//     bedsAvailableMild: 4100,
-//     bedsAvailableSevere: 1000,
-//   },
-//   {
-//     x: 2,
-//     name: '2/09/2021',
-//     bedsAvailableMild: 3200,
-//     bedsAvailableSevere: 2000,
-//   },
-//   {
-//     x: 3,
-//     name: '3/09/2021',
-//     bedsAvailableMild: 1900,
-//     bedsAvailableSevere: 2750,
-//   },
-//   {
-//     x: 4,
-//     name: '4/09/2021',
-//     bedsAvailableMild: 2800,
-//     bedsAvailableSevere: 4000,
-//   },
-//   {
-//     x: 5,
-//     name: '5/09/2021',
-//     bedsAvailableMild: 1903,
-//     bedsAvailableSevere: 3000,
-//   },
-//   {
-//     x: 6,
-//     name: '6/09/2021',
-//     bedsAvailableMild: 2306,
-//     bedsAvailableSevere: 1550,
-//   },
-//   {
-//     x: 7,
-//     name: '7/09/2021',
-//     bedsAvailableMild: 3500,
-//     bedsAvailableSevere: 1200,
-//   },
-//   {
-//     x: 8,
-//     name: '8/09/2021',
-//     bedsAvailableMild: 4000,
-//     bedsAvailableSevere: 900,
-//   },
-//   {
-//     x: 9,
-//     name: '9/09/2021',
-//     bedsAvailableMild: 5444,
-//     bedsAvailableSevere: 1000,
-//   },
-//   {
-//     x: 10,
-//     name: '10/09/2021',
-//     bedsAvailableMild: 6000,
-//     bedsAvailableSevere: 1150,
-//   },
-//   {
-//     x: 11,
-//     name: '11/09/2021',
-//     bedsAvailableMild: 7444,
-//     bedsAvailableSevere: 1400,
-//   },
-//   {
-//     x: 12,
-//     name: '12/09/2021',
-//     bedsAvailableMild: 8000,
-//     bedsAvailableMildPredicted: 8000,
-//     bedsAvailableSevere: 1600,
-//     bedsAvailableSeverePredicted: 1600,
-//   },
-// ];
-
-// hospitalBedData = hospitalBedData.concat(
-//   {
-//     x: 13,
-//     name:  '13/09/2021', 
-//     bedsAvailableMildPredicted: 7500,
-//     bedsAvailableSeverePredicted: 1800,
-//   },
-//   {
-//     x: 14,
-//     name:  '14/09/2021', 
-//     bedsAvailableMildPredicted: 6200,
-//     bedsAvailableSeverePredicted: 1450,
-//   },
-//   {
-//     x: 15,
-//     name:  '15/09/2021', 
-//     bedsAvailableMildPredicted: 7000,
-//     bedsAvailableSeverePredicted: 1550,
-//   }
-// );
