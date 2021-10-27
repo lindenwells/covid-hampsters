@@ -19,7 +19,7 @@ export function mapQuery(): Promise<void | firebase.firestore.DocumentData> {
 };
 
 /* Gets the occupancy data from hospitals in Firebase */
-export async function graphQuery()//: Promise<void | firebase.firestore.DocumentData> 
+export async function graphQuery(): Promise<firebase.firestore.DocumentData> 
 {
   /*
    * orderBy(firebase.firestore.FieldPath.documentId(), 'desc').limit(1), does not work on v8
@@ -31,8 +31,8 @@ export async function graphQuery()//: Promise<void | firebase.firestore.Document
     .then((querySnapshot) => { // Twice?
       console.log("getting graph data");
       return querySnapshot.docs;
-    })
-    .catch((error) => {
-      console.log("Error getting documents: ", error);
-  });
+    });
+    // .catch((error) => {
+    //   console.log("Error getting documents: ", error);
+    //   throw new Error()
 };
