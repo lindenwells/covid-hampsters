@@ -87,8 +87,6 @@ type DataPoint = {
 }
 // example data
 
-// TODO: call mapQuery() (import from databaseMap.tsx), for real data
-
 var data: DataPoint[] = [
   {
     x: 1,
@@ -345,7 +343,7 @@ export function HospitalBedChart(props: chartHelper): JSX.Element {
         // domain={[hospitalBedData[0].x, predictedData.slice(-1)[0].x]}
         // ticks={[10, 20, 30, 40, 50, 60, 70, 80, 90, 100]}
         />
-        <YAxis domain={[-20, 'auto']}/>
+        <YAxis domain={[0, 'auto']}/>
         <Tooltip />
         <Legend />
         <Line type="monotone" data={hospitalBedData} name="Beds" dataKey="bedsAvailable" stroke="#ff6200" activeDot={{ r: 6 }}
@@ -356,7 +354,6 @@ export function HospitalBedChart(props: chartHelper): JSX.Element {
           strokeWidth="2"
           dot={{ r: 4 }}
         />
-        {/* TODO: fix referenceline below, Max Beds, get from firebase etc. */}
         <ReferenceLine x={hospitalBedData.slice(-1)[0].x} stroke="#42a5f5" label={{ value: "Today", fill: "#ffffff" }} />
         <ReferenceLine y={maxBedCapacity} stroke="#ff1900" label={{ value: "Max Beds", fill: "#ffffff" }} />
         <Brush dataKey="name" height={50} stroke="#8884d8" >
