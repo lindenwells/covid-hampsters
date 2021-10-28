@@ -65,7 +65,7 @@ export function AreaBedChart(props: areaChartHelper) {
     .catch((error) => {
       console.log("Error getting documents chart: ", error);
     });
-  })//[props.hospitalName])
+  })
   //use effect end
 
   if (bedData.length === 0) {
@@ -132,23 +132,7 @@ export function AreaBedChart(props: areaChartHelper) {
     }
   );
 
-  console.log("total data: ");
   var totalData = bedData.concat(predictedAreaData);
-  console.log(totalData);
-
-  // let twoDimData =
-  //   hospitalAreaBedData.map(
-  //     (date) => [date.x, date.bedsAvailable]
-  //   );
-
-  // var data1: string[] = [];
-  // hospitalAreaBedData.forEach((d) => {
-  //   data1.push(d.name);
-  // });
-  // var data2: number[] = [];
-  // hospitalAreaBedData.forEach((d) => {
-  //   data2.push(d.x);
-  // });
 
   return(
     <ResponsiveContainer width="100%" height="100%" minHeight="400px">
@@ -213,13 +197,11 @@ export function HospitalBedChart(props: chartHelper): JSX.Element {
   useEffect(() => {
     graphQuery().then((query: firebase.firestore.DocumentData) => {
       // TODO: get at current date
-      // console.log("starting query, getting hospitals");
       const result = query.map((doc: firebase.firestore.DocumentData, index: number) => {
         console.log("hospital: " + props.hospitalName + ", Occupancy for " + doc.id + ": " + doc.get(props.hospitalName));
         var newData: object = {x:index, name:doc.id, bedsAvailable:doc.get(props.hospitalName)};
         return newData
       });
-      // console.log("inside query data: " + result);
       var finalResult = result.slice(-10);
       for (let i=0; i < finalResult.length; i++) {
         var newElem = finalResult[i];
@@ -253,20 +235,6 @@ export function HospitalBedChart(props: chartHelper): JSX.Element {
     return moment(tickItem, 'YYYY-MM-DD').add(days, 'day').format('YYYY-MM-DD')
   }
 
-  // console.log("TIME TESTING START: ");
-  // function formatXAxisToEpoch(date: string) {
-  //   return moment(date, 'YYYY-MM-DD').valueOf()
-  // }
-  // function formatXAxisFromEpoch(epoch: number) {
-  //   return moment(epoch, 'YYYY-MM-DD').format('YYYY-MM-DD')
-  // }
-  // var testDate = "2020-03-28";
-  // console.log("test date: " + testDate);
-  // var epoch = formatXAxisToEpoch(testDate);
-  // console.log(epoch);
-  // console.log(formatXAxisFromEpoch(epoch));
-  // console.log("TIME TESTING END: ");
-
   var xVal = bedData.slice(-1)[0].x;
   var date = bedData.slice(-1)[0].name;
   var [, pred1] = linearRegression.predict(xVal + 1);
@@ -292,7 +260,6 @@ export function HospitalBedChart(props: chartHelper): JSX.Element {
     {
       x: xVal,
       name: bedData.slice(-1)[0].name,
-      // name: moment(date).,
       bedsAvailable: bedData.slice(-1)[0].bedsAvailable,
       bedsAvailablePrediction: bedData.slice(-1)[0].bedsAvailable,
     };
@@ -302,7 +269,6 @@ export function HospitalBedChart(props: chartHelper): JSX.Element {
     {
       x: xVal + 1,
       name: addDays(date, 1),
-      // name: moment(date).,
       bedsAvailablePrediction: pred1
     },
     {
@@ -348,12 +314,10 @@ export function HospitalBedChart(props: chartHelper): JSX.Element {
         <CartesianGrid strokeDasharray="3 3" />
         <XAxis
           dataKey="name"
-        // domain={[hospitalBedData[0].x, predictedData.slice(-1)[0].x]}
-        // ticks={[10, 20, 30, 40, 50, 60, 70, 80, 90, 100]}
         />
         <YAxis domain={[0, 'auto']}/>
         <Tooltip />
-        <Legend />
+        <Legend height={5}/>
         <Line type="monotone" name="Beds" dataKey="bedsAvailable" stroke="#ff6200" activeDot={{ r: 6 }}
           strokeWidth="2"
           dot={{ r: 4 }}
@@ -373,7 +337,6 @@ export function HospitalBedChart(props: chartHelper): JSX.Element {
             <Line type="monotone" dataKey="bedsAvailablePrediction" stroke="#42a5f5" dot={false} />
           </LineChart>
         </Brush>
-        <Legend height={5}/>
       </LineChart>
     </ResponsiveContainer>
   );
