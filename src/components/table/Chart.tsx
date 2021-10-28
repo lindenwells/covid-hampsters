@@ -381,7 +381,7 @@ export function HospitalBedChart(props: chartHelper): JSX.Element {
         <ReferenceLine x={bedData[bedData.length - 1].name} stroke="#42a5f5" label={{ value: "Today", fill: "#ffffff" }} />
         <ReferenceLine y={maxBedCapacity} stroke="#ff1900" label={{ value: "Max Beds", fill: "#ffffff" }} />
         {/* TODO: Fix mini graph */}
-        <Brush data={hospitalBedData} dataKey="x" type="number" tickFormatter={formatXAxis} height={50} stroke="#8884d8" >
+        <Brush dataKey="x" type="number" tickFormatter={formatXAxis} height={50} stroke="#8884d8" >
           <LineChart>
             <CartesianGrid fill="#1E1D2B" />
             <YAxis hide domain={['auto', 'auto']} />
