@@ -22,7 +22,7 @@ interface areaChartHelper {
 
 // "Area" Chart
 export function AreaBedChart(props: areaChartHelper) {
-  const [hospitalAreaBedData, setHosAreaBedData] = useState<HospitalDataPoint[]>([]);
+  const [bedData, setBedData] = useState<Array<any>>([]);
   var maxBeds: number = 0;
   var hospitals: string[] = [];
 
@@ -51,7 +51,7 @@ export function AreaBedChart(props: areaChartHelper) {
           totalBeds += doc.get(hos);
         }
         );
-        var newData: HospitalDataPoint = createData(index, doc.id, totalBeds);
+        var newData: object = {x:index, name:doc.id, bedsAvailable:totalBeds};
         return newData
       });
       var finalResult = result;
@@ -60,7 +60,7 @@ export function AreaBedChart(props: areaChartHelper) {
         newElem.x = i;
         finalResult[i] = newElem;
       }
-      setHosAreaBedData(finalResult); // Set to last 10 days
+      setBedData(finalResult); // Set to last 10 days
     })
     .catch((error) => {
       console.log("Error getting documents chart: ", error);
@@ -68,12 +68,12 @@ export function AreaBedChart(props: areaChartHelper) {
   })//[props.hospitalName])
   //use effect end
 
-  if (hospitalAreaBedData.length === 0) {
+  if (bedData.length === 0) {
     return <></>
   }
 
   let twoDim =
-    hospitalAreaBedData.map(
+    bedData.map(
       (date) => [date.x, date.bedsAvailable]
     );
 
@@ -83,8 +83,8 @@ export function AreaBedChart(props: areaChartHelper) {
     return moment(tickItem, 'YYYY-MM-DD').add(days, 'day').format('YYYY-MM-DD')
   }
 
-  var xVal = hospitalAreaBedData.slice(-1)[0].x;
-  var date = hospitalAreaBedData.slice(-1)[0].name;
+  var xVal = bedData.slice(-1)[0].x;
+  var date = bedData.slice(-1)[0].name;
   var [, pred1] = linearRegression.predict(xVal + 1);
   var [, pred2] = linearRegression.predict(xVal + 2);
   var [, pred3] = linearRegression.predict(xVal + 3);
@@ -101,42 +101,40 @@ export function AreaBedChart(props: areaChartHelper) {
     pred3 = 0;
   }
 
-  var predictedAreaData: HospitalDataPoint[] = [];
+  var predictedAreaData: Array<any> = [];
 
   // Push first value from previous to fill gap
-  predictedAreaData.push(
-    hospitalAreaBedData.slice(-1)[0]
-  );
+  bedData[bedData.length - 1] = 
+    {
+      x: xVal,
+      name: bedData.slice(-1)[0].name,
+      // name: moment(date).,
+      bedsAvailable: bedData.slice(-1)[0].bedsAvailable,
+      bedsAvailablePrediction: bedData.slice(-1)[0].bedsAvailable,
+    };
 
   // Push predictions
   predictedAreaData.push(
     {
       x: xVal + 1,
       name: addDays(date, 1),
-      bedsAvailable: pred1
+      bedsAvailablePrediction: pred1
     },
     {
       x: xVal + 2,
       name: addDays(date, 2),
-      bedsAvailable: pred2
+      bedsAvailablePrediction: pred2
     },
     {
       x: xVal + 3,
       name: addDays(date, 3),
-      bedsAvailable: pred3
+      bedsAvailablePrediction: pred3
     }
   );
 
   console.log("total data: ");
-  var totalData = hospitalAreaBedData.concat(predictedAreaData);
+  var totalData = bedData.concat(predictedAreaData);
   console.log(totalData);
-
-  // function formatXAxis(x: number) {
-  //   var date = totalData[x].name;
-  //   return date
-  // }
-
-  var totalAreaData = hospitalAreaBedData.concat(predictedAreaData);
 
   // let twoDimData =
   //   hospitalAreaBedData.map(
@@ -155,7 +153,7 @@ export function AreaBedChart(props: areaChartHelper) {
   return(
     <ResponsiveContainer width="100%" height="100%" minHeight="400px">
       <AreaChart
-        data={totalAreaData}
+        data={totalData}
         margin={{
           top: 5,
           right: 45,
@@ -184,20 +182,20 @@ export function AreaBedChart(props: areaChartHelper) {
           fill="url(#OrangeGradient)"
           dot={{ r: 4 }}
         />
-        {/* <Area type="monotone" name="Patients (Predicted)" dataKey="bedsAvailable" stroke="#42a5f5" activeDot={{ r: 6 }}
+        <Area type="monotone" name="Patients (Predicted)" dataKey="bedsAvailablePrediction" stroke="#42a5f5" activeDot={{ r: 6 }}
           strokeWidth="2"
           fillOpacity="1"
           fill="url(#BlueGradient)"
           dot={{ r: 4 }}
-        /> */}
-        <ReferenceLine x={hospitalAreaBedData.slice(-1)[0].x} stroke="#42a5f5" label={{ value: "Today", fill: "#ffffff" }} />
+        />
+        <ReferenceLine x={bedData[bedData.length - 1].name} stroke="#42a5f5" label={{ value: "Today", fill: "#ffffff" }} />
         <ReferenceLine y={maxBeds} stroke="#ff1900" label={{ value: "Max Beds", fill: "#ffffff" }} />
         <Brush dataKey="name" height={50} stroke="#8884d8" >
           <AreaChart>
             <CartesianGrid fill="#1E1D2B" />
             <YAxis hide domain={['auto', 'auto']} />
-            {/* <Area type="monotone" dataKey="bedsAvailable" stroke="#ff9800" fill="#ff9800" dot={false} /> */}
-            <Area type="monotone" dataKey="bedsAvailable" stroke="#42a5f5" fill="#42a5f5" dot={false} />
+            <Area type="monotone" dataKey="bedsAvailable" stroke="#ff9800" fill="#ff9800" dot={false} />
+            <Area type="monotone" dataKey="bedsAvailablePrediction" stroke="#42a5f5" fill="#42a5f5" dot={false} />
           </AreaChart>
         </Brush>
       </AreaChart>
@@ -207,20 +205,6 @@ export function AreaBedChart(props: areaChartHelper) {
 
 interface chartHelper {
   hospitalName: string
-}
-
-type HospitalDataPoint = {
-  x: number,
-  name: string,
-  bedsAvailable: number
-}
-
-function createData(
-  x: number,
-  name: string,
-  bedsAvailable: number
-): HospitalDataPoint {
-  return { x, name, bedsAvailable };
 }
 
 // "Hospital" Chart
